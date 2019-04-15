@@ -3,16 +3,16 @@ class EnlacesPaginas{
 
 public function enlacesPaginasModel($enlacesModel){
 
-if($enlacesModel=="inicio"){
+if($enlacesModel=="inicio" || $enlacesModel=="registros"){
 
-	  $module = "Vistas/modulos/".$enlacesModel.".php";
+	  $module = "Vistas/Modulos/".$enlacesModel.".php";
 	}
 	else if($enlacesModel== "index.php"){
 
-			$module= "Vistas/modulos/inicio.php";
+			$module= "Vistas/Modulos/inicio.php";
 	}
 	else{
-		 $module= "Vistas/modulos/inicio.php";
+		 $module= "Vistas/Modulos/inicio.php";
 	} 
         return $module;
 	}
