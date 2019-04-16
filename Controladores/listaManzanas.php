@@ -9,9 +9,8 @@ $json = array();
 while ($row = mysqli_fetch_array($lista)) {
 
     $json[] = array(
-
         'manzana' => $row['manzana'],
-        'id' => $row['IdManazana']
+        'id' => $row['IdManzana']
     );       
 }
 

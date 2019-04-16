@@ -1,17 +1,22 @@
 <?php
-include_once '../BaseDatos/Base.php';
+include_once '../BaseDatos/baseDatos.php';
 
 class Manzanas
 {
     function __construct(){
-        $this->db = new Base;
+        $this->db = new baseDatos();
     }
 
     public function Registros()
     {
-        $this->db->query('SELECT * FROM manzanas');
-        $resultados = $this->db->registros();
-        return $resultados;
+
+        $query = "SELECT * FROM manzanas ";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'. mysqli_error($this->db->conection()));
+        }
+
+        return $resultado;
     }
 
     public function Registrar()
