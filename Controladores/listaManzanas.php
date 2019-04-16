@@ -1,5 +1,5 @@
 <?php
-include_once 'Modelos/Manzanas.php';
+include_once '../Modelos/Manzanas.php';
 
 $cuadra = new Manzanas();
 
