@@ -1,15 +1,22 @@
 <?php
-include_once 'BaseDatos/Base.php';
+include_once '../BaseDatos/baseDatos.php';
 
 class Familias 
 {
     function __construct(){
-        $this->db = new Base();
+        $this->db = new baseDatos();
     }
 
-    public function Registros()
+    public function Registros($id)
     {
-        # code...
+        $manzana = $id;
+        $query = "SELECT * FROM familias WHERE nroManzana = $manzana";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'.mysqli_error($this->db->conection()));
+        }
+
+        return $resultado;
     }
 
     public function Registrar()

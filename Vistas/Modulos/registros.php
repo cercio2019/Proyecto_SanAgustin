@@ -27,6 +27,7 @@
                <thead>
                    <th>Id</th>
                    <th>Familias nro:</th>
+                   <th>Nro manzana</th>
                </thead>
                <tbody id="fila">
 
