@@ -1,21 +1,31 @@
 $(document).ready(function(){
     console.log('jquery funciona');
-
+    listaManzanas();
     var tabla= $('#tabla');
     tabla.hide();
+
+    function listaManzanas() {        
+        $.ajax({
+          url: 'Controladores/listaManzanas.php',
+          type: 'GET',
+          success: function (response) {
+              let manzanas = JSON.parse(response);
+              let plantilla = '';
+
+              manzanas.forEach(cuadra => {
+                  plantilla = `<option class="${cuadra.id}">${cuadra.manzana}</option>`
+              });
+
+              $('#manzanas').html(plantilla);
+          }
+
+        });
+    }
 
     $('#formulario').submit(function(e) {
         e.preventDefault();
         tabla.show();
-        let manzanas = $('#manzanas').val();
-
-    if (manzanas==="Manzana nro 1") {
-       let familias = 1;
-        while (familias <=10) {
-        $('#fila').append(`<tr><td>${familias}</td><td>Familia nro ${familias}</td></tr> `);
-        familias++;
-        }
-        }
+        let manzanas2 = $('#manzanas').val();
         
     })
 

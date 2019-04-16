@@ -10,11 +10,7 @@
             <div class="col-5">
                     <Select class="form-control" id="manzanas">
                     <option value="">Seleccionar</option>   
-                    <option value="Manzana nro 1">Manzana nro 1</option>
-                    <option value="Manzana nro 2">Manzana nro 2</option>
-                    <option value="Manzana nro 3">Manzana nro 3</option>
-                    <option value="Manzana nro 4">Manzana nro 4</option>
-                    <option value="Manzana nro 5">Manzana nro 5</option>
+                   
                     </Select>
                 </div>
                 <div class="col-3">
