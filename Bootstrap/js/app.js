@@ -13,7 +13,7 @@ $(document).ready(function(){
               let plantilla = '';
 
               manzanas.forEach(cuadra => {
-                  plantilla = `<option value="${cuadra.id}">${cuadra.manzana}</option>`
+                  plantilla = `<option value="${cuadra.IdManzana}">${cuadra.manzana}</option>`
               });
 
               $('#manzanas').html(plantilla);

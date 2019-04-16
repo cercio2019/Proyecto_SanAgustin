@@ -16,4 +16,4 @@ while ($row = mysqli_fetch_array($lista)) {
 }
 
 $jsonString = json_encode($json);
-    echo $jsonString;
+echo $jsonString;

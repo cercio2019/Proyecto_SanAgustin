@@ -2,10 +2,10 @@
 
 class Base
 {
-	private $host = DB_HOST;
-    private $usuario = DB_USUARIO;
-    private $password = DB_PASSWORD;
-    private $nombre_base = DB_NOMBRE;
+	private $host = 'localhost';
+    private $usuario = 'root';
+    private $password = 'cv23952018';
+    private $nombre_base = 'sanagustin';
     private $dbh;
     private $stmt;
     private $error;
