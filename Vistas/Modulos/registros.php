@@ -63,3 +63,31 @@
      </div>
  </div>
  </div>
+
+<!-- zona donde se muestra todos los datos de la persona seleccionada -->
+ <div class="row" id="planillaPersona">
+  <div class="col-12">
+   <div class="container">
+   <div class="row">
+   <div class="col-12">
+   <button class="btn btn-primary" id="volver2">Volver</button>
+   </div>
+   </div>     
+     <div class="row mt-5">     
+      <div class="col-6">
+          <ul id="datos1">
+          
+          </ul>      
+      </div>
+      <div class="col-6" >
+          <ul id="datos2">
+          
+          </ul>
+      </div>
+      <div class="col-12 mt-5">
+      <button class="btn btn-danger" id="editDatos">Editar</button>
+      </div>
+     </div>
+   </div>
+  </div>
+ </div>

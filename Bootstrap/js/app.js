@@ -4,8 +4,10 @@ $(document).ready(function(){
     var formulario = $('#formulario');
     var tabla= $('#tabla');
     var tablaPersona = $('#tablaPersonas');
+    var planilla = $('#planillaPersona');
     tabla.hide();
     tablaPersona.hide();
+    planilla.hide();
 
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
@@ -89,7 +91,41 @@ function listaManzanas() {
      tablaPersona.hide();
      formulario.show();
      tabla.show();   
-    })
+    });
 
+    $(document).on('click', '.planilla', function(e) {
+        tablaPersona.hide();
+        planilla.show();
+        let elemento = $(this)[0].parentElement.parentElement;
+        let idpersona = $(elemento).attr('Idpersona');
+        $.post('Controladores/PlanillaPersona.php', {idpersona}, function(response) {
+            
+            let persona = JSON.parse(response);
+            let plantilla = '';
+            let plantilla2 = '';
+          
+              persona.forEach(objetos => {
+                  plantilla += `<li class="m-4">ID : ${objetos.id} </li>
+                  <li class="m-4">Cedula : ${objetos.cedula} </li>
+                  <li class="m-4">Nombres y apellidos : ${objetos.nombreApellido} </li>
+                  <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
+                  <li class="m-4">Edad : ${objetos.edad} </li>
+                  `;
+                  plantilla2 = `<li class="m-4">Sexo : ${objetos.sexo} </li>
+                  <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
+                  <li class="m-4">Manzanero : ${objetos.manzanero} </li>
+                  `;
+              });
+             
+              $('#datos1').html(plantilla); 
+              $('#datos2').html(plantilla2); 
+        });
+        e.preventDefault(); 
+    });
+
+    $(document).on('click', '#volver2', function (e) {
+        planilla.hide();
+        tablaPersona.show();          
+       });
 
 })
