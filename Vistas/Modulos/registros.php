@@ -37,3 +37,29 @@
     </div>
       </div>
  </div>
+
+ <div class="row" id="tablaPersonas">
+ <div class="col-12">
+     <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 ">
+           <button class="btn btn-primary" id="volver">Volver</button>
+          </div>
+          <div class="col-12 mt-3">
+          <table class="table">
+      <thead>
+      <th>ID</th>
+      <th>Cedula</th>
+      <th>Nombre y apellido</th>
+      <th>Edad</th>
+      <th></th>
+      </thead>
+      <tbody id="personas">
+      
+      </tbody>
+      </table>
+          </div>
+        </div>
+     </div>
+ </div>
+ </div>

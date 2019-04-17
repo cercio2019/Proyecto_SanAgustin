@@ -1,17 +1,21 @@
 <?php
-include_once 'BaseDatos/Base.php';
+include_once '../BaseDatos/baseDatos.php';
 
 class Persona 
 {
     function __construct(){
-        $this->db = new Base();
+        $this->db = new baseDatos();
     }
 
-    public function Registros()
+    public function Registros($idFamiliar)
     {
-        $this->db->query('SELECT * FROM individual');
-        $resultados = $this->db->excute();
-        return $resultados;
+        $nroFamilia = $idFamiliar;
+        $query = "SELECT * FROM individual WHERE grupoFamiliarNro = $nroFamilia ";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'. mysqli_error($this->db->conection()));
+        }
+        return $resultado;
     }
 
     public function Registrar()
