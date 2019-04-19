@@ -109,13 +109,53 @@ function listaManzanas() {
       
        let fecha = $('#fecha').val();
        let edad = calcularEdad(fecha);
-
-     
-       
-      
-        const datosPersonales ={
+       let nombres = $('#nombres').val();
+       let apellidos = $('#Apellidos').val();
+       let nombreCompleto = `${nombres} ${apellidos}`;
         
-       } 
+       const datosPersonales ={
+         cedula: $('#cedula').val(), 
+          nombreApellido: nombreCompleto,
+         fechaNac: fecha, 
+          edad : edad,
+         sexo : $('#edad').val(),
+           tipo : $('#tipoPersona').val(),
+         telefono : $('#telefono').val(), 
+          correo : $('#correo').val(),
+         carnet : $('#carnet').val(), 
+          codigo : $('#codigo').val(),    
+         serial : $('#serial').val(), 
+           manzanero : $('#manzanero').val(),
+         observacion : $('#observacion').val(),
+          manzana : $('#manzanaNRO').val(),
+         familia : $('#familaNRO').val()
+        }
+        
+        $.post('Controladores/registroPersona.php', {datosPersonales}, function(response) {
+            let personas = JSON.parse(response);
+            let plantilla = '';
+          
+              personas.forEach(objetos => {
+                  plantilla += `<tr Idpersona="${objetos.id}">
+                     <td>${objetos.id}</td>
+                     <td>${objetos.cedula}</td>
+                     <td>
+                      <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
+                     </td>
+                     <td>${objetos.edad}</td>
+                     <td>
+                     <button  class="btn btn-danger planilla">
+                            Ver Planilla
+                     </button>
+                     </td>
+                  </tr>`
+              });
+          
+              $('#personas').html(plantilla); 
+        });
+        planillaRegistrar.hide();
+        tablaPersona.show();
+        e.preventDefault();
     });
 
     // verificar si tiene el carnet de la patria 

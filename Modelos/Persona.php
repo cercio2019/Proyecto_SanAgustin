@@ -29,9 +29,19 @@ class Persona
         return $resultado;
     }
 
-    public function Registrar()
+    public function Registrar($cedula, $nombreCompleto, $fecha, $edad, $sexo,
+     $tipo, $telefono, $correo, $carnet, $codigo, $serial, $manzanero, $observacion,
+     $familia, $manzana)
     {
-        # code...
+        $query = "INSERT into tareas(cedula, Nombres y apellidos, grupoFamiliarNro,
+        fechaNacimiento, Edad, sexo, TipoPersona, Telefono, correo, carnetPatria,
+        codigo, serial, observacionSocial, Manzanero, NroManzana) VALUE ($cedula,
+        $nombreCompleto, $familia, $fecha, $edad, $sexo, $tipo, $telefono, $correo, $carnet,
+        $codigo, $serial, $manzanero, $observacion,  $manzana )";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la sentencia');
+        }                          
     }
 
     public function Editar()
