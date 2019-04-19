@@ -129,11 +129,11 @@
     <label for="">Carnet de la patria</label>
     <select  id="carnet" class="form-control">
     <option value="NO">NO</option>
-    <option value="SI">SI</option>
+    <option value="SI" id="form-carnet">SI</option>
     </select> 
  </div>
  </div>
- <div class="row">
+ <div class="row" id="si-carnet">
  <div class="col-6">
     <label for="">Codigo</label>
     <input type="text" class="form-control" id="codigo">  

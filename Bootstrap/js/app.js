@@ -100,9 +100,63 @@ function listaManzanas() {
         tablaPersona.hide();
         planillaRegistrar.show(); 
         let idFam= $('#idFamiliar').val();
-        $('#familiaNRO').val(idfam);
+        $('#familiaNRO').val(idFam);
         
-    })
+    });
+
+    // registrar los datos de una persona 
+    planillaRegistrar.submit(function (e) {
+      
+       let fecha = $('#fecha').val();
+       let edad = calcularEdad(fecha);
+
+     
+       
+      
+        const datosPersonales ={
+        
+       } 
+    });
+
+    // verificar si tiene el carnet de la patria 
+    let carnetSi = $('#si-carnet');
+    carnetSi.hide();
+   $('#form-carnet').click(function(e) {    
+        
+    carnetSi.show();       
+    
+   e.preventDefault();
+   });
+
+    
+    // metodo para la busqueda de edad de una persona
+    function calcularEdad(fecha) {
+    let fechaNacimiento = fecha;
+
+    fechaActual = new Date();    
+    diaHoy = fechaActual.getDate();
+    mesHoy = fechaActual.getMonth();
+    anoHoy = fechaActual.getFullYear(); 
+    
+    fechaNacimiento = new Date(fechaNacimiento);    
+    diaNacimiento = fechaNacimiento.getDate();
+    mesNacimiento = fechaNacimiento.getMonth();
+    anoNacimiento = fechaNacimiento.getFullYear();
+
+    if (anoHoy > anoNacimiento && mesHoy > mesNacimiento) {
+
+        edad = anoHoy - anoNacimiento; 
+
+    }else if (anoHoy > anoNacimiento && mesNacimiento > mesHoy) {
+
+        edad = anoHoy - anoNacimiento - 1; 
+
+    } else  if (anoHoy > anoNacimiento ) {
+        
+        edad = anoHoy - anoNacimiento;
+    }
+    return edad;
+    }
 
     // muestra una planilla con todos los datos de una persona
     $(document).on('click', '.planilla', function(e) {
