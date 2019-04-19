@@ -5,9 +5,11 @@ $(document).ready(function(){
     var tabla= $('#tabla');
     var tablaPersona = $('#tablaPersonas');
     var planilla = $('#planillaPersona');
+    var planillaRegistrar = $('#form-registrar');
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
+    planillaRegistrar.hide();
 
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
@@ -23,11 +25,10 @@ function listaManzanas() {
         });
               $('#manzanas').append(plantilla);
         }
-
         });
     }
 
-     //Mostar la lista de familias que estan en una manazana 
+     //Mostar la tabla de familias que estan en una manazana 
     formulario.submit(function (e) {
         const idManzana = $('#manzanas').val();
               tabla.show();  
@@ -54,7 +55,7 @@ function listaManzanas() {
            e.preventDefault();     
      });
 
-     //Mostar las lista de personas que viven en la manzana
+     //Mostar la tablas de personas que viven en la manzana
      $(document).on('click', '.verPersonas', function (e) {
           tablaPersona.show();
           tabla.hide();
@@ -84,6 +85,8 @@ function listaManzanas() {
           
               $('#personas').html(plantilla); 
         });
+        $('#titulo-familiar').html(`<h4>Familia nro ${idFamilia}</h4>`);
+        $('#idFamiliar').val(idFamilia);
         e.preventDefault(); 
     });
 
@@ -93,6 +96,15 @@ function listaManzanas() {
      tabla.show();   
     });
 
+    $(document).on('click', '#nuevo', function (e) {
+        tablaPersona.hide();
+        planillaRegistrar.show(); 
+        let idFam= $('#idFamiliar').val();
+        $('#familiaNRO').val(idfam);
+        
+    })
+
+    // muestra una planilla con todos los datos de una persona
     $(document).on('click', '.planilla', function(e) {
         tablaPersona.hide();
         planilla.show();
