@@ -104,21 +104,47 @@ function listaManzanas() {
         
     });
 
+      // metodo para la busqueda de edad de una persona
+      function calcularEdad(fecha) {
+        let fechaNacimiento = fecha;
+    
+        fechaActual = new Date();    
+        diaHoy = fechaActual.getDate();
+        mesHoy = fechaActual.getMonth();
+        anoHoy = fechaActual.getFullYear(); 
+        
+        fechaNacimiento = new Date(fechaNacimiento);    
+        diaNacimiento = fechaNacimiento.getDate();
+        mesNacimiento = fechaNacimiento.getMonth();
+        anoNacimiento = fechaNacimiento.getFullYear();
+    
+        if (anoHoy > anoNacimiento && mesHoy > mesNacimiento) {
+    
+            edad = anoHoy - anoNacimiento; 
+    
+        }else if (anoHoy > anoNacimiento && mesNacimiento > mesHoy) {
+    
+            edad = anoHoy - anoNacimiento - 1; 
+    
+        } else  if (anoHoy > anoNacimiento ) {
+            
+            edad = anoHoy - anoNacimiento;
+        }
+        return edad;
+        }
+
     // registrar los datos de una persona 
     planillaRegistrar.submit(function (e) {
       
        let fecha = $('#fecha').val();
        let edad = calcularEdad(fecha);
-       let nombres = $('#nombres').val();
-       let apellidos = $('#Apellidos').val();
-       let nombreCompleto = `${nombres} ${apellidos}`;
         
        const datosPersonales ={
          cedula: $('#cedula').val(), 
-          nombreApellido: nombreCompleto,
+          nombreApellido: `${$('#nombres').val()} ${$('#Apellidos').val()} `,
          fechaNac: fecha, 
           edad : edad,
-         sexo : $('#edad').val(),
+         sexo : $('#sexo').val(),
            tipo : $('#tipoPersona').val(),
          telefono : $('#telefono').val(), 
           correo : $('#correo').val(),
@@ -128,30 +154,15 @@ function listaManzanas() {
            manzanero : $('#manzanero').val(),
          observacion : $('#observacion').val(),
           manzana : $('#manzanaNRO').val(),
-         familia : $('#familaNRO').val()
-        }
+         familia : $('#familiaNRO').val()
+        };
         
-        $.post('Controladores/registroPersona.php', {datosPersonales}, function(response) {
-            let personas = JSON.parse(response);
-            let plantilla = '';
-          
-              personas.forEach(objetos => {
-                  plantilla += `<tr Idpersona="${objetos.id}">
-                     <td>${objetos.id}</td>
-                     <td>${objetos.cedula}</td>
-                     <td>
-                      <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
-                     </td>
-                     <td>${objetos.edad}</td>
-                     <td>
-                     <button  class="btn btn-danger planilla">
-                            Ver Planilla
-                     </button>
-                     </td>
-                  </tr>`
-              });
-          
-              $('#personas').html(plantilla); 
+          console.log(fecha);
+          console.log(edad);
+          console.log(datosPersonales);
+
+        $.post('Controladores/registroPersona.php', datosPersonales, function(response) {
+            
         });
         planillaRegistrar.hide();
         tablaPersona.show();
@@ -168,35 +179,7 @@ function listaManzanas() {
    e.preventDefault();
    });
 
-    
-    // metodo para la busqueda de edad de una persona
-    function calcularEdad(fecha) {
-    let fechaNacimiento = fecha;
 
-    fechaActual = new Date();    
-    diaHoy = fechaActual.getDate();
-    mesHoy = fechaActual.getMonth();
-    anoHoy = fechaActual.getFullYear(); 
-    
-    fechaNacimiento = new Date(fechaNacimiento);    
-    diaNacimiento = fechaNacimiento.getDate();
-    mesNacimiento = fechaNacimiento.getMonth();
-    anoNacimiento = fechaNacimiento.getFullYear();
-
-    if (anoHoy > anoNacimiento && mesHoy > mesNacimiento) {
-
-        edad = anoHoy - anoNacimiento; 
-
-    }else if (anoHoy > anoNacimiento && mesNacimiento > mesHoy) {
-
-        edad = anoHoy - anoNacimiento - 1; 
-
-    } else  if (anoHoy > anoNacimiento ) {
-        
-        edad = anoHoy - anoNacimiento;
-    }
-    return edad;
-    }
 
     // muestra una planilla con todos los datos de una persona
     $(document).on('click', '.planilla', function(e) {

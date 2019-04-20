@@ -1,7 +1,8 @@
 <?php
 include_once '../Modelos/Persona.php';
 
-$cedula = $_POST['cedula'];
+if (isset($_POST['cedula'])) {
+    $cedula = $_POST['cedula'];
 $nombres = $_POST['nombreApellido'];
 $fecha = $_POST['fechaNac'];
 $edad = $_POST['edad'];
@@ -21,3 +22,6 @@ $personas = new Persona();
 
 $personas->Registrar($cedula, $nombres, $fecha, $edad, $sexo, $tipo, $telefono,
 $correo, $carnet, $codigo, $serial, $manzanero, $observacion, $familia, $manzana);
+}else {
+    echo 'sin datos todavia';
+}
