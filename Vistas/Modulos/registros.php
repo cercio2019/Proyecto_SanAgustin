@@ -76,6 +76,11 @@
  <!--zona para registrar un nuevo Integrante en la familia -->
 <form action="" id="form-registrar" class="mb-5">
 <div class="row">
+<div class="col-12">
+<button class="btn btn-primary" id="regresar">Volver</button>
+</div>
+</div>
+<div class="row mt-3">
  <div class="col-6">
     <label for="">Cedula</label>
     <input type="text" class="form-control" id="cedula">  

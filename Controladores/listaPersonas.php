@@ -1,7 +1,7 @@
 <?php
 include_once '../Modelos/Persona.php';
 
-$idFamilia= $_POST['idFamilia'];
+$idFamilia= $_POST['idFamiliar'];
 
 $personas = new Persona();
 
@@ -13,7 +13,7 @@ while ($row = mysqli_fetch_array($lista)) {
     $json[] = array(
         'id' => $row['idPersona'],
         'cedula' => $row['cedula'],
-        'nombreApellido' => $row['Nombres y apellidos'],
+        'nombreApellido' => $row['NombresApellidos'],
         'edad' => $row['Edad']
     );       
 }

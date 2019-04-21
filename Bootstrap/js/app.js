@@ -55,6 +55,34 @@ function listaManzanas() {
            e.preventDefault();     
      });
 
+     function listaPersonas(id) {
+
+      let idFamiliar= id;   
+      $.post('Controladores/listaPersonas.php', {idFamiliar}, function(response) {
+            
+        let personas = JSON.parse(response);
+        let plantilla = '';
+      
+          personas.forEach(objetos => {
+              plantilla += `<tr Idpersona="${objetos.id}">
+                 <td>${objetos.id}</td>
+                 <td>${objetos.cedula}</td>
+                 <td>
+                  <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
+                 </td>
+                 <td>${objetos.edad}</td>
+                 <td>
+                 <button  class="btn btn-danger planilla">
+                        Ver Planilla
+                 </button>
+                 </td>
+              </tr>`
+          });
+      
+          $('#personas').html(plantilla); 
+    });
+     }
+
      //Mostar la tablas de personas que viven en la manzana
      $(document).on('click', '.verPersonas', function (e) {
           tablaPersona.show();
@@ -62,34 +90,13 @@ function listaManzanas() {
           formulario.hide();
         let elemento = $(this)[0].parentElement.parentElement;
         let idFamilia = $(elemento).attr('Idfamilia');
-        $.post('Controladores/listaPersonas.php', {idFamilia}, function(response) {
-            
-            let personas = JSON.parse(response);
-            let plantilla = '';
-          
-              personas.forEach(objetos => {
-                  plantilla += `<tr Idpersona="${objetos.id}">
-                     <td>${objetos.id}</td>
-                     <td>${objetos.cedula}</td>
-                     <td>
-                      <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
-                     </td>
-                     <td>${objetos.edad}</td>
-                     <td>
-                     <button  class="btn btn-danger planilla">
-                            Ver Planilla
-                     </button>
-                     </td>
-                  </tr>`
-              });
-          
-              $('#personas').html(plantilla); 
-        });
+        listaPersonas(idFamilia);
         $('#titulo-familiar').html(`<h4>Familia nro ${idFamilia}</h4>`);
         $('#idFamiliar').val(idFamilia);
         e.preventDefault(); 
     });
 
+    
     $(document).on('click', '#volver', function (e) {
      tablaPersona.hide();
      formulario.show();
@@ -136,25 +143,24 @@ function listaManzanas() {
     // registrar los datos de una persona 
     planillaRegistrar.submit(function (e) {
       
-       let fecha = $('#fecha').val();
-       let edad = calcularEdad(fecha);
-        
+       const fecha = $('#fecha').val();
+       let idfamiliar2 =   $('#familiaNRO').val()     
        const datosPersonales ={
          cedula: $('#cedula').val(), 
-          nombreApellido: `${$('#nombres').val()} ${$('#Apellidos').val()} `,
+         nombreApellido: `${$('#nombres').val()} ${$('#Apellidos').val()} `,
          fechaNac: fecha, 
-          edad : edad,
+         edad : calcularEdad(fecha),
          sexo : $('#sexo').val(),
-           tipo : $('#tipoPersona').val(),
+         tipo : $('#tipoPersona').val(),
          telefono : $('#telefono').val(), 
-          correo : $('#correo').val(),
+         correo : $('#correo').val(),
          carnet : $('#carnet').val(), 
-          codigo : $('#codigo').val(),    
+         codigo : $('#codigo').val(),    
          serial : $('#serial').val(), 
-           manzanero : $('#manzanero').val(),
+         manzanero : $('#manzanero').val(),
          observacion : $('#observacion').val(),
-          manzana : $('#manzanaNRO').val(),
-         familia : $('#familiaNRO').val()
+         manzana : $('#manzanaNRO').val(),
+         familia : idfamiliar2
         };
         
           console.log(fecha);
@@ -162,9 +168,11 @@ function listaManzanas() {
           console.log(datosPersonales);
 
         $.post('Controladores/registroPersona.php', datosPersonales, function(response) {
-            
+           console.log(response);          
         });
+        planillaRegistrar.trigger('reset');
         planillaRegistrar.hide();
+        listaPersonas(idfamiliar2);
         tablaPersona.show();
         e.preventDefault();
     });
@@ -177,6 +185,13 @@ function listaManzanas() {
     carnetSi.show();       
     
    e.preventDefault();
+   });
+
+   $(document).on('click', '#regresar', function (e) {
+    planillaRegistrar.trigger('reset');
+    planillaRegistrar.hide();
+    tablaPersona.show();
+    e.preventDefault();
    });
 
 

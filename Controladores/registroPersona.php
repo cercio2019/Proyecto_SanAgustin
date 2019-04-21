@@ -1,5 +1,5 @@
 <?php
-include_once '../Modelos/Persona.php';
+include_once '../BaseDatos/baseDatos.php';
 
 if (isset($_POST['cedula'])) {
     $cedula = $_POST['cedula'];
@@ -18,10 +18,17 @@ $observacion = $_POST['observacion'];
 $manzana = $_POST['manzana'];
 $familia = $_POST['familia'];
 
-$personas = new Persona();
+$db = new baseDatos();
 
-$personas->Registrar($cedula, $nombres, $fecha, $edad, $sexo, $tipo, $telefono,
-$correo, $carnet, $codigo, $serial, $manzanero, $observacion, $familia, $manzana);
-}else {
-    echo 'sin datos todavia';
+$query = "INSERT INTO individual(cedula, NombresApellidos, grupoFamiliarNro,
+        fechaNacimiento, Edad, sexo, TipoPersona, Telefono, correo, carnetPatria,
+        codigo, SerialCarnet, observacionSocial, Manzanero, NroManzana) VALUE ('$cedula',
+        '$nombres', '$familia', '$fecha', '$edad', '$sexo', '$tipo', '$telefono', '$correo', '$carnet',
+        '$codigo', '$serial', '$observacion', '$manzanero',  '$manzana' )";
+        $resultado = mysqli_query($db->conection(), $query);
+        if (!$resultado) {
+            die('error en la sentencia'. mysqli_error($db->conection()));
+        } 
+        echo 'Tarea registrada exitosamente';
 }
+ 
