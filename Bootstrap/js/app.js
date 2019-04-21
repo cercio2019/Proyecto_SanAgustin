@@ -55,6 +55,7 @@ function listaManzanas() {
            e.preventDefault();     
      });
 
+     // lista de personas actualizada que conforman la familia
      function listaPersonas(id) {
 
       let idFamiliar= id;   
