@@ -216,16 +216,24 @@ function listaManzanas() {
             let plantilla = '';
             let plantilla2 = '';
           
-              persona.forEach(objetos => {
+        persona.forEach(objetos => {
                   plantilla += `<li class="m-4">ID : ${objetos.id} </li>
                   <li class="m-4">Cedula : ${objetos.cedula} </li>
                   <li class="m-4">Nombres y apellidos : ${objetos.nombreApellido} </li>
                   <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
+                  <li class="m-4">Fecha de nacimiento : ${objetos.fecha} </li>
                   <li class="m-4">Edad : ${objetos.edad} </li>
+                  <li class="m-4">Sexo : ${objetos.sexo} </li>
+                  <li class="m-4">Telefono : ${objetos.telefono} </li>
                   `;
-                  plantilla2 = `<li class="m-4">Sexo : ${objetos.sexo} </li>
+                  plantilla2 = `<li class="m-4">Correo electronico : ${objetos.correo} </li>
                   <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
+                  <li class="m-4">Codigo carnet de la patria : ${objetos.codigo} </li>
+                  <li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
                   <li class="m-4">Manzanero : ${objetos.manzanero} </li>
+                  <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
+                  <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
+                  <li class="m-4">Observacion social : ${objetos.observacion} </li>
                   `;
               });
              
@@ -250,15 +258,15 @@ function listaManzanas() {
               persona.forEach(objetos => {
                 $('#editCedula').val(objetos.cedula); 
                 $('#editNombres').val(objetos.nombreApellido);
-                $('#editFecha').val();
+                $('#editFecha').val(objetos.fecha);
                 $('#editSexo').val(objetos.sexo);
                 $('#editTipoPersona').val(objetos.tipoPersona);
-                $('#editTelefono').val(); 
-                $('#editCorreo').val(); 
-                $('#editCodigo').val();    
-                $('#editSerial').val(); 
-                $('#editManzanero').val();
-                $('#editObservacion').val();
+                $('#editTelefono').val(objetos.telefono); 
+                $('#editCorreo').val(objetos.correo); 
+                $('#editCodigo').val(objetos.codigo);    
+                $('#editSerial').val(objetos.serial); 
+                $('#editManzanero').val(objetos.manzanero);
+                $('#editObservacion').val(objetos.observacion);
               });            
         });
         planilla.hide();
@@ -272,4 +280,6 @@ function listaManzanas() {
        planilla.show();
        e.preventDefault();          
        });
+
+       // formulario para editar los datos de una persona
 })

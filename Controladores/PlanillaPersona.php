@@ -19,11 +19,18 @@ while ($row = mysqli_fetch_array($lista)) {
         'id' => $row['idPersona'],
         'cedula' => $row['cedula'],
         'nombreApellido' => $row['NombresApellidos'],
+        'fecha' => $row['fechaNacimiento'],
          'nrofam' => $row['grupoFamiliarNro'],
          'sexo' => $row['sexo'],
+         'telefono' => $row['Telefono'],
+         'correo' => $row['correo'],
+         'codigo' => $row['codigo'],
+         'serial' => $row['SerialCarnet'],
          'tipoPersona' => $row['TipoPersona'],
-        'edad' => $row['Edad'],
-        'manzanero' => $row['Manzanero']
+         'edad' => $row['Edad'],
+         'manzanero' => $row['Manzanero'],
+         'observacion' => $row['observacionSocial'],
+         'nroManzana' => $row['NroManzana']       
     );       
 }
 
