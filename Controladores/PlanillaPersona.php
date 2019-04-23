@@ -1,7 +1,12 @@
 <?php
 include_once '../Modelos/Persona.php';
 
-$idPersona= $_POST['idpersona'];
+
+if (isset($_POST['idpersona'])) {
+    $idPersona= $_POST['idpersona'];
+}elseif (isset($_POST['nroPersona'])) {
+    $idPersona= $_POST['nroPersona'];
+}
 
 $personas = new Persona();
 

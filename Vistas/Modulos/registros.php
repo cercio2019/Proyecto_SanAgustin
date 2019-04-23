@@ -187,6 +187,9 @@
    <div class="col-6">
    <button class="btn btn-primary" id="volver2">Volver</button>
    </div>
+   <div class="col-5">
+   <input type="text" id="nroPersonal">
+   </div>
    </div>     
      <div class="row mt-5">     
       <div class="col-6">
@@ -206,3 +209,96 @@
    </div>
   </div>
  </div>
+
+  <!--zona para registrar un nuevo Integrante en la familia -->
+<form action="" id="form-edtitar" class="mb-5">
+<div class="row">
+<div class="col-12">
+<button class="btn btn-primary" id="regresarPlanilla">Volver</button>
+</div>
+</div>
+<div class="row mt-3">
+ <div class="col-6">
+    <label for="">Cedula</label>
+    <input type="text" class="form-control" id="editCedula">  
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-6">
+    <label for="">Nombre completo</label>
+    <input type="text" class="form-control" id="editNombres">  
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-6">
+    <label for="">Fecha de nacimiento</label>
+    <input type="date" class="form-control" id="editFecha">  
+ </div>
+ <div class="col-6">
+    <label for="">Sexo</label>
+    <select name="" id="editSexo" class="form-control">
+    <option value="">Seleccionar</option>
+    <option value="Masculino">Masculino</option>
+    <option value="Femenino">Femenino</option>
+    </select>
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-6">
+    <label for="">Tipo persona</label>
+    <select name="" id="editTipoPersona" class="form-control">
+    <option value="">Seleccionar</option>
+    <option value="JEFE">JEFE</option>
+    <option value="MIEMBRO">MIEMBRO</option>
+    </select> 
+ </div>
+ <div class="col-6">
+    <label for="">Telefono</label>
+    <input type="text" class="form-control" id="editTelefono">  
+ </div>
+ </div>
+
+ <div class="row">
+ <div class="col-6">
+    <label for="">Correo</label>
+    <input type="email" class="form-control" id="editCorreo">  
+ </div>
+ </div>
+ <div class="row" id="si-carnet">
+ <div class="col-6">
+    <label for="">Codigo</label>
+    <input type="text" class="form-control" id="editCodigo">  
+ </div>
+ <div class="col-6">
+    <label for="">Serial</label>
+    <input type="text" class="form-control" id="editSerial">  
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-6">
+    <label for="">Manzanero</label>
+   <select  id="editmanzanero" class="form-control">
+   <option value="NO">NO</option>
+   <option value="SI">SI</option>
+   </select> 
+ </div>
+ <div class="col-6">
+    <label for="">Observacion social</label>
+    <textarea  id="editObservacion" cols="10" rows="5" class="form-control">
+    </textarea> 
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-6">
+    <input type="hidden"  id="manzanaNRO">  
+ </div>
+ <div class="col-6">
+    <input type="hidden"  id="familiaNRO">  
+ </div>
+ </div>
+ <div class="row mt-4">
+ <div class="col-12 text-center">
+  <input type="submit" value="Editar" class="btn btn-danger w-50">
+ </div>
+ </div>
+</form>

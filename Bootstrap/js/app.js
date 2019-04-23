@@ -6,10 +6,12 @@ $(document).ready(function(){
     var tablaPersona = $('#tablaPersonas');
     var planilla = $('#planillaPersona');
     var planillaRegistrar = $('#form-registrar');
+    var planillaEditar = $('#form-edtitar');
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
     planillaRegistrar.hide();
+    planillaEditar.hide();
 
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
@@ -230,6 +232,7 @@ function listaManzanas() {
               $('#datos1').html(plantilla); 
               $('#datos2').html(plantilla2); 
         });
+        $('#nroPersonal').val(idpersona);
         e.preventDefault(); 
     });
 
@@ -238,4 +241,35 @@ function listaManzanas() {
         tablaPersona.show();          
        });
 
+       $(document).on('click', '#editDatos', function (e) {
+          let nroPersona = $('#nroPersonal').val();
+
+          $.post('Controladores/PlanillaPersona.php', {nroPersona}, function(response) {
+            
+            let persona = JSON.parse(response);                
+              persona.forEach(objetos => {
+                $('#editCedula').val(objetos.cedula); 
+                $('#editNombres').val(objetos.nombreApellido);
+                $('#editFecha').val();
+                $('#editSexo').val(objetos.sexo);
+                $('#editTipoPersona').val(objetos.tipoPersona);
+                $('#editTelefono').val(); 
+                $('#editCorreo').val(); 
+                $('#editCodigo').val();    
+                $('#editSerial').val(); 
+                $('#editManzanero').val();
+                $('#editObservacion').val();
+              });            
+        });
+        planilla.hide();
+        planillaEditar.show()
+        e.preventDefault();
+       });
+
+       $(document).on('click', '#regresarPlanilla', function (e) {
+         planillaEditar.trigger('reset');  
+        planillaEditar.hide();
+       planilla.show();
+       e.preventDefault();          
+       });
 })
