@@ -51,8 +51,10 @@ function listaManzanas() {
                   </tr>`
               });          
               $('#fila').html(plantilla);  
+              
         });
-           e.preventDefault();     
+        $('#idCuadra').val(idManzana); 
+         e.preventDefault();     
      });
 
      // lista de personas actualizada que conforman la familia
@@ -91,9 +93,11 @@ function listaManzanas() {
           formulario.hide();
         let elemento = $(this)[0].parentElement.parentElement;
         let idFamilia = $(elemento).attr('Idfamilia');
+        let idCuadra = $('#idCuadra').val(); 
         listaPersonas(idFamilia);
         $('#titulo-familiar').html(`<h4>Familia nro ${idFamilia}</h4>`);
         $('#idFamiliar').val(idFamilia);
+        $('#idCuadrafamiliar').val(idCuadra);
         e.preventDefault(); 
     });
 
@@ -107,9 +111,10 @@ function listaManzanas() {
     $(document).on('click', '#nuevo', function (e) {
         tablaPersona.hide();
         planillaRegistrar.show(); 
-        let idFam= $('#idFamiliar').val();
+        let idFam = $('#idFamiliar').val();
+        let idMan = $('#idCuadrafamiliar').val();
         $('#familiaNRO').val(idFam);
-        
+        $('#manzanaNRO').val(idMan);      
     });
 
       // metodo para la busqueda de edad de una persona

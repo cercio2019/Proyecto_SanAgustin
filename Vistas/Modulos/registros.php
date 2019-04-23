@@ -23,6 +23,7 @@
 
     <div class="row mt-3" id="tabla">
         <div class="col-12">
+        <input type="text" id="idCuadra">
             <table class="table">
                <thead>
                    <th>Id</th>
@@ -53,6 +54,7 @@
     Nuevo Integrante
    </button>
    <input type="hidden" id="idFamiliar">
+   <input type="text" id="idCuadrafamiliar">
    </div>
           <div class="col-12 mt-5">
           <table class="table">
@@ -158,7 +160,7 @@
  </div>
  <div class="col-6">
     <label for="">Observacion social</label>
-    <textarea  id="observacion" cols="15" rows="5" class="form-control">
+    <textarea  id="observacion" cols="10" rows="5" class="form-control">
     </textarea> 
  </div>
  </div>
