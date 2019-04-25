@@ -29,10 +29,29 @@ class Persona
         return $resultado;
     }
 
-
-    public function Editar()
+    public function EditarPersona($datos)
     {
-        # code...
+        $id = $datos['id'];
+        $cedula = $datos['cedula'];
+        $nombres = $datos['nombres'];
+        $fecha = $datos['fecha'];
+        $edad = $datos['edad'];
+        $tipo = $datos['tipo'];
+        $sexo = $datos['sexo'];
+        $telefono = $datos['telefono'];
+        $correo = $datos['correo'];
+        $codigo = $datos['codigo'];
+        $serial = $datos['serial'];
+        $observacion = $datos['observacion'];
+        $manzanero = $datos['manzanero'];
+      
+        $query = "UPDATE individual SET cedula = $cedula, NombresApellidos = '$nombres', fechaNacimiento = '$fecha', Edad = '$edad', sexo = '$sexo', TipoPersona = '$tipo', Telefono = '$telefono', correo = '$correo', codigo = '$codigo', SerialCarnet = '$serial', observacionSocial = '$observacion', Manzanero = '$manzanero' WHERE idPersona = '$id' ";
+            $resultado = mysqli_query($this->db->conection(), $query);
+            if (!$resultado) {
+                die('error en la busqueda'. mysqli_error($this->db->conection()));
+            }else {
+                return 'El registro se ha actualizado satisfactoriamente';
+            }       
     }
 
     public function Eliminar()

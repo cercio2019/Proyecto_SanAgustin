@@ -185,24 +185,12 @@ function listaManzanas() {
         e.preventDefault();
     });
 
-    // verificar si tiene el carnet de la patria 
-    let carnetSi = $('#si-carnet');
-    carnetSi.hide();
-   $('#form-carnet').click(function(e) {    
-        
-    carnetSi.show();       
-    
-   e.preventDefault();
-   });
-
    $(document).on('click', '#regresar', function (e) {
     planillaRegistrar.trigger('reset');
     planillaRegistrar.hide();
     tablaPersona.show();
     e.preventDefault();
    });
-
-
 
     // muestra una planilla con todos los datos de una persona
     $(document).on('click', '.planilla', function(e) {
@@ -256,6 +244,7 @@ function listaManzanas() {
             
             let persona = JSON.parse(response);                
               persona.forEach(objetos => {
+                $('#editID').val(objetos.id),
                 $('#editCedula').val(objetos.cedula); 
                 $('#editNombres').val(objetos.nombreApellido);
                 $('#editFecha').val(objetos.fecha);
@@ -282,4 +271,31 @@ function listaManzanas() {
        });
 
        // formulario para editar los datos de una persona
+       planillaEditar.submit(function (e) {
+        let fechaedit = $('#editFecha').val();
+        
+        const datos ={         
+            id: $('#editID').val(),
+            cedula: $('#editCedula').val(), 
+            nombre: $('#editNombres').val(),
+            fecha: fechaedit,
+            edad: calcularEdad(fechaedit),
+            sexo: $('#editSexo').val(),
+            tipo: $('#editTipoPersona').val(),
+            telefono: $('#editTelefono').val(), 
+            correo: $('#editCorreo').val(), 
+            codigo: $('#editCodigo').val(),    
+            serial: $('#editSerial').val(), 
+            manzanero: $('#editManzanero').val(),
+            observacion: $('#editObservacion').val()
+         };
+
+         $.post('Controladores/editPersona.php', datos, function(response) {
+          alert(response);
+         })
+         planillaEditar.trigger('reset'); 
+         planillaEditar.hide();
+         planilla.show();
+         e.preventDefault();
+       });
 })

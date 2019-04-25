@@ -210,7 +210,7 @@
   </div>
  </div>
 
-  <!--zona para registrar un nuevo Integrante en la familia -->
+  <!--zona para editar los datos de un Integrante en la familia -->
 <form action="" id="form-edtitar" class="mb-5">
 <div class="row">
 <div class="col-12">
@@ -220,7 +220,8 @@
 <div class="row mt-3">
  <div class="col-6">
     <label for="">Cedula</label>
-    <input type="text" class="form-control" id="editCedula">  
+    <input type="text" class="form-control" id="editCedula"> 
+    <input type="hidden" id="editID"> 
  </div>
  </div>
  <div class="row">
@@ -277,7 +278,7 @@
  <div class="row">
  <div class="col-6">
     <label for="">Manzanero</label>
-   <select  id="editmanzanero" class="form-control">
+   <select  id="editManzanero" class="form-control">
    <option value="NO">NO</option>
    <option value="SI">SI</option>
    </select> 
