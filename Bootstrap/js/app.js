@@ -63,11 +63,9 @@ function listaManzanas() {
      function listaPersonas(id) {
 
       let idFamiliar= id;   
-      $.post('Controladores/listaPersonas.php', {idFamiliar}, function(response) {
-            
+      $.post('Controladores/listaPersonas.php', {idFamiliar}, function(response) {            
         let personas = JSON.parse(response);
-        let plantilla = '';
-      
+        let plantilla = '';      
           personas.forEach(objetos => {
               plantilla += `<tr Idpersona="${objetos.id}">
                  <td>${objetos.id}</td>
@@ -79,6 +77,11 @@ function listaManzanas() {
                  <td>
                  <button  class="btn btn-danger planilla">
                         Ver Planilla
+                 </button>
+                 </td>
+                 <td>
+                 <button  class="btn btn-warning delete">
+                      Eliminar
                  </button>
                  </td>
               </tr>`
@@ -102,6 +105,21 @@ function listaManzanas() {
         $('#idCuadrafamiliar').val(idCuadra);
         e.preventDefault(); 
     });
+
+    $(document).on('click', '.delete', function (e) {
+      
+     let idFamiliar = $('#idFamiliar').val();
+
+     if (confirm('¿Deseas eliminar este registro del sistema?')) {
+      let elemento = $(this)[0].parentElement.parentElement;
+      let idpersona = $(elemento).attr('Idpersona');
+      $.post('Controladores/borrarPersona.php', {idpersona}, function (response) {
+        alert(response);
+      });
+     }
+     listaPersonas(idFamiliar);
+      e.preventDefault();
+    })
 
     
     $(document).on('click', '#volver', function (e) {
@@ -180,8 +198,8 @@ function listaManzanas() {
         });
         planillaRegistrar.trigger('reset');
         planillaRegistrar.hide();
-        listaPersonas(idfamiliar2);
         tablaPersona.show();
+        listaPersonas(idfamiliar2);
         e.preventDefault();
     });
 
@@ -192,42 +210,48 @@ function listaManzanas() {
     e.preventDefault();
    });
 
+   function mostrarDatosPersonales(id) {
+
+    let idpersona = id;
+    $.post('Controladores/PlanillaPersona.php', {idpersona}, function(response) {
+            
+      let persona = JSON.parse(response);
+      let plantilla = '';
+      let plantilla2 = '';
+    
+  persona.forEach(objetos => {
+            plantilla += `<li class="m-4">ID : ${objetos.id} </li>
+            <li class="m-4">Cedula : ${objetos.cedula} </li>
+            <li class="m-4">Nombres y apellidos : ${objetos.nombreApellido} </li>
+            <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
+            <li class="m-4">Fecha de nacimiento : ${objetos.fecha} </li>
+            <li class="m-4">Edad : ${objetos.edad} </li>
+            <li class="m-4">Sexo : ${objetos.sexo} </li>
+            <li class="m-4">Telefono : ${objetos.telefono} </li>
+            `;
+            plantilla2 = `<li class="m-4">Correo electronico : ${objetos.correo} </li>
+            <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
+            <li class="m-4">Codigo carnet de la patria : ${objetos.codigo} </li>
+            <li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
+            <li class="m-4">Manzanero : ${objetos.manzanero} </li>
+            <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
+            <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
+            <li class="m-4">Observacion social : ${objetos.observacion} </li>
+            `;
+        });
+       
+        $('#datos1').html(plantilla); 
+        $('#datos2').html(plantilla2); 
+  });
+   }
+
     // muestra una planilla con todos los datos de una persona
     $(document).on('click', '.planilla', function(e) {
         tablaPersona.hide();
         planilla.show();
         let elemento = $(this)[0].parentElement.parentElement;
         let idpersona = $(elemento).attr('Idpersona');
-        $.post('Controladores/PlanillaPersona.php', {idpersona}, function(response) {
-            
-            let persona = JSON.parse(response);
-            let plantilla = '';
-            let plantilla2 = '';
-          
-        persona.forEach(objetos => {
-                  plantilla += `<li class="m-4">ID : ${objetos.id} </li>
-                  <li class="m-4">Cedula : ${objetos.cedula} </li>
-                  <li class="m-4">Nombres y apellidos : ${objetos.nombreApellido} </li>
-                  <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
-                  <li class="m-4">Fecha de nacimiento : ${objetos.fecha} </li>
-                  <li class="m-4">Edad : ${objetos.edad} </li>
-                  <li class="m-4">Sexo : ${objetos.sexo} </li>
-                  <li class="m-4">Telefono : ${objetos.telefono} </li>
-                  `;
-                  plantilla2 = `<li class="m-4">Correo electronico : ${objetos.correo} </li>
-                  <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
-                  <li class="m-4">Codigo carnet de la patria : ${objetos.codigo} </li>
-                  <li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
-                  <li class="m-4">Manzanero : ${objetos.manzanero} </li>
-                  <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
-                  <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
-                  <li class="m-4">Observacion social : ${objetos.observacion} </li>
-                  `;
-              });
-             
-              $('#datos1').html(plantilla); 
-              $('#datos2').html(plantilla2); 
-        });
+        mostrarDatosPersonales(idpersona);
         $('#nroPersonal').val(idpersona);
         e.preventDefault(); 
     });
@@ -273,9 +297,9 @@ function listaManzanas() {
        // formulario para editar los datos de una persona
        planillaEditar.submit(function (e) {
         let fechaedit = $('#editFecha').val();
-        
+        let idindividual = $('#editID').val();
         const datos ={         
-            id: $('#editID').val(),
+            id: idindividual,
             cedula: $('#editCedula').val(), 
             nombre: $('#editNombres').val(),
             fecha: fechaedit,
@@ -296,6 +320,7 @@ function listaManzanas() {
          planillaEditar.trigger('reset'); 
          planillaEditar.hide();
          planilla.show();
+         mostrarDatosPersonales(idindividual);
          e.preventDefault();
        });
 })

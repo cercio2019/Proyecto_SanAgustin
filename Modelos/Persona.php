@@ -54,8 +54,15 @@ class Persona
             }       
     }
 
-    public function Eliminar()
+    public function Eliminar($id)
     {
-        # code...
+        $idpersona = $id;
+        $query = "DELETE FROM individual WHERE idPersona = $idpersona ";
+        $resultado= mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la setencia'. mysqli_error($this->db->conection()));
+        }else {
+            return 'El registro ha sido eliminado del sistema';
+        }
     }
 }
