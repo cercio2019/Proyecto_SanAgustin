@@ -1,6 +1,7 @@
 $(document).ready(function(){
     console.log('jquery funciona');
     listaManzanas();
+    listaDiscapacitados();
     var formulario = $('#formulario');
     var tabla= $('#tabla');
     var tablaPersona = $('#tablaPersonas');
@@ -12,6 +13,7 @@ $(document).ready(function(){
     planilla.hide();
     planillaRegistrar.hide();
     planillaEditar.hide();
+
 
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
@@ -29,6 +31,7 @@ function listaManzanas() {
         }
         });
     }
+
 
      //Mostar la tabla de familias que estan en una manazana 
     formulario.submit(function (e) {
@@ -58,6 +61,7 @@ function listaManzanas() {
         $('#idCuadra').val(idManzana); 
          e.preventDefault();     
      });
+
 
      // lista de personas actualizada que conforman la familia
      function listaPersonas(id) {
@@ -91,6 +95,7 @@ function listaManzanas() {
     });
      }
 
+
      //Mostar la tablas de personas que viven en la manzana
      $(document).on('click', '.verPersonas', function (e) {
           tablaPersona.show();
@@ -106,6 +111,8 @@ function listaManzanas() {
         e.preventDefault(); 
     });
 
+
+    // metodo para eliminar un registro de la base de datos 
     $(document).on('click', '.delete', function (e) {
       
      let idFamiliar = $('#idFamiliar').val();
@@ -128,6 +135,7 @@ function listaManzanas() {
      tabla.show();   
     });
 
+    // te muestra el formulario para registra un nuevo integrante a la familia 
     $(document).on('click', '#nuevo', function (e) {
         tablaPersona.hide();
         planillaRegistrar.show(); 
@@ -136,6 +144,7 @@ function listaManzanas() {
         $('#familiaNRO').val(idFam);
         $('#manzanaNRO').val(idMan);      
     });
+
 
       // metodo para la busqueda de edad de una persona
       function calcularEdad(fecha) {
@@ -165,6 +174,7 @@ function listaManzanas() {
         }
         return edad;
         }
+
 
     // registrar los datos de una persona 
     planillaRegistrar.submit(function (e) {
@@ -203,6 +213,7 @@ function listaManzanas() {
         e.preventDefault();
     });
 
+    // regresar a una ventana anterior
    $(document).on('click', '#regresar', function (e) {
     planillaRegistrar.trigger('reset');
     planillaRegistrar.hide();
@@ -210,6 +221,8 @@ function listaManzanas() {
     e.preventDefault();
    });
 
+
+   // funcion de mostrar los datos personales de cada integrante de la comunidad
    function mostrarDatosPersonales(id) {
 
     let idpersona = id;
@@ -245,6 +258,7 @@ function listaManzanas() {
   });
    }
 
+
     // muestra una planilla con todos los datos de una persona
     $(document).on('click', '.planilla', function(e) {
         tablaPersona.hide();
@@ -261,7 +275,9 @@ function listaManzanas() {
         tablaPersona.show();          
        });
 
-       $(document).on('click', '#editDatos', function (e) {
+
+       // metodo para llamar los datos de una perosna y luego ser editadas 
+    $(document).on('click', '#editDatos', function (e) {
           let nroPersona = $('#nroPersonal').val();
 
           $.post('Controladores/PlanillaPersona.php', {nroPersona}, function(response) {
@@ -294,6 +310,7 @@ function listaManzanas() {
        e.preventDefault();          
        });
 
+
        // formulario para editar los datos de una persona
        planillaEditar.submit(function (e) {
         let fechaedit = $('#editFecha').val();
@@ -323,4 +340,36 @@ function listaManzanas() {
          mostrarDatosPersonales(idindividual);
          e.preventDefault();
        });
+
+
+// funcion que muestra la lista de discpacitados de la comunidad 
+       function listaDiscapacitados() {        
+        $.ajax({
+            url: 'Controladores/listaDiscapacitados.php',
+            type: 'GET',
+            success: function (response) {
+              let discapacitados = JSON.parse(response);
+              let plantilla = '';
+    
+              discapacitados.forEach(objetos => {
+                plantilla += `<tr IdDiscaoacitado="${objetos.cedula}">
+                   <td>${objetos.NROdiscapacitado}</td>
+                   <td>${objetos.cedula}</td>
+                   <td>
+                    <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
+                   </td>
+                   <td>${objetos.edad}</td>
+                   <td>${objetos.tipoDiscapacidad}</td>
+                   <td>
+                   <button  class="btn btn-danger planillaDiscapacidad">
+                          Ver Planilla
+                   </button>
+                   </td>
+                </tr>`
+            });
+                  $('#listaDiscapacitado').append(plantilla);
+            }
+            });
+        }      
+
 })
