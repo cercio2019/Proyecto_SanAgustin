@@ -21,14 +21,14 @@ class  Discapacitado
     public function RegistroIndividual($datos)
     {
         $cedula = $datos['cedula'];
-        $nombre = $datos['nombreApellido'];
+        $nombre = $datos['nombres'];
         $fecha = $datos['fecha'];
         $edad = $datos['edad'];
 
         $query= "INSERT INTO discapacitados (cedula, nombreApellido, fechaNacimiento, edad) VALUE ('$cedula', '$nombre', '$fecha', '$edad')";
-        $resultado = mysqli_query($db->conection(), $query);
+        $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
-            die('error en la sentencia'. mysqli_error($db->conection()));
+            die('error en la sentencia'. mysqli_error($this->db->conection()));
         } 
         return 'Este registro se ha guardado exitosamente';
     }

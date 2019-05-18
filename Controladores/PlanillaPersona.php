@@ -29,8 +29,8 @@ while ($row = mysqli_fetch_array($lista)) {
          'tipoPersona' => $row['TipoPersona'],
          'edad' => $row['Edad'],
          'manzanero' => $row['Manzanero'],
-         'observacion' => $row['observacionSocial'],
-         'nroManzana' => $row['NroManzana']       
+         'nroManzana' => $row['NroManzana'],
+         'discapacidad' => $row['Discapacidad']       
     );       
 }
 

@@ -29,6 +29,35 @@ class Persona
         return $resultado;
     }
 
+    public function Registrar($datos)
+    {
+        $cedula= $datos['cedula'];
+        $nombres= $datos['nombres'];
+        $familia= $datos['familia'];
+        $fecha= $datos['fecha'];
+        $edad= $datos['edad'];
+        $sexo= $datos['sexo'];
+        $tipo= $datos['tipo'];
+        $telefono= $datos['telefono'];
+        $correo= $datos['correo'];
+        $codigo= $datos['codigo'];
+        $serial= $datos['serial'];
+        $discapacidad= $datos['discapacidad'];
+        $manzanero= $datos['manzanero'];
+        $manzana= $datos['manzana'];
+
+        $query = "INSERT INTO individual(cedula, NombresApellidos, grupoFamiliarNro,
+        fechaNacimiento, Edad, sexo, TipoPersona, Telefono, correo, codigo, SerialCarnet, Discapacidad, Manzanero, NroManzana) VALUE ('$cedula',
+        '$nombres', '$familia', '$fecha', '$edad', '$sexo', '$tipo', '$telefono', '$correo',
+        '$codigo', '$serial', '$discapacidad', '$manzanero',  '$manzana' )";
+
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la sentencia'. mysqli_error($this->db->conection()));
+        } 
+        return 'Persona registrada exitosamente';
+    }
+
     public function EditarPersona($datos)
     {
         $id = $datos['id'];

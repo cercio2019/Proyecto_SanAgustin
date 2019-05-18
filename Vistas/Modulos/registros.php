@@ -132,13 +132,6 @@
     <label for="">Correo</label>
     <input type="email" class="form-control" id="correo">  
  </div>
- <div class="col-6">
-    <label for="">Carnet de la patria</label>
-    <select  id="carnet" class="form-control">
-    <option value="NO">NO</option>
-    <option value="SI" id="form-carnet">SI</option>
-    </select> 
- </div>
  </div>
  <div class="row" id="si-carnet">
  <div class="col-6">
@@ -159,9 +152,11 @@
    </select> 
  </div>
  <div class="col-6">
-    <label for="">Observacion social</label>
-    <textarea  id="observacion" cols="10" rows="5" class="form-control">
-    </textarea> 
+ <label for="">¿Discapacitado?</label>
+ <select name="" id="discapacitado" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
  </div>
  </div>
  <div class="row">

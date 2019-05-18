@@ -194,7 +194,7 @@ function listaManzanas() {
          codigo : $('#codigo').val(),    
          serial : $('#serial').val(), 
          manzanero : $('#manzanero').val(),
-         observacion : $('#observacion').val(),
+         discapacitado : $('#discapacitado').val(),
          manzana : $('#manzanaNRO').val(),
          familia : idfamiliar2
         };
@@ -246,10 +246,10 @@ function listaManzanas() {
             <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
             <li class="m-4">Codigo carnet de la patria : ${objetos.codigo} </li>
             <li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
-            <li class="m-4">Manzanero : ${objetos.manzanero} </li>
-            <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
+            <li class="m-4">Manzanero : ${objetos.manzanero}</li>
+            <li class="m-4">Nro familiar : ${objetos.nrofam}</li>
             <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
-            <li class="m-4">Observacion social : ${objetos.observacion} </li>
+            <li class="m-4">¿Discapacidad? : ${objetos.discapacidad}</li>
             `;
         });
        
