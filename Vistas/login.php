@@ -1,47 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=divice-width, initial-scale=1, shrink-to-fit=no">
-	<meta http-equiv="x-ua-compatible" content="ie-edge">
-	<link rel="stylesheet" type="text/css" href= "Bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="Bootstrap/css/personalizacion.css">
-	<title><?php echo NOMBRESITIO; ?></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="Bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="Bootstrap/css/style.css">
+    <title><?php echo NOMBRESITIO; ?></title>
 </head>
-
 <body>
 
-<div class="bg-reds text-white">
-	<h1 class="p-5"><?php echo NOMBRESITIO;?></h1>
-</div>
+    <div class="container p-5">
 
-<div class="container-fluid  mt-5">
+    </div>
    
-	<div class="row  bg-bluDark p-5">		
-		<div class="col-12 p-5 text-center">              
-         <h3 class="text-white ml-5">Entrar al sistema</h3>
+    <div class="container mt-5">
+       <div class="row mt-5">
+        <div class="col-12 col-md-3">
 
-		<?php if (isset($error)) {?>
-   	        <p class="text-white ml-5"><?php echo $error; ?></p>
+        </div>
+        <div class="col-12 col-md-6 text-center bg-blue" >
+
+            <div class="container-fluid">
+                    <h3 class="text-white mt-3">Comunidad San Agustin</h3>
+        
+			<?php if (isset($error)) {?>
+   	        <p class="text-white text-center"><?php echo $error; ?></p>
         <?php } ?>
+             <form action="" method="POST">
 
-		<form class="ml-1 text-white pt-2 text-center" method="POST" action="">
-		<div>
-			<label>usuario</label>
-			 <center><input type="text" name="usuario"  class="form-control w-50 text-center "></center> 
-		</div> 
-		<div class="mt-3">
-			<label>contraseña</label>
-			<center><input type="password" name="password" class="form-control w-50 text-center"></center>
-		</div>
-		<div class="text-center"><input type="submit"  value="ingresar" class="btn btn-danger mt-4 w-50"></div>
-	</form>
+                <div class="row mt-5">
+                    <div class="col-4">
+                        <select  class="form-control" name="documento">
+                            <option value="V">V</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+                    <div class="col-8">
+                        <input type="text" class="form-control" placeholder="ingresar cedula" name="usuario">
+                    </div>                    
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                            <input type="password" class="form-control mt-5" placeholder="ingresar contraseña" name="password">
+                    </div>
+                </div>
+              
+            <input type="submit" value="Ingresar" class=" btn btn-danger mt-5 mb-5 w-50 ">
+            </form>
 
-</div>
-</div>
-</div>
-<script src="Bootstrap/js/jquery-3.3.1.slim.min.js"></script>
+            </div>
+            
+        </div>
+        <div class="col-12  col-md-3">
+            
+        </div>
+       </div>
+    </div>
+
+    
+<script src="Bootstrap/js/jquery-3.4.0.min.js"></script>
 <script src="Bootstrap/js/popper.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

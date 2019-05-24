@@ -276,7 +276,7 @@ function listaManzanas() {
        });
 
 
-       // metodo para llamar los datos de una perosna y luego ser editadas 
+       // metodo para llamar los datos de una persona y luego ser editados 
     $(document).on('click', '#editDatos', function (e) {
           let nroPersona = $('#nroPersonal').val();
 
@@ -295,7 +295,7 @@ function listaManzanas() {
                 $('#editCodigo').val(objetos.codigo);    
                 $('#editSerial').val(objetos.serial); 
                 $('#editManzanero').val(objetos.manzanero);
-                $('#editObservacion').val(objetos.observacion);
+                $('#editDiscapacidad').val(objetos.discapacidad);
               });            
         });
         planilla.hide();
@@ -328,7 +328,7 @@ function listaManzanas() {
             codigo: $('#editCodigo').val(),    
             serial: $('#editSerial').val(), 
             manzanero: $('#editManzanero').val(),
-            observacion: $('#editObservacion').val()
+            discapacidad: $('#editDiscapacidad').val()
          };
 
          $.post('Controladores/editPersona.php', datos, function(response) {
@@ -352,7 +352,7 @@ function listaManzanas() {
               let plantilla = '';
     
               discapacitados.forEach(objetos => {
-                plantilla += `<tr IdDiscaoacitado="${objetos.cedula}">
+                plantilla += `<tr IdDiscapacitado="${objetos.cedula}">
                    <td>${objetos.NROdiscapacitado}</td>
                    <td>${objetos.cedula}</td>
                    <td>

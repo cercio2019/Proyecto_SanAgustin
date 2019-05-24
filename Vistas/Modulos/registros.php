@@ -5,7 +5,7 @@
             <h3>Registro de la Comunidad</h3>
         </div>
     </div>
-    <form action="" class="mt-3" id="formulario">
+    <form action="" class="mt-5" id="formulario">
       <div class="row">
             <div class="col-5">
                     <Select class="form-control" id="manzanas">
@@ -23,7 +23,7 @@
 
     <div class="row mt-3" id="tabla">
         <div class="col-12">
-        <input type="text" id="idCuadra">
+        <input type="hidden" id="idCuadra">
             <table class="table">
                <thead>
                    <th>Id</th>
@@ -54,7 +54,7 @@
     Nuevo Integrante
    </button>
    <input type="hidden" id="idFamiliar">
-   <input type="text" id="idCuadrafamiliar">
+   <input type="hidden" id="idCuadrafamiliar">
    </div>
           <div class="col-12 mt-5">
           <table class="table">
@@ -183,7 +183,7 @@
    <button class="btn btn-primary" id="volver2">Volver</button>
    </div>
    <div class="col-5">
-   <input type="text" id="nroPersonal">
+   <input type="hidden" id="nroPersonal">
    </div>
    </div>     
      <div class="row mt-5">     
@@ -259,8 +259,6 @@
     <label for="">Correo</label>
     <input type="email" class="form-control" id="editCorreo">  
  </div>
- </div>
- <div class="row" id="si-carnet">
  <div class="col-6">
     <label for="">Codigo</label>
     <input type="text" class="form-control" id="editCodigo">  
@@ -269,8 +267,6 @@
     <label for="">Serial</label>
     <input type="text" class="form-control" id="editSerial">  
  </div>
- </div>
- <div class="row">
  <div class="col-6">
     <label for="">Manzanero</label>
    <select  id="editManzanero" class="form-control">
@@ -278,10 +274,14 @@
    <option value="SI">SI</option>
    </select> 
  </div>
+ </div>
+ <div class="row">
  <div class="col-6">
-    <label for="">Observacion social</label>
-    <textarea  id="editObservacion" cols="10" rows="5" class="form-control">
-    </textarea> 
+    <label for="">¿Discapacidad?</label>
+   <select name="" id="editDiscapacidad" class="form-control">
+   <option value="NO">NO</option>
+   <option value="SI">SI</option>
+   </select> 
  </div>
  </div>
  <div class="row">

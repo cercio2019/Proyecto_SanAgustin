@@ -15,9 +15,9 @@ class ControllerLogin
  		  	$dato= $user->getUsuario();
  		  	 include_once 'Vistas/template.php';
 
- 		  } else if (isset($_POST['usuario']) && isset($_POST['password'])) {
+ 		  } else if (isset($_POST['documento']) && isset($_POST['usuario']) && isset($_POST['password'])) {
 
- 		  	 $userForm = $_POST['usuario'];
+ 		  	 $userForm = $_POST['documento'].'-'.$_POST['usuario'];
  		  	 $passForm = $_POST['password'];
 
  		  	 $user = new Usuario();
