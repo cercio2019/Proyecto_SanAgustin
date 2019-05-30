@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="Bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="Bootstrap/css/style.css">
+    <link rel="stylesheet" type="text/css" href="Bootstrap/css/bootstrap.css">
     <title><?php echo NOMBRESITIO; ?></title>
 </head>
 <body>
@@ -19,10 +19,10 @@
         <div class="col-12 col-md-3">
 
         </div>
-        <div class="col-12 col-md-6 text-center bg-blue" >
+        <div class="col-12 col-md-6  text-center bg-danger " >
 
             <div class="container-fluid">
-                    <h3 class="text-white mt-3">Comunidad San Agustin</h3>
+                    <h3 class="mt-3 text-white">Comunidad San Agustin</h3>
         
 			<?php if (isset($error)) {?>
    	        <p class="text-white text-center"><?php echo $error; ?></p>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
               
-            <input type="submit" value="Ingresar" class=" btn btn-danger mt-5 mb-5 w-50 ">
+            <input type="submit" value="Ingresar" class=" btn btn-dark mt-5 mb-5 w-50 ">
             </form>
 
             </div>

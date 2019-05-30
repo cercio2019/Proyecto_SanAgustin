@@ -11,15 +11,24 @@
 <body>
 <div class="container-fluid bg-reds">
 <div class="row">
-	<div class="col-sm-12 col-md-4">
+	<div class="col-sm-12 col-md-5">
 	 <div class="container text-white mt-3">
 	 <h3>Sistema San Agustin</h3>
 	 </div>
 	</div>
-	    <div class="col-sm-12 col-md-8">
+	    <div class="col-sm-12 col-md-5">
       		<?php include "Menus/nav_1.php"; ?>
         </div>  
 </div>
+
+<div class="row bg-dark text-white">
+		<div class="col-6 col-sm-5 col-md-4 text-center mt-2">
+			<p>Usuario: <strong> <?php echo $dato->Nombre." ".$dato->Apellido; ?></strong></p>
+		</div>
+		<div class="col-6 col-sm-5 col-md-4 text-center mt-2">
+			<p>Tipo de usuario:<strong> <?php echo $dato->tipo; ?></strong></p>
+		</div>
+	</div>
 </div>
 
 <div class="container-fluid mt-4">
@@ -27,17 +36,6 @@
 $mvc = new Controller();
 $mvc -> enlacesPaginasController();
 ?>
-</div>
-
-<div class="container-fluid bg-reds text-white fixed-bottom">
-	<div class="row ">
-		<div class="col-3 text-center">
-			<p>Usuario: <strong> <?php echo $dato->Nombre." ".$dato->Apellido; ?></strong></p>
-		</div>
-		<div class="col-3 text-center">
-			<p>Tipo de usuario:<strong> <?php echo $dato->tipo; ?></strong></p>
-		</div>
-	</div>
 </div>
 
 <script src="Bootstrap/js/jquery-3.4.0.min.js"></script>

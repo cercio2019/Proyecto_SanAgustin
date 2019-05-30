@@ -84,27 +84,27 @@
 </div>
 <div class="row mt-3">
  <div class="col-6">
-    <label for="">Cedula</label>
+    <label for="">Cedula *</label>
     <input type="text" class="form-control" id="cedula">  
  </div>
  </div>
- <div class="row">
+ <div class="row mt-2">
  <div class="col-6">
-    <label for="">Nombres</label>
+    <label for="">Nombres *</label>
     <input type="text" class="form-control" id="nombres">  
  </div>
  <div class="col-6">
-    <label for="">Apellidos</label>
+    <label for="">Apellidos *</label>
     <input type="text" class="form-control" id="Apellidos">  
  </div>
  </div>
- <div class="row">
+ <div class="row mt-2">
  <div class="col-6">
-    <label for="">Fecha de nacimiento</label>
+    <label for="">Fecha de nacimiento *</label>
     <input type="date" class="form-control" id="fecha">  
  </div>
  <div class="col-6">
-    <label for="">Sexo</label>
+    <label for="">Sexo *</label>
     <select name="" id="sexo" class="form-control">
     <option value="">Seleccionar</option>
     <option value="Masculino">Masculino</option>
@@ -112,9 +112,9 @@
     </select>
  </div>
  </div>
- <div class="row">
+ <div class="row mt-2">
  <div class="col-6">
-    <label for="">Tipo persona</label>
+    <label for="">Tipo persona *</label>
     <select name="" id="tipoPersona" class="form-control">
     <option value="">Seleccionar</option>
     <option value="JEFE">JEFE</option>
@@ -127,32 +127,32 @@
  </div>
  </div>
 
- <div class="row">
+ <div class="row mt-2">
  <div class="col-6">
     <label for="">Correo</label>
     <input type="email" class="form-control" id="correo">  
  </div>
- </div>
- <div class="row" id="si-carnet">
  <div class="col-6">
-    <label for="">Codigo</label>
+    <label for="">Codigo (carnet de la patria)</label>
     <input type="text" class="form-control" id="codigo">  
  </div>
+ </div>
+ <div class="row mt-2">
  <div class="col-6">
-    <label for="">Serial</label>
+    <label for="">Serial (carnet de la patria)</label>
     <input type="text" class="form-control" id="serial">  
  </div>
- </div>
- <div class="row">
  <div class="col-6">
-    <label for="">Manzanero</label>
+    <label for="">Manzanero *</label>
    <select  id="manzanero" class="form-control">
    <option value="NO">NO</option>
    <option value="SI">SI</option>
    </select> 
  </div>
+ </div>
+ <div class="row mt-2">
  <div class="col-6">
- <label for="">¿Discapacitado?</label>
+ <label for="">¿Discapacitado? *</label>
  <select name="" id="discapacitado" class="form-control">
  <option value="NO">NO</option>
  <option value="SI">SI</option>
@@ -172,6 +172,7 @@
   <input type="submit" value="Registrar" class="btn btn-danger w-50">
  </div>
  </div>
+ <p>Campos obligatorios (*)</p>
 </form>
 
 <!-- zona donde se muestra todos los datos de la persona seleccionada -->
@@ -186,18 +187,23 @@
    <input type="hidden" id="nroPersonal">
    </div>
    </div>     
-     <div class="row mt-5">     
-      <div class="col-6">
+     <div class="row mt-3">     
+      <div class="col-4 ">
           <ul id="datos1">
           
           </ul>      
       </div>
-      <div class="col-6" >
+      <div class="col-4" >
           <ul id="datos2">
           
           </ul>
       </div>
-      <div class="col-12 mt-5">
+      <div class="col-4" >
+          <ul id="datos3">
+          
+          </ul>
+      </div>
+      <div class="col-12 mt-3">
       <button class="btn btn-danger" id="editDatos">Editar</button>
       </div>
      </div>
@@ -214,70 +220,69 @@
 </div>
 <div class="row mt-3">
  <div class="col-6">
-    <label for="">Cedula</label>
+    <label for="">Cedula *</label>
     <input type="text" class="form-control" id="editCedula"> 
     <input type="hidden" id="editID"> 
  </div>
  </div>
- <div class="row">
+ <div class="row mt-3">
  <div class="col-6">
-    <label for="">Nombre completo</label>
+    <label for="">Nombre completo *</label>
     <input type="text" class="form-control" id="editNombres">  
  </div>
- </div>
- <div class="row">
  <div class="col-6">
-    <label for="">Fecha de nacimiento</label>
+    <label for="">Fecha de nacimiento *</label>
     <input type="date" class="form-control" id="editFecha">  
  </div>
+ </div>
+ <div class="row mt-3">
  <div class="col-6">
-    <label for="">Sexo</label>
+    <label for="">Sexo *</label>
     <select name="" id="editSexo" class="form-control">
     <option value="">Seleccionar</option>
     <option value="Masculino">Masculino</option>
     <option value="Femenino">Femenino</option>
     </select>
  </div>
- </div>
- <div class="row">
  <div class="col-6">
-    <label for="">Tipo persona</label>
+    <label for="">Tipo persona *</label>
     <select name="" id="editTipoPersona" class="form-control">
     <option value="">Seleccionar</option>
     <option value="JEFE">JEFE</option>
     <option value="MIEMBRO">MIEMBRO</option>
     </select> 
  </div>
+ </div>
+ <div class="row mt-3">
  <div class="col-6">
     <label for="">Telefono</label>
     <input type="text" class="form-control" id="editTelefono">  
  </div>
- </div>
-
- <div class="row">
  <div class="col-6">
     <label for="">Correo</label>
     <input type="email" class="form-control" id="editCorreo">  
  </div>
+ </div>
+ <div class="row mt-3">
  <div class="col-6">
-    <label for="">Codigo</label>
+    <label for="">Codigo (carnet de la patria)</label>
     <input type="text" class="form-control" id="editCodigo">  
  </div>
  <div class="col-6">
-    <label for="">Serial</label>
+    <label for="">Serial (carnet de la patria)</label>
     <input type="text" class="form-control" id="editSerial">  
  </div>
+ </div>
+ <div class="row mt-3">
  <div class="col-6">
-    <label for="">Manzanero</label>
+    <label for="">Manzanero *</label>
    <select  id="editManzanero" class="form-control">
    <option value="NO">NO</option>
    <option value="SI">SI</option>
    </select> 
  </div>
- </div>
- <div class="row">
  <div class="col-6">
-    <label for="">¿Discapacidad?</label>
+    <label for="">¿Discapacidad? *</label>
    <select name="" id="editDiscapacidad" class="form-control">
    <option value="NO">NO</option>
    <option value="SI">SI</option>
@@ -297,4 +302,5 @@
   <input type="submit" value="Editar" class="btn btn-danger w-50">
  </div>
  </div>
+ <p>Campos obligatorios (*)</p>
 </form>

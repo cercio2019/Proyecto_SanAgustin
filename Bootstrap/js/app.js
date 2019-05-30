@@ -231,6 +231,7 @@ function listaManzanas() {
       let persona = JSON.parse(response);
       let plantilla = '';
       let plantilla2 = '';
+      let plantilla3 = '';
     
   persona.forEach(objetos => {
             plantilla += `<li class="m-4">ID : ${objetos.id} </li>
@@ -239,13 +240,17 @@ function listaManzanas() {
             <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
             <li class="m-4">Fecha de nacimiento : ${objetos.fecha} </li>
             <li class="m-4">Edad : ${objetos.edad} </li>
-            <li class="m-4">Sexo : ${objetos.sexo} </li>
-            <li class="m-4">Telefono : ${objetos.telefono} </li>
+           
             `;
-            plantilla2 = `<li class="m-4">Correo electronico : ${objetos.correo} </li>
+            plantilla2 = ` <li class="m-4">Sexo : ${objetos.sexo} </li>
+            <li class="m-4">Telefono : ${objetos.telefono} </li>
+            <li class="m-4">Correo electronico : ${objetos.correo} </li>
             <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
             <li class="m-4">Codigo carnet de la patria : ${objetos.codigo} </li>
-            <li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
+            
+            `;
+
+            plantilla3= `<li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
             <li class="m-4">Manzanero : ${objetos.manzanero}</li>
             <li class="m-4">Nro familiar : ${objetos.nrofam}</li>
             <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
@@ -255,6 +260,8 @@ function listaManzanas() {
        
         $('#datos1').html(plantilla); 
         $('#datos2').html(plantilla2); 
+        $('#datos3').html(plantilla3); 
+
   });
    }
 
