@@ -3,7 +3,9 @@ class EnlacesPaginas{
 
 public function enlacesPaginasModel($enlacesModel){
 
-if($enlacesModel=="inicio" || $enlacesModel=="registros" || $enlacesModel=="discapacitados"){
+if($enlacesModel=="inicio" || $enlacesModel=="registros" || $enlacesModel=="discapacitados"
+
+|| $enlacesModel=="TerceraEdad" || $enlacesModel=="Documentos" || $enlacesModel=="registroUsuario"){
 
 	  $module = "Vistas/Modulos/".$enlacesModel.".php";
 	}

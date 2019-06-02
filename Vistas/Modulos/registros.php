@@ -203,7 +203,7 @@
           
           </ul>
       </div>
-      <div class="col-12 mt-3">
+      <div class="col-12 m-4">
       <button class="btn btn-danger" id="editDatos">Editar</button>
       </div>
      </div>

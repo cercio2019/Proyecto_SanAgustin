@@ -94,4 +94,14 @@ class Persona
             return 'El registro ha sido eliminado del sistema';
         }
     }
+
+    public function TerceraEdad()
+    {
+        $query = "SELECT * FROM individual WHERE Edad > 59 ";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'. mysqli_error($this->db->conection()));
+        }
+        return $resultado;
+    }
 }

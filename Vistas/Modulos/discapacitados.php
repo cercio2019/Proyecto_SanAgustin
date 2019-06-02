@@ -24,6 +24,10 @@
 </div>
 
 
-
+<div class="row mt-4 mb-4">
+<div class="col-12 text-center">
+<a href="PDF/Pdf2.php" target="_blank" class="btn btn-primary w-50">Descargar Registros</a>
+</div>
+</div>
 
 </div>

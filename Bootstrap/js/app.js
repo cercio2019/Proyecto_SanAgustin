@@ -2,6 +2,8 @@ $(document).ready(function(){
     console.log('jquery funciona');
     listaManzanas();
     listaDiscapacitados();
+    listaTerceraEdad();
+    listaUsuarios()
     var formulario = $('#formulario');
     var tabla= $('#tabla');
     var tablaPersona = $('#tablaPersonas');
@@ -377,6 +379,58 @@ function listaManzanas() {
                   $('#listaDiscapacitado').append(plantilla);
             }
             });
-        }      
+        } 
+        
+        //funcion de que muesta la lista de personas de la tercera edad
+        function listaTerceraEdad() {
+          $.ajax({
+              url: 'Controladores/listaTerceraEdad.php',
+              type: 'GET',
+              success: function (response) {
+                let mayores = JSON.parse(response);
+                let plantilla = '';
 
+                
+              mayores.forEach(objetos => {
+                plantilla += `<tr IdDiscapacitado="${objetos.id}">
+                   <td>${objetos.id}</td>
+                   <td>${objetos.cedula}</td>
+                   <td>
+                   ${objetos.nombreApellido}
+                   </td>
+                   <td>${objetos.edad}</td>                   
+                   <td>${objetos.familia}</td>
+                   <td>${objetos.manzana}</td>
+
+                </tr>`
+            });
+
+            $('#listaMayores').append(plantilla);
+              }
+          });
+        }
+
+        //funcion de que muesta la lista de usuarios 
+        function listaUsuarios() {
+          $.ajax({
+              url: 'Controladores/listaUsuarios.php',
+              type: 'GET',
+              success: function (response) {
+                let users = JSON.parse(response);
+                let plantilla = '';
+                
+            users.forEach(objetos => {
+                plantilla += `<tr>                   
+                   <td>${objetos.cedula}</td>
+                   <td>
+                   ${objetos.nombre} ${objetos.apellido} 
+                   </td>
+                   <td>${objetos.tipo}</td>                                  
+                </tr>`
+            });
+
+            $('#listaUser').append(plantilla);
+              }
+          });
+        }
 })
