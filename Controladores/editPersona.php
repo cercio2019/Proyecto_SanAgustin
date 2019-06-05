@@ -14,8 +14,10 @@ $datos = [
 'telefono' => $_POST['telefono'],
 'tipo' => $_POST['tipo'],
 'correo' => $_POST['correo'],
-'codigo' => $_POST['codigo'],
-'serial' => $_POST['serial'],
+'carnet' => $_POST['carnet'],
+'hogar' => $_POST['hogarPatria'],
+'vivienda' => $_POST['vivienda'],
+'nroCasa' => $_POST['nroCasa'],
 'manzanero' => $_POST['manzanero'],
 'discapacitado' => $_POST['discapacidad']
 ];

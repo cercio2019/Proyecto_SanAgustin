@@ -133,14 +133,29 @@
     <input type="email" class="form-control" id="correo">  
  </div>
  <div class="col-6">
-    <label for="">Codigo (carnet de la patria)</label>
-    <input type="text" class="form-control" id="codigo">  
+ <label for="">¿Carnet de la patria?</label>
+ <select name="" id="carnetPatria" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
  </div>
- </div>
- <div class="row mt-2">
  <div class="col-6">
-    <label for="">Serial (carnet de la patria)</label>
-    <input type="text" class="form-control" id="serial">  
+ <label for="">¿Hogares de la patria?</label>
+ <select name="" id="hogarPatria" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
+ </div>
+ <div class="col-6">
+ <label for="">¿Vivienda Propia?</label>
+ <select name="" id="viviendaPropia" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
+ </div>
+ <div class="col-6">
+ <label for="">Nro de referencia de la casa</label>
+ <input type="text" class="form-control" id="NroCasa">
  </div>
  <div class="col-6">
     <label for="">Manzanero *</label>
@@ -265,12 +280,31 @@
  </div>
  <div class="row mt-3">
  <div class="col-6">
-    <label for="">Codigo (carnet de la patria)</label>
-    <input type="text" class="form-control" id="editCodigo">  
+ <label for="">¿Carnet de la patria? *</label>
+ <select name="" id="editCarnet" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
  </div>
  <div class="col-6">
-    <label for="">Serial (carnet de la patria)</label>
-    <input type="text" class="form-control" id="editSerial">  
+ <label for="">¿Hogares de la patria? *</label>
+ <select name="" id="editHogar" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
+ </div>
+ </div>
+ <div class="row mt-3">
+ <div class="col-6">
+ <label for="">¿Vivienda Propia? *</label>
+ <select name="" id="editVivienda" class="form-control">
+ <option value="NO">NO</option>
+ <option value="SI">SI</option>
+ </select>
+ </div>
+ <div class="col-6">
+ <label for="">Nro de referencia de la casa *</label>
+ <input type="text" class="form-control" id="editCasa">
  </div>
  </div>
  <div class="row mt-3">
@@ -299,7 +333,7 @@
  </div>
  <div class="row mt-4">
  <div class="col-12 text-center">
-  <input type="submit" value="Editar" class="btn btn-danger w-50">
+  <input type="submit" value="Actualizar" class="btn btn-danger w-50">
  </div>
  </div>
  <p>Campos obligatorios (*)</p>

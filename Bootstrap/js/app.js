@@ -192,9 +192,10 @@ function listaManzanas() {
          tipo : $('#tipoPersona').val(),
          telefono : $('#telefono').val(), 
          correo : $('#correo').val(),
-         carnet : $('#carnet').val(), 
-         codigo : $('#codigo').val(),    
-         serial : $('#serial').val(), 
+         carnet : $('#carnetPatria').val(), 
+         hogarPatria: $('#hogarPatria'),
+         vivienda: $('#viviendaPropia'),
+         nroCasa: $('#NroCasa'),  
          manzanero : $('#manzanero').val(),
          discapacitado : $('#discapacitado').val(),
          manzana : $('#manzanaNRO').val(),
@@ -248,11 +249,13 @@ function listaManzanas() {
             <li class="m-4">Telefono : ${objetos.telefono} </li>
             <li class="m-4">Correo electronico : ${objetos.correo} </li>
             <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
-            <li class="m-4">Codigo carnet de la patria : ${objetos.codigo} </li>
+            <li class="m-4">Carnet de la patria : ${objetos.carnet} </li>
             
             `;
 
-            plantilla3= `<li class="m-4">Serial carnet de la patria : ${objetos.serial} </li>
+            plantilla3= `<li class="m-4">hogares de la patria : ${objetos.hogar} </li>
+            <li class="m-4">vivienda Propia : ${objetos.vivienda}</li>
+            <li class="m-4">Nro de la casa : ${objetos.nroCasa}</li>
             <li class="m-4">Manzanero : ${objetos.manzanero}</li>
             <li class="m-4">Nro familiar : ${objetos.nrofam}</li>
             <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
@@ -301,8 +304,10 @@ function listaManzanas() {
                 $('#editTipoPersona').val(objetos.tipoPersona);
                 $('#editTelefono').val(objetos.telefono); 
                 $('#editCorreo').val(objetos.correo); 
-                $('#editCodigo').val(objetos.codigo);    
-                $('#editSerial').val(objetos.serial); 
+                $('#editCarnet').val(objetos.carnet);
+                $('#editHogar').val(objetos.hogar);
+                $('#editVivienda').val(objetos.vivienda);
+                $('#editCasa').val(objetos.nroCasa);
                 $('#editManzanero').val(objetos.manzanero);
                 $('#editDiscapacidad').val(objetos.discapacidad);
               });            
@@ -334,8 +339,10 @@ function listaManzanas() {
             tipo: $('#editTipoPersona').val(),
             telefono: $('#editTelefono').val(), 
             correo: $('#editCorreo').val(), 
-            codigo: $('#editCodigo').val(),    
-            serial: $('#editSerial').val(), 
+            carnet: $('#editCarnet').val(),
+            hogarPatria: $('#editHogar').val(),
+            vivienda: $('#editVivienda').val(),
+            nroCasa: $('#editCasa').val(),     
             manzanero: $('#editManzanero').val(),
             discapacidad: $('#editDiscapacidad').val()
          };

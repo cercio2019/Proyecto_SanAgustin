@@ -9,11 +9,13 @@ $json = array();
 while ($row = mysqli_fetch_array($lista)) {
 
     $json[] = array(
-        'NROdiscapacitado' => $row['NroRegistroMedico'],
+        'NroPersonal' => $row['NroPersonal'],
         'cedula' => $row['cedula'],
         'nombreApellido' => $row['nombreApellido'],
         'edad' => $row['edad'],
-        'tipoDiscapacidad' => $row['tipoDiscapacidad']
+        'tipoDiscapacidad' => $row['tipoDiscapacidad'],
+        'gradoDiscapacidad' => $row['gradoDiscapacidad'],
+        'carnetDiscapacidad' => $row['carnetCONAPDIS']
     );       
 }
 
