@@ -3,18 +3,20 @@ $(document).ready(function(){
     listaManzanas();
     listaDiscapacitados();
     listaTerceraEdad();
-    listaUsuarios()
+    listaUsuarios();
     var formulario = $('#formulario');
     var tabla= $('#tabla');
     var tablaPersona = $('#tablaPersonas');
     var planilla = $('#planillaPersona');
     var planillaRegistrar = $('#form-registrar');
     var planillaEditar = $('#form-edtitar');
+    var formUsuario = $('#formu-User');
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
     planillaRegistrar.hide();
     planillaEditar.hide();
+    formUsuario.hide();
 
 
     // muestra la lista de manzanas disponibles 
@@ -427,12 +429,18 @@ function listaManzanas() {
                 let plantilla = '';
                 
             users.forEach(objetos => {
-                plantilla += `<tr>                   
+                plantilla += `<tr cedulaUser="${objetos.cedula}" >                   
                    <td>${objetos.cedula}</td>
                    <td>
                    ${objetos.nombre} ${objetos.apellido} 
                    </td>
-                   <td>${objetos.tipo}</td>                                  
+                   <td>${objetos.tipo}</td>
+                   <td><button class="btn btn-primary" id="Contraseña">
+                   Contraseña
+                   </button></td>
+                   <td><button class="btn btn-danger" id="eliminarUser">
+                   Eliminar
+                   </button></td>                                   
                 </tr>`
             });
 
@@ -440,4 +448,49 @@ function listaManzanas() {
               }
           });
         }
+
+        $(document).on('click', '#nuevoUser', function (e) {
+          $('#listUsuarios').hide();
+          formUsuario.show();
+          e.preventDefault();
+        })
+
+        // funcion para registar un nuevo usuario en el sistema
+        var registrarUsuario = $('#registrarUser');
+        registrarUsuario.submit(function(e) {
+          
+          const datosUsuarios= {
+            cedula: $('#cedulaUser').val(),
+            nombre: $('#nombreUser').val(),
+            apellido: $('#apellidoUser').val(),
+            contraseña: $('#contraseñaUser').val(),
+            tipo: $('#tipoUser').val()
+          };
+
+          $.post('Controladores/registrarUsuario.php', datosUsuarios, function(response) {
+           
+            registrarUsuario.trigger('reset'); 
+            listaUsuarios();
+            alert(response);
+            
+           });
+          
+           formUsuario.hide();
+           $('#listUsuarios').show();
+           e.preventDefault();
+        })
+
+
+        $(document).on('click', '#eliminarUser', function (e) {
+      
+          if (confirm('¿Deseas eliminar este registro del sistema?')) {
+           let elemento = $(this)[0].parentElement.parentElement;
+           let cedulaUsuario = $(elemento).attr('cedulaUser');
+           $.post('Controladores/borrarUsuario.php', {cedulaUsuario}, function (response) {
+             alert(response);
+             listaUsuarios();
+           });
+          }
+           e.preventDefault();
+         })
 })

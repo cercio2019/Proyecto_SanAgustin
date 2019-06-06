@@ -76,7 +76,7 @@
  </div>
 
  <!--zona para registrar un nuevo Integrante en la familia -->
-<form action="" id="form-registrar" class="mb-5">
+<form action="" id="form-registrar" class="m-5">
 <div class="row">
 <div class="col-12">
 <button class="btn btn-primary" id="regresar">Volver</button>
@@ -227,7 +227,7 @@
  </div>
 
   <!--zona para editar los datos de un Integrante en la familia -->
-<form action="" id="form-edtitar" class="mb-5">
+<form action="" id="form-edtitar" class="m-5">
 <div class="row">
 <div class="col-12">
 <button class="btn btn-primary" id="regresarPlanilla">Volver</button>
