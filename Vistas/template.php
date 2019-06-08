@@ -40,6 +40,7 @@ $mvc -> enlacesPaginasController();
 
 <script src="Bootstrap/js/jquery-3.4.0.min.js"></script>
 <script src="Bootstrap/js/app.js"></script>
+<script src="Bootstrap/js/app2.js"></script>
 <script src="Bootstrap/js/popper.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
 <script src="Bootstrap/js/all.js"></script>

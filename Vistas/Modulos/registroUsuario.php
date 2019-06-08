@@ -3,12 +3,13 @@
 <h3>Registro de usuarios</h3>
 </div>
 
+<!--TABLA DE LOS USUARIOS PERTENECIENTES AL SISTEMA-->
 <div class="col-12 mt-5" id="listUsuarios">
 
 <div class="container">
 <div class="col-6">
 <button class="btn btn-dark" id="nuevoUser">
-Registrar nuevo Usuario
+ Nuevo Usuario
 </button>
 </div>
 </div>
@@ -28,6 +29,8 @@ Registrar nuevo Usuario
 </div>
 
 
+
+<!-- formulario para registrar un nuevo usuario -->
 <div class="col-12" id="formu-User">
 <div class="container">
 <div class="col-6">
@@ -72,6 +75,44 @@ Registrar nuevo Usuario
 <div class="row m-5">
 <div class="col-12 text-center">
 <input type="submit" value="Registrar" class="btn btn-danger w-50">
+</div>
+</div>
+</form>
+</div>
+</div>
+
+
+<!--FORMULARIO PARA CAMBIAR LA CONTRASEÑA DE UN USUARIO-->
+
+<div class="col-12" id="cambiarContraseña">
+<div class="container">
+<div class="col-6">
+<button class="btn btn-primary" id="returnUser">
+    volver
+</button>
+</div>
+</div>
+
+<div class="container">
+<form action="" id="form-contraseña">
+<input type="text" id="ci">
+<div class="row">
+<div class="col-4">
+<label for="">Contraseña Actual</label>
+<input type="password" class="form-control" placeholder="Ingresa tu contraseña" id="pwrdActual">
+</div>
+<div class="col-4">
+<label for="">Contraseña Nueva</label>
+<input type="password" class="form-control" placeholder="Ingresa tu nueva contraseña" id="pwrdNueva">
+</div>
+<div class="col-4">
+<label for="">Confirmar nueva contraseña</label>
+<input type="password" class="form-control" placeholder="Confirma tu nueva contraseña" id="pwrdConfirmada">
+</div>
+</div>
+<div class="row m-4">
+<div class="col-12 text-center">
+<input type="submit" value="Cambiar contraseña" class="btn btn-danger w-50">
 </div>
 </div>
 </form>
