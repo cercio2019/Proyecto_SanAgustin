@@ -48,11 +48,7 @@ class Persona
         $manzanero= $datos['manzanero'];
         $manzana= $datos['manzana'];
 
-        $query = "INSERT INTO individual(cedula, NombresApellidos, grupoFamiliarNro,
-        fechaNacimiento, Edad, sexo, TipoPersona, Telefono, correo, carnetPatria, hogaresDeLaPatria,
-         Discapacidad, viviendaPropia, refenciaNroCasa, Manzanero, NroManzana) VALUE ('$cedula',
-        '$nombres', '$familia', '$fecha', '$edad', '$sexo', '$tipo', '$telefono', '$correo',
-        '$carnet', '$hogar', '$discapacidad', '$vivienda', '$nroCasa', '$manzanero',  '$manzana' )";
+        $query = "INSERT INTO individual (cedula, NombresApellidos, grupoFamiliarNro, fechaNacimiento, Edad, sexo, TipoPersona, Telefono, correo, carnetPatria, hogaresDeLaPatria, Discapacidad, viviendaPropia, referenciaNroCasa, Manzanero, NroManzana) VALUE ('$cedula', '$nombres', '$familia', '$fecha', '$edad', '$sexo', '$tipo', '$telefono', '$correo', '$carnet', '$hogar', '$discapacidad', '$vivienda', '$nroCasa', '$manzanero', '$manzana')";
 
         $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
@@ -79,7 +75,7 @@ class Persona
         $discapacidad = $datos['discapacitado'];
         $manzanero = $datos['manzanero'];
       
-        $query = "UPDATE individual SET cedula = $cedula, NombresApellidos = '$nombres', fechaNacimiento = '$fecha', Edad = '$edad', sexo = '$sexo', TipoPersona = '$tipo', Telefono = '$telefono', correo = '$correo', carnetPatria = '$carnet', hogaresDeLaPatria = '$hogar', Discapacidad = '$discapacidad', viviendaPropia = '$vivienda', referenciaNroCasa = '$nroCasa',  Manzanero = '$manzanero' WHERE idPersona = '$id' ";
+        $query = "UPDATE individual SET cedula = '$cedula', NombresApellidos = '$nombres', fechaNacimiento = '$fecha', Edad = '$edad', sexo = '$sexo', TipoPersona = '$tipo', Telefono = '$telefono', correo = '$correo', carnetPatria = '$carnet', hogaresDeLaPatria = '$hogar', Discapacidad = '$discapacidad', viviendaPropia = '$vivienda', referenciaNroCasa = '$nroCasa',  Manzanero = '$manzanero' WHERE idPersona = '$id' ";
             $resultado = mysqli_query($this->db->conection(), $query);
             if (!$resultado) {
                 die('error en la busqueda'. mysqli_error($this->db->conection()));

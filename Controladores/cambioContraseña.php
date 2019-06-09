@@ -11,7 +11,7 @@ if (isset($_POST['contraseñaActual'])) {
     $verificarContraseña = $usuario->BuscarContraseña($cedula, $contraseñaActual);
 
     
-   if ($contraseñaActual === $verificarContraseña) {
+   if ($verificarContraseña = $contraseñaActual) {
       
         $mensaje = $usuario->CambiarContraseña($cedula, $contraseñaActual);
 

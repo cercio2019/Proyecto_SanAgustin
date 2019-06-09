@@ -84,18 +84,30 @@
 </div>
 <div class="row mt-3">
  <div class="col-6">
-    <label for="">Cedula *</label>
-    <input type="text" class="form-control" id="cedula">  
+ <label for="">Cedula *</label>
+<div class="row">
+<div class="col-4">
+<select name="" id="documento" class="form-control">
+<option value="">-</option>
+<option value="V">V</option>
+<option value="E">E</option>
+<option value="J">J</option>
+</select>
+</div>
+<div class="col-8">
+<input type="text" class="form-control" id="cedula" placeholder="Ingrese Documento">  
+</div>
+</div> 
  </div>
  </div>
  <div class="row mt-2">
  <div class="col-6">
     <label for="">Nombres *</label>
-    <input type="text" class="form-control" id="nombres">  
+    <input type="text" class="form-control" id="nombres" placeholder="Ingrese Nombre">  
  </div>
  <div class="col-6">
     <label for="">Apellidos *</label>
-    <input type="text" class="form-control" id="Apellidos">  
+    <input type="text" class="form-control" id="Apellidos" placeholder="Ingrese Apellido">  
  </div>
  </div>
  <div class="row mt-2">
@@ -123,43 +135,47 @@
  </div>
  <div class="col-6">
     <label for="">Telefono</label>
-    <input type="text" class="form-control" id="telefono">  
+    <input type="text" class="form-control" id="telefono" placeholder="Ingrese telefono">  
  </div>
  </div>
 
  <div class="row mt-2">
  <div class="col-6">
     <label for="">Correo</label>
-    <input type="email" class="form-control" id="correo">  
+    <input type="email" class="form-control" id="correo" placeholder="Ingrese correo electronico">  
  </div>
  <div class="col-6">
  <label for="">¿Carnet de la patria?</label>
  <select name="" id="carnetPatria" class="form-control">
+ <option value="">Seleccionar</option>
  <option value="NO">NO</option>
  <option value="SI">SI</option>
  </select>
  </div>
- <div class="col-6">
+ <div class="col-6 mt-2">
  <label for="">¿Hogares de la patria?</label>
  <select name="" id="hogarPatria" class="form-control">
+ <option value="">Seleccionar</option>
  <option value="NO">NO</option>
  <option value="SI">SI</option>
  </select>
  </div>
- <div class="col-6">
+ <div class="col-6 mt-2">
  <label for="">¿Vivienda Propia?</label>
  <select name="" id="viviendaPropia" class="form-control">
+ <option value="">Seleccionar</option>
  <option value="NO">NO</option>
  <option value="SI">SI</option>
  </select>
  </div>
- <div class="col-6">
+ <div class="col-6 mt-2">
  <label for="">Nro de referencia de la casa</label>
- <input type="text" class="form-control" id="NroCasa">
+ <input type="text" class="form-control" id="NroCasa" placeholder="Ingrese numero de casa">
  </div>
- <div class="col-6">
+ <div class="col-6 mt-2">
     <label for="">Manzanero *</label>
    <select  id="manzanero" class="form-control">
+   <option value="">Seleccionar</option>
    <option value="NO">NO</option>
    <option value="SI">SI</option>
    </select> 
@@ -169,6 +185,7 @@
  <div class="col-6">
  <label for="">¿Discapacitado? *</label>
  <select name="" id="discapacitado" class="form-control">
+ <option value="">Seleccionar</option>
  <option value="NO">NO</option>
  <option value="SI">SI</option>
  </select>

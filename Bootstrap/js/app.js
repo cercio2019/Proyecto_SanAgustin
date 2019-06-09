@@ -176,43 +176,128 @@ function listaManzanas() {
         return edad;
         }
 
+         // funcion que envia los datos de una persona por ajax para registrarlo en la base de datos
+        function registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogar , vivienda, casa, manzanero, discapacitado, manzana, idfamiliar) {
+          const datosPersonales ={
+            cedula: `${documento}-${cedula}`, 
+            nombreApellido: `${nombre} ${apellido} `,
+            fechaNac: fecha, 
+            edad : calcularEdad(fecha),
+            sexo : sexo,
+            tipo : tipo,
+            telefono :telefono, 
+            correo : correo,
+            carnet : carnet, 
+            hogarPatria: hogar,
+            vivienda: vivienda,
+            nroCasa: casa,  
+            manzanero : manzanero,
+            discapacitado : discapacitado,
+            manzana : manzana,
+            familia : idfamiliar
+           };        
+          
+           $.post('Controladores/registroPersona.php', datosPersonales, function(response) {
+              alert(response);          
+           });
+        }
 
     // registrar los datos de una persona 
     planillaRegistrar.submit(function (e) {
-      
-       const fecha = $('#fecha').val();
-       let idfamiliar2 =   $('#familiaNRO').val()     
-       const datosPersonales ={
-         cedula: $('#cedula').val(), 
-         nombreApellido: `${$('#nombres').val()} ${$('#Apellidos').val()} `,
-         fechaNac: fecha, 
-         edad : calcularEdad(fecha),
-         sexo : $('#sexo').val(),
-         tipo : $('#tipoPersona').val(),
-         telefono : $('#telefono').val(), 
-         correo : $('#correo').val(),
-         carnet : $('#carnetPatria').val(), 
-         hogarPatria: $('#hogarPatria'),
-         vivienda: $('#viviendaPropia'),
-         nroCasa: $('#NroCasa'),  
-         manzanero : $('#manzanero').val(),
-         discapacitado : $('#discapacitado').val(),
-         manzana : $('#manzanaNRO').val(),
-         familia : idfamiliar2
-        };
-        
-          console.log(fecha);
-          console.log(edad);
-          console.log(datosPersonales);
+       
+      const documento = $('#documento').val(),
+      cedula = $('#cedula').val(),
+      nombre = $('#nombres').val(),
+      apellido = $('#Apellidos').val(),
+      fecha = $('#fecha').val(),
+      sexo = $('#sexo').val(),
+      tipo = $('#tipoPersona').val(),
+      telefono = $('#telefono').val(),
+      correo = $('#correo').val(),
+      carnet = $('#carnetPatria').val(),
+      hogarPatria = $('#hogarPatria').val(),
+      vivienda = $('#viviendaPropia').val(),
+      nroCasa = $('#NroCasa').val(),
+      manzanero = $('#manzanero').val(),
+      discapacitado = $('#discapacitado').val(),
+      manzana = $('#manzanaNRO').val(),
+      idfamiliar2 = $('#familiaNRO').val();
 
-        $.post('Controladores/registroPersona.php', datosPersonales, function(response) {
-           console.log(response);          
-        });
-        planillaRegistrar.trigger('reset');
-        planillaRegistrar.hide();
-        tablaPersona.show();
-        listaPersonas(idfamiliar2);
+       if (nombre==='') {
+        
+        alert('Por favor debes ingresar el nombre');
+        $('#nombres').focus();
         e.preventDefault();
+
+       }else if (apellido==='') {
+        
+        alert('Por favor debes ingresar el apellido');
+        $('#Apellidos').focus();
+        e.preventDefault();
+
+       }else if (fecha==='') {
+        
+        alert('Por favor debes ingresar la fecha de nacimiento');
+        $('#fecha').focus();
+        e.preventDefault();
+
+       }else if (sexo==='') {
+        
+        alert('Por favor debes seleccionar el sexo');
+        $('#sexo').focus();
+        e.preventDefault();
+
+       }else if (tipo==='') {
+        
+        alert('Por favor debes seleccionar el tipo persona');
+        $('#tipoPersona').focus();
+        e.preventDefault();
+
+       }else if (carnet==='') {
+        
+        alert('Por favor debes seleccionar si tienes o no carnet de la patria');
+        $('#carnetPatria').focus();
+        e.preventDefault();
+
+       }else if (hogarPatria==='') {
+        
+        alert('Por favor debes indicar si recibes o no  beneficios de hogares de la patria');
+        $('#hogarPatria').focus();
+        e.preventDefault();
+
+       }else if (vivienda==='') {
+        
+        alert('Por favor debes indicar si tienes o no una vivienda propia');
+        $('#viviendaPropia').focus();
+        e.preventDefault();
+
+       }else if (nroCasa==='') {
+        
+        alert('Por favor debes ingresar el numero de la casa');
+        $('#NroCasa').focus();
+        e.preventDefault();
+
+       }else if (manzanero==='') {
+        
+        alert('Por favor debes indicar si eres manzanero o no');
+        $('#manzanero').focus();
+        e.preventDefault();
+
+       }else if (discapacitado==='') {
+        
+        alert('Por favor debes indicar si eres discapacitado o no');
+        $('#discapacitado').focus();
+        e.preventDefault();
+
+       }else{
+        
+         registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogarPatria, vivienda, nroCasa, manzanero, discapacitado, manzana, idfamiliar2);
+         planillaRegistrar.trigger('reset');
+         planillaRegistrar.hide();
+         tablaPersona.show();
+         listaPersonas(idfamiliar2);
+         e.preventDefault();
+        }     
     });
 
     // regresar a una ventana anterior
@@ -324,36 +409,95 @@ function listaManzanas() {
        });
 
 
-       // formulario para editar los datos de una persona
-       planillaEditar.submit(function (e) {
-        let fechaedit = $('#editFecha').val();
-        let idindividual = $('#editID').val();
-        const datos ={         
-            id: idindividual,
-            cedula: $('#editCedula').val(), 
-            nombre: $('#editNombres').val(),
-            fecha: fechaedit,
-            edad: calcularEdad(fechaedit),
-            sexo: $('#editSexo').val(),
-            tipo: $('#editTipoPersona').val(),
-            telefono: $('#editTelefono').val(), 
-            correo: $('#editCorreo').val(), 
-            carnet: $('#editCarnet').val(),
-            hogarPatria: $('#editHogar').val(),
-            vivienda: $('#editVivienda').val(),
-            nroCasa: $('#editCasa').val(),     
-            manzanero: $('#editManzanero').val(),
-            discapacidad: $('#editDiscapacidad').val()
+        function editarPersona(id, cedula, nombres, fecha, sexo, tipo, telefono, correo, carnet, hogar, vivienda, casa, manzanero, discapacidad) {
+          const datos ={         
+            id: id,
+            cedula: cedula, 
+            nombre: nombres,
+            fecha: fecha,
+            edad: calcularEdad(fecha),
+            sexo: sexo,
+            tipo: tipo,
+            telefono: telefono, 
+            correo: correo, 
+            carnet: carnet,
+            hogarPatria: hogar,
+            vivienda: vivienda,
+            nroCasa: casa,     
+            manzanero: manzanero,
+            discapacidad: discapacidad
          };
 
          $.post('Controladores/editPersona.php', datos, function(response) {
           alert(response);
-         })
-         planillaEditar.trigger('reset'); 
-         planillaEditar.hide();
-         planilla.show();
-         mostrarDatosPersonales(idindividual);
-         e.preventDefault();
+         });
+        }
+
+       // formulario para editar los datos de una persona
+       planillaEditar.submit(function (e) {
+        const idindividual = $('#editID').val(),
+        Cedulaedit = $('#editCedula').val(),
+        Nombresedit = $('#editNombres').val(),
+        fechaedit = $('#editFecha').val(),
+        Sexoedit = $('#editSexo').val(),
+        Tipoedit = $('#editTipoPersona').val(),
+        Telefonoedit = $('#editTelefono').val(),
+        Correoedit = $('#editCorreo').val(),
+        Carnetedit = $('#editCarnet').val(),
+        Hogaredit = $('#editHogar').val(),
+        Viviendaedit = $('#editVivienda').val(),
+        Casaedit = $('#editCasa').val(),
+        Manazaneroedit = $('#editManzanero').val(),
+        Discapacidadedit = $('#editDiscapacidad').val();
+       
+
+        if (Cedulaedit==='') {
+        
+          alert('Por favor debes ingresar el documento de identidad');
+          $('#editCedula').focus();
+          e.preventDefault();
+  
+         }else if (Nombresedit==='') {
+          
+          alert('Por favor debes ingresar el nombre completo');
+          $('#editNombres').focus();
+          e.preventDefault();
+  
+         }else if (fechaedit==='') {
+          
+          alert('Por favor debes ingresar la fecha de nacimiento');
+          $('#editFecha').focus();
+          e.preventDefault();
+  
+         }else if (Sexoedit==='') {
+          
+          alert('Por favor debes ingresar la fecha de nacimiento');
+          $('#editSexo').focus();
+          e.preventDefault();
+  
+         }else if (Tipoedit==='') {
+          
+          alert('Por favor debes ingresar la fecha de nacimiento');
+          $('#editTipoPersona').focus();
+          e.preventDefault();
+  
+         }else if (Casaedit==='') {
+          
+          alert('Por favor debes ingresar la fecha de nacimiento');
+          $('#editCasa').focus();
+          e.preventDefault();
+  
+         }else{
+
+          editarPersona(idindividual, Cedulaedit, Nombresedit, fechaedit, Sexoedit, Tipoedit, Telefonoedit, Correoedit, Carnetedit, Hogaredit, Viviendaedit, Casaedit, Manazaneroedit, Discapacidadedit);
+          planillaEditar.trigger('reset'); 
+          planillaEditar.hide();
+          planilla.show();
+          mostrarDatosPersonales(idindividual);
+          e.preventDefault();
+
+         }
+        
        });
 
 
@@ -395,7 +539,6 @@ function listaManzanas() {
               success: function (response) {
                 let mayores = JSON.parse(response);
                 let plantilla = '';
-
                 
               mayores.forEach(objetos => {
                 plantilla += `<tr IdDiscapacitado="${objetos.id}">
