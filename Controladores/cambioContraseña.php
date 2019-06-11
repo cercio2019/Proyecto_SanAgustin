@@ -1,24 +1,15 @@
 <?php
 include_once '../Modelos/User.php';
 
-if (isset($_POST['contraseñaActual'])) {
+if (isset($_POST['Nuevapassword'])) {
     
     $usuario = new User();
-    $cedula = $_POST['cedula'];
-    $contraseñaActual = $_POST['contraseñaActual'];
+    $cedula = $_POST['cedula'];  
     $contraseñaNueva = $_POST['Nuevapassword'];
     $contraseñaConfirmada = $_POST['ConfirmPassword'];
-    $verificarContraseña = $usuario->BuscarContraseña($cedula, $contraseñaActual);
-
     
-   if ($verificarContraseña = $contraseñaActual) {
-      
-        $mensaje = $usuario->CambiarContraseña($cedula, $contraseñaActual);
-
-   }else {
-      $mensaje = 'falta';
-   }
-
-        echo $mensaje;
+     $mensaje = $usuario->CambiarContraseña($cedula, $contraseñaNueva);
+        
+     echo $mensaje;
     
 }

@@ -7,7 +7,7 @@ $(document).ready(function() {
     var formContraseña = $('#form-contraseña');
     formUsuario.hide();
     seccionContraseña.hide();
-
+  
     //funcion de que muesta la lista de usuarios 
     function listaUsuarios() {
         $.ajax({
@@ -102,7 +102,6 @@ $(document).ready(function() {
      //funcion para el cambio de contraseña de un usuario
      formContraseña.submit(function(e) {
         
-
         let contraseñaNueva = $('#pwrdNueva').val();
         let contraseñaConfirmada= $('#pwrdConfirmada').val();
    
@@ -110,24 +109,16 @@ $(document).ready(function() {
                
             const datosContraseña={
                 cedula: $('#ci').val(),
-                contraseñaActual: $('#pwrdActual').val(),
                 Nuevapassword: contraseñaNueva,
                 ConfirmPassword: contraseñaConfirmada
             };
     
             $.post('Controladores/cambioContraseña.php', datosContraseña, function(response) {
-               
-             if (response = 'falta') {
-                 
-               alert('La contraseña actual de este usuario es incorrecta');
-    
-             }else{    
+                
                 alert(response);
                 seccionContraseña.hide();
                 formContraseña.trigger('reset');
-                $('#listUsuarios').show();
-             } 
-    
+                $('#listUsuarios').show();    
             });      
    
            }else{
@@ -137,6 +128,40 @@ $(document).ready(function() {
            }        
            e.preventDefault();
      });
+
+     const cedulaUser = $('#cedulaUser').val();
+     $('#ciInvitado').val(cedulaUser);
+     formuPassword = $('#formu-password');
+     $('#mensaje').hide();
+     formuPassword.submit(function (e) {
+       
+      let cedulaInvitado = $('#ciInvitado').val();      
+      let Nueva = $('#claveNueva').val();
+      let Confirmada= $('#claveConfirmada').val();
+ 
+         if (Nueva == Confirmada) {
+             
+          const datosContraseña={
+              cedula: cedulaInvitado,
+              Nuevapassword: Nueva,
+              ConfirmPassword: Confirmada
+          };
+  
+          $.post('Controladores/cambioContraseña.php', datosContraseña, function(response) {
+              
+              alert(response)
+              formuPassword.hide();
+              $('#mensaje').show();
+              formuPassword.trigger('reset'); 
+          });      
+ 
+         }else{
+
+          alert('La confirmacion de la nueva contraseña es incorrecta');
+           
+         }        
+         e.preventDefault();
+     })
 
 
 })

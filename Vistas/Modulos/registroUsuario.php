@@ -97,15 +97,11 @@
 <form action="" id="form-contraseña">
 <input type="text" id="ci">
 <div class="row">
-<div class="col-4">
-<label for="">Contraseña Actual</label>
-<input type="password" class="form-control" placeholder="Ingresa tu contraseña" id="pwrdActual">
-</div>
-<div class="col-4">
+<div class="col-6">
 <label for="">Contraseña Nueva</label>
 <input type="password" class="form-control" placeholder="Ingresa tu nueva contraseña" id="pwrdNueva">
 </div>
-<div class="col-4">
+<div class="col-6">
 <label for="">Confirmar nueva contraseña</label>
 <input type="password" class="form-control" placeholder="Confirma tu nueva contraseña" id="pwrdConfirmada">
 </div>

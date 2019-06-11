@@ -95,7 +95,7 @@
 </select>
 </div>
 <div class="col-8">
-<input type="text" class="form-control" id="cedula" placeholder="Ingrese Documento">  
+<input type="text" class="form-control" id="cedula" placeholder="Ingrese Documento" onkeypress="return soloNumeros(event)" onpaste="return false">  
 </div>
 </div> 
  </div>
@@ -103,11 +103,11 @@
  <div class="row mt-2">
  <div class="col-6">
     <label for="">Nombres *</label>
-    <input type="text" class="form-control" id="nombres" placeholder="Ingrese Nombre">  
+    <input type="text" class="form-control" id="nombres" placeholder="Ingrese Nombre"  onkeypress="return soloLetras(event)" onpaste="return false">  
  </div>
  <div class="col-6">
     <label for="">Apellidos *</label>
-    <input type="text" class="form-control" id="Apellidos" placeholder="Ingrese Apellido">  
+    <input type="text" class="form-control" id="Apellidos" placeholder="Ingrese Apellido"  onkeypress="return soloLetras(event)" onpaste="return false">  
  </div>
  </div>
  <div class="row mt-2">
@@ -135,7 +135,7 @@
  </div>
  <div class="col-6">
     <label for="">Telefono</label>
-    <input type="text" class="form-control" id="telefono" placeholder="Ingrese telefono">  
+    <input type="text" class="form-control" id="telefono" placeholder="Ingrese telefono" onkeypress="return soloNumeros(event)" onpaste="return false">  
  </div>
  </div>
 
@@ -170,7 +170,7 @@
  </div>
  <div class="col-6 mt-2">
  <label for="">Nro de referencia de la casa</label>
- <input type="text" class="form-control" id="NroCasa" placeholder="Ingrese numero de casa">
+ <input type="text" class="form-control" id="NroCasa" placeholder="Ingrese numero de casa" onkeypress="return soloNumeros(event)" onpaste="return false">
  </div>
  <div class="col-6 mt-2">
     <label for="">Manzanero *</label>
@@ -253,14 +253,14 @@
 <div class="row mt-3">
  <div class="col-6">
     <label for="">Cedula *</label>
-    <input type="text" class="form-control" id="editCedula"> 
+    <input type="text" class="form-control" id="editCedula" onkeypress="return soloNumeros(event)" onpaste="return false"> 
     <input type="hidden" id="editID"> 
  </div>
  </div>
  <div class="row mt-3">
  <div class="col-6">
     <label for="">Nombre completo *</label>
-    <input type="text" class="form-control" id="editNombres">  
+    <input type="text" class="form-control" id="editNombres"  onkeypress="return soloLetras(event)" onpaste="return false">  
  </div>
  <div class="col-6">
     <label for="">Fecha de nacimiento *</label>
@@ -288,7 +288,7 @@
  <div class="row mt-3">
  <div class="col-6">
     <label for="">Telefono</label>
-    <input type="text" class="form-control" id="editTelefono">  
+    <input type="text" class="form-control" id="editTelefono" onkeypress="return soloNumeros(event)" onpaste="return false">  
  </div>
  <div class="col-6">
     <label for="">Correo</label>
@@ -321,7 +321,7 @@
  </div>
  <div class="col-6">
  <label for="">Nro de referencia de la casa *</label>
- <input type="text" class="form-control" id="editCasa">
+ <input type="text" class="form-control" id="editCasa" onkeypress="return soloNumeros(event)" onpaste="return false">
  </div>
  </div>
  <div class="row mt-3">

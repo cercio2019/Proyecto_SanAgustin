@@ -4,8 +4,8 @@ class EnlacesPaginas{
 public function enlacesPaginasModel($enlacesModel){
 
 if($enlacesModel=="inicio" || $enlacesModel=="registros" || $enlacesModel=="discapacitados"
-
-|| $enlacesModel=="TerceraEdad" || $enlacesModel=="Documentos" || $enlacesModel=="registroUsuario"){
+|| $enlacesModel=="TerceraEdad" || $enlacesModel=="Documentos" || $enlacesModel=="registroUsuario"
+|| $enlacesModel=="modificarContraseña"){
 
 	  $module = "Vistas/Modulos/".$enlacesModel.".php";
 	}
