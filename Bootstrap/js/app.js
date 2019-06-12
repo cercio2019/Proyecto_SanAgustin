@@ -8,12 +8,14 @@ $(document).ready(function(){
     var tablaPersona = $('#tablaPersonas');
     var planilla = $('#planillaPersona');
     var planillaRegistrar = $('#form-registrar');
-    var planillaEditar = $('#form-edtitar');   
+    var planillaEditar = $('#form-edtitar');  
+    var mensajeLogro = $('#perRegistrada'); 
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
     planillaRegistrar.hide();
     planillaEditar.hide();
+    mensajeLogro.hide();
     
 
     // muestra la lista de manzanas disponibles 
@@ -176,8 +178,8 @@ function listaManzanas() {
         return edad;
         }
 
-         // funcion que envia los datos de una persona por ajax para registrarlo en la base de datos
-        function registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogar , vivienda, casa, manzanero, discapacitado, manzana, idfamiliar) {
+  // funcion que envia los datos de una persona por ajax para registrarlo en la base de datos
+   function registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogar , vivienda, casa, manzanero, discapacitado, manzana, idfamiliar) {
           const datosPersonales ={
             cedula: `${documento}-${cedula}`, 
             nombreApellido: `${nombre} ${apellido} `,
@@ -196,9 +198,8 @@ function listaManzanas() {
             manzana : manzana,
             familia : idfamiliar
            };        
-          
            $.post('Controladores/registroPersona.php', datosPersonales, function(response) {
-              alert(response);          
+            $('#registroExitoso').html(response);      
            });
         }
 
@@ -289,15 +290,21 @@ function listaManzanas() {
         $('#discapacitado').focus();
         e.preventDefault();
 
-       }else{
-        
-         registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogarPatria, vivienda, nroCasa, manzanero, discapacitado, manzana, idfamiliar2);
-         planillaRegistrar.trigger('reset');
-         planillaRegistrar.hide();
-         tablaPersona.show();
-         listaPersonas(idfamiliar2);
-         e.preventDefault();
-        }     
+       }else{       
+        registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogarPatria, vivienda, nroCasa, manzanero, discapacitado, manzana, idfamiliar2);
+        planillaRegistrar.trigger('reset');
+        planillaRegistrar.hide(); 
+        mensajeLogro.show();
+        $('#FAMILIAID').val(idfamiliar2);
+        e.preventDefault();
+        }   
+    });
+
+    $(document).on('click', '#mostrarPersonas', function(e) {
+     let FAMILIAnro = $('#FAMILIAID').val(); 
+     listaPersonas(FAMILIAnro);
+     mensajeLogro.hide();
+     tablaPersona.show();
     });
 
     // regresar a una ventana anterior

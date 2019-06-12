@@ -23,17 +23,15 @@ class User
        $cedula= $datos['cedula'];
        $nombre= $datos['nombre'];
        $apellido= $datos['apellido'];
-       $contraseña= $datos['contraseña'];
+       $clave= $datos['contraseña'];
        $tipo= $datos['tipo'];
 
-       $query = "INSERT INTO usuario(cedula_usuario, Nombre, Apellido, clave, tipo)
-       VALUES ('$cedula', '$nombre', '$apellido', '$contraseña', '$tipo')";
+       $query = "INSERT INTO usuario (cedula_usuario, Nombre, Apellido, clave, tipo) VALUE ('$cedula', '$nombre', '$apellido', '$clave', '$tipo')";
         $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
-            die('error en la busqueda'. mysqli_error($this->db->conection()));
-        }else {
-            return 'Registro de usuario Exitoso';
+            die('error de sentencia'. mysqli_error($this->db->conection()));
         }
+            return 'Registro de usuario Exitoso';
    }
 
    public function CambiarContraseña($cedula, $contraseña)
@@ -53,7 +51,7 @@ class User
    public function Eliminar($cedula)
    {
     $cedulaPersonal = $cedula;
-    $query = "DELETE FROM usuario WHERE cedula_usuario = $cedulaPersonal ";
+    $query = "DELETE FROM usuario WHERE cedula_usuario = '$cedulaPersonal' ";
     $resultado= mysqli_query($this->db->conection(), $query);
     if (!$resultado) {
         die('error en la setencia'. mysqli_error($this->db->conection()));

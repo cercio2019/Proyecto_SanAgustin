@@ -86,7 +86,7 @@ function soloNumeros(e) {
 
          teclado2= String.fromCharCode(key2);
 
-         letras = ' abcdefghijklmnñppqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+         letras = ' abcdefghijklmnñoppqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
 
          especiales2 = '8-37-38-46-164';
 

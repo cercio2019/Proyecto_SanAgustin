@@ -5,8 +5,12 @@ $(document).ready(function() {
     var formUsuario = $('#formu-User');
     var seccionContraseña = $('#cambiarContraseña');
     var formContraseña = $('#form-contraseña');
+    var mensajeRegistro = $('#mensajeRegistro');
+    var mensajeEliminar = $('#mensajeEliminar');
     formUsuario.hide();
     seccionContraseña.hide();
+    mensajeRegistro.hide();
+    mensajeEliminar.hide();
   
     //funcion de que muesta la lista de usuarios 
     function listaUsuarios() {
@@ -18,7 +22,7 @@ $(document).ready(function() {
               let plantilla = '';
               
           users.forEach(objetos => {
-              plantilla += `<tr cedulaUser="${objetos.cedula}" >                   
+              plantilla += `<tr UserCedula="${objetos.cedula}">                   
                  <td>${objetos.cedula}</td>
                  <td>
                  ${objetos.nombre} ${objetos.apellido} 
@@ -38,6 +42,7 @@ $(document).ready(function() {
         });
       }
 
+      // boton para llamar el formulario para registrar un nuevo usuario
       $(document).on('click', '#nuevoUser', function (e) {
         $('#listUsuarios').hide();
         formUsuario.show();
@@ -49,7 +54,7 @@ $(document).ready(function() {
       registrarUsuario.submit(function(e) {
         
         const datosUsuarios= {
-          cedula: $('#cedulaUser').val(),
+          cedula: $('#CedulaUser').val(),
           nombre: $('#nombreUser').val(),
           apellido: $('#apellidoUser').val(),
           contraseña: $('#contraseñaUser').val(),
@@ -58,14 +63,11 @@ $(document).ready(function() {
 
         $.post('Controladores/registrarUsuario.php', datosUsuarios, function(response) {
          
-          registrarUsuario.trigger('reset'); 
-          listaUsuarios();
-          alert(response);
-          
-         });
-        
-         formUsuario.hide();
-         $('#listUsuarios').show();
+        registrarUsuario.trigger('reset'); 
+        formUsuario.hide();
+        mensajeRegistro.show();
+        $('#SeRegistro').html(response);
+         });   
          e.preventDefault();
       })
 
@@ -77,29 +79,33 @@ $(document).ready(function() {
         e.preventDefault();
       })
 
+      // funcion para eliminar un usuario de la base de datos
       $(document).on('click', '#eliminarUser', function (e) {
     
         if (confirm('¿Deseas eliminar este registro del sistema?')) {
          let elemento = $(this)[0].parentElement.parentElement;
-         let cedulaUsuario = $(elemento).attr('cedulaUser');
-         $.post('Controladores/borrarUsuario.php', {cedulaUsuario}, function (response) {
-           alert(response);
-           listaUsuarios();
+         let CedulaUsuario = $(elemento).attr('UserCedula');
+         $.post('Controladores/borrarUsuario.php', {CedulaUsuario}, function (response) {
+          $('#listUsuarios').hide();
+          mensajeEliminar.show();
+          $('#SeElimino').html(response);
          });
         }
          e.preventDefault();
        });
-
+        
+       // funcion para llamar el formulario para cambiar contraseña
        $(document).on('click', '#Contraseña', function (e) {
-        let elemento = $(this)[0].parentElement.parentElement;
-        let ciUsuario = $(elemento).attr('cedulaUser');
+        let elemento2 = $(this)[0].parentElement.parentElement;
+        let ciUsuario = $(elemento2).attr('UserCedula');
 
         $('#listUsuarios').hide();
         seccionContraseña.show();
         $('#ci').val(ciUsuario);
        })
 
-     //funcion para el cambio de contraseña de un usuario
+
+     //funcion para el cambio de contraseña a todo los usuario 
      formContraseña.submit(function(e) {
         
         let contraseñaNueva = $('#pwrdNueva').val();
@@ -129,6 +135,7 @@ $(document).ready(function() {
            e.preventDefault();
      });
 
+     // funcion que permite realizar cambio de contraseña de un usuario invitado
      const cedulaUser = $('#cedulaUser').val();
      $('#ciInvitado').val(cedulaUser);
      formuPassword = $('#formu-password');
@@ -141,13 +148,13 @@ $(document).ready(function() {
  
          if (Nueva == Confirmada) {
              
-          const datosContraseña={
+          const datosContraseña2={
               cedula: cedulaInvitado,
               Nuevapassword: Nueva,
               ConfirmPassword: Confirmada
           };
   
-          $.post('Controladores/cambioContraseña.php', datosContraseña, function(response) {
+          $.post('Controladores/cambioContraseña.php', datosContraseña2, function(response) {
               
               alert(response)
               formuPassword.hide();

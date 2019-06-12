@@ -207,6 +207,24 @@
  <p>Campos obligatorios (*)</p>
 </form>
 
+<!---Menssaje para notificar que el registro se cumplio-->
+<div class="container mt-5" id="perRegistrada">
+<input type="text" id="FAMILIAID">
+<div class="row">
+<div class="col-12 text-center">
+<h1 id="registroExitoso"></h1>
+</div>
+</div>
+<div class="row mt-5">
+<div class="col-12 text-center p-5">
+<a href="#" class="btn btn-danger" id="mostrarPersonas">Regresar</a>
+</div>
+</div>
+</div>
+
+
+
+
 <!-- zona donde se muestra todos los datos de la persona seleccionada -->
  <div class="row" id="planillaPersona">
   <div class="col-12">

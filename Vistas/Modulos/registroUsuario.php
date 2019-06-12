@@ -28,7 +28,19 @@
 </table>
 </div>
 
-
+<!---Menssaje para notificar que  registro fue eliminado-->
+<div class="container mt-5" id="mensajeEliminar">
+<div class="row">
+<div class="col-12 text-center">
+<h1 id="SeElimino"></h1>
+</div>
+</div>
+<div class="row mt-5">
+<div class="col-12 text-center p-5">
+<a href="index.php?action=registroUsuario" class="btn btn-danger">Regresar</a>
+</div>
+</div>
+</div>
 
 <!-- formulario para registrar un nuevo usuario -->
 <div class="col-12" id="formu-User">
@@ -45,7 +57,7 @@
 <div class="row m-3">
 <div class="col-6">
 <label for="">Cedula</label>
-<input type="text" class="form-control" id="cedulaUser">
+<input type="text" class="form-control" id="CedulaUser">
 </div>
 <div class="col-6">
 <label for="">Nombre</label>
@@ -81,6 +93,19 @@
 </div>
 </div>
 
+<!---Menssaje para notificar que el registro se cumplio-->
+<div class="container mt-5" id="mensajeRegistro">
+<div class="row">
+<div class="col-12 text-center">
+<h1 id="SeRegistro"></h1>
+</div>
+</div>
+<div class="row mt-5">
+<div class="col-12 text-center p-5">
+<a href="index.php?action=registroUsuario" class="btn btn-danger">Regresar</a>
+</div>
+</div>
+</div>
 
 <!--FORMULARIO PARA CAMBIAR LA CONTRASEÑA DE UN USUARIO-->
 
