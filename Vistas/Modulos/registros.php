@@ -75,6 +75,24 @@
  </div>
  </div>
 
+<!---Menssaje para notificar que el registro se cumplio-->
+<div class="container mt-5" id="mensajeliminado">
+<input type="text" id="Refamiliar">
+<div class="row">
+<div class="col-12 text-center">
+<h1 id="eliminado"></h1>
+</div>
+</div>
+<div class="row mt-5">
+<div class="col-12 text-center p-5">
+<a href="#" class="btn btn-danger" id="mostrarTabla">Regresar</a>
+</div>
+</div>
+</div>
+
+
+
+
  <!--zona para registrar un nuevo Integrante en la familia -->
 <form action="" id="form-registrar" class="m-5">
 <div class="row">
@@ -373,3 +391,19 @@
  </div>
  <p>Campos obligatorios (*)</p>
 </form>
+
+
+<!---Menssaje para notificar que la edicion de un registro se cumplio-->
+<div class="container mt-5" id="mensajedicion">
+<input type="text" id="idEditado">
+<div class="row">
+<div class="col-12 text-center">
+<h1 id="Editado"></h1>
+</div>
+</div>
+<div class="row mt-5">
+<div class="col-12 text-center p-5">
+<a href="#" class="btn btn-danger" id="PlanillaEditada">Regresar</a>
+</div>
+</div>
+</div>

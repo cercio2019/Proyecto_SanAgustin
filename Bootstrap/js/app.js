@@ -9,15 +9,18 @@ $(document).ready(function(){
     var planilla = $('#planillaPersona');
     var planillaRegistrar = $('#form-registrar');
     var planillaEditar = $('#form-edtitar');  
-    var mensajeLogro = $('#perRegistrada'); 
+    var mensajeLogro = $('#perRegistrada');
+    var mensajeEliminado= $('#mensajeliminado'); 
+    var mensajeEditado= $('#mensajedicion'); 
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
     planillaRegistrar.hide();
     planillaEditar.hide();
     mensajeLogro.hide();
+    mensajeEliminado.hide();
+    mensajeEditado.hide();
     
-
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
     $.ajax({
@@ -124,13 +127,26 @@ function listaManzanas() {
       let elemento = $(this)[0].parentElement.parentElement;
       let idpersona = $(elemento).attr('Idpersona');
       $.post('Controladores/borrarPersona.php', {idpersona}, function (response) {
-        alert(response);
+        
+        $('#eliminado').html(response);
+       
       });
-     }
-     listaPersonas(idFamiliar);
+      $('#Refamiliar').val(idFamiliar);
+      tablaPersona.hide();
+      mensajeEliminado.show();
+     }  
       e.preventDefault();
-    })
+    });
 
+
+    $(document).on('click', '#mostrarTabla', function (e) {
+      
+     let reFAMILIAR = $('#Refamiliar').val();
+     listaPersonas(reFAMILIAR);
+     mensajeEliminado.hide();
+     tablaPersona.show();
+     e.preventDefault();
+    })
     
     $(document).on('click', '#volver', function (e) {
      tablaPersona.hide();
@@ -415,7 +431,7 @@ function listaManzanas() {
        e.preventDefault();          
        });
 
-
+         // funcion para editar los datos de un integrante de la comunidad
         function editarPersona(id, cedula, nombres, fecha, sexo, tipo, telefono, correo, carnet, hogar, vivienda, casa, manzanero, discapacidad) {
           const datos ={         
             id: id,
@@ -436,7 +452,7 @@ function listaManzanas() {
          };
 
          $.post('Controladores/editPersona.php', datos, function(response) {
-          alert(response);
+         $('#Editado').html(response);
          });
         }
 
@@ -499,16 +515,24 @@ function listaManzanas() {
           editarPersona(idindividual, Cedulaedit, Nombresedit, fechaedit, Sexoedit, Tipoedit, Telefonoedit, Correoedit, Carnetedit, Hogaredit, Viviendaedit, Casaedit, Manazaneroedit, Discapacidadedit);
           planillaEditar.trigger('reset'); 
           planillaEditar.hide();
-          planilla.show();
-          mostrarDatosPersonales(idindividual);
+          mensajeEditado.show();
+          $('#idEditado').val(idindividual);
           e.preventDefault();
 
          }
         
        });
 
+      $(document).on('click', '#PlanillaEditada', function (e) {
+        let idEditado =  $('#idEditado').val();
+        mostrarDatosPersonales(idEditado);
+        mensajeEditado.hide();
+        planilla.show();
+        e.preventDefault();
+      })
 
-// funcion que muestra la lista de discpacitados de la comunidad 
+
+// funcion que muestra la lista de discapacitados de la comunidad 
        function listaDiscapacitados() {        
         $.ajax({
             url: 'Controladores/listaDiscapacitados.php',
