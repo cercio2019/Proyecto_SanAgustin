@@ -18,14 +18,26 @@ class  Discapacitado
         return $resultado;
     }
 
+    public function datosPersonales($id)
+    {
+        $idPersonal = $id;
+        $query= "SELECT * FROM discapacitados WHERE NroPersonal = '$idPersonal' ";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'. mysqli_error($this->db->conection()));
+        }
+        return $resultado;
+    }
+
     public function RegistroIndividual($datos)
     {
+        
         $cedula = $datos['cedula'];
         $nombre = $datos['nombres'];
         $fecha = $datos['fecha'];
         $edad = $datos['edad'];
 
-        $query= "INSERT INTO discapacitados (cedula, nombreApellido, fechaNacimiento, edad) VALUE ('$cedula', '$nombre', '$fecha', '$edad')";
+        $query= "INSERT INTO discapacitados ( cedula, nombreApellido, fechaNacimiento, edad) VALUE ('$cedula', '$nombre', '$fecha', '$edad')";
         $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
             die('error en la sentencia'. mysqli_error($this->db->conection()));
@@ -35,11 +47,14 @@ class  Discapacitado
 
     public function editarRegistro($datos2)
     {
-        $tipoDiscapacidad = $datos2['tipoDiscapacidad'];
-        $query = "UPDATE discapacitados SET tipoDiscapacidad = '$tipoDiscapacidad' ";
-        $resultado = mysqli_query($db->conection(), $query);
+        $id = $datos2['id'];
+        $tipoDiscapacidad = $datos2['tipo'];
+        $grado = $datos2['grado'];
+        $carnet = $datos2['carnet'];
+        $query = "UPDATE discapacitados SET tipoDiscapacidad = '$tipoDiscapacidad', gradoDiscapacidad = '$grado', carnetCONAPDIS = '$carnet'  WHERE NroPersonal = '$id' ";
+        $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
-           die('error en la sentencia'. mysqli_error($db->conection()));
+           die('error en la sentencia'. mysqli_error($this->db->conection()));
         }
         return 'Se ha completado el registro del discapacitado';
     }

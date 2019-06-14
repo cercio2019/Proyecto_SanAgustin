@@ -12,6 +12,9 @@ $(document).ready(function(){
     var mensajeLogro = $('#perRegistrada');
     var mensajeEliminado= $('#mensajeliminado'); 
     var mensajeEditado= $('#mensajedicion'); 
+    var seccionDiscapacitados = $('#seccionDiscapacitados');
+    var seccionDatos = $('#seccionDatos');
+    var mensajeActualizado = $('#mensajActualizacion');
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
@@ -20,6 +23,8 @@ $(document).ready(function(){
     mensajeLogro.hide();
     mensajeEliminado.hide();
     mensajeEditado.hide();
+    seccionDatos.hide();
+    mensajeActualizado.hide();
     
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
@@ -542,8 +547,8 @@ function listaManzanas() {
               let plantilla = '';
     
               discapacitados.forEach(objetos => {
-                plantilla += `<tr IdDiscapacitado="${objetos.cedula}">
-                   <td>${objetos.NROdiscapacitado}</td>
+                plantilla += `<tr IdDiscapacitado="${objetos.NroPersonal}">
+                   <td>${objetos.NroPersonal}</td>
                    <td>${objetos.cedula}</td>
                    <td>
                     <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
@@ -561,6 +566,70 @@ function listaManzanas() {
             }
             });
         } 
+
+
+        $(document).on('click', '.planillaDiscapacidad', function(e) {
+          
+        let elemento = $(this)[0].parentElement.parentElement;
+        let iddiscapacidad = $(elemento).attr('IdDiscapacitado');
+        datosDiscapacitados(iddiscapacidad);
+        $('#numerodiscapacidad').val(iddiscapacidad);
+        seccionDiscapacitados.hide();
+        seccionDatos.show();
+        e.preventDefault(); 
+
+        })
+
+
+        function datosDiscapacitados(id) {
+          let NROdiscapacitado = id;
+        $.post('Controladores/datosDiscapacitados.php', {NROdiscapacitado}, function (response) {
+          
+          let datosDiscapacitados = JSON.parse(response);
+          let plantilla = '';
+          let plantilla2 = '';
+
+           datosDiscapacitados.forEach(objetos => {
+            plantilla = `<li class="m-4">Cedula : ${objetos.cedula} </li>
+            <li class="m-4">Nombres y apellidos : ${objetos.nombreApellido} </li>
+            `;
+
+            plantilla2 =`<li class="m-4">Fecha de nacimiento : ${objetos.fecha} </li>
+            <li class="m-4">Edad : ${objetos.edad} </li>
+            `;
+            
+            $('#tipoDiscapacidad').val(`${objetos.tipo}`);
+            $('#gradoDiscapacidad').val(`${objetos.grado}`);
+            $('#CONAPDIS').val(`${objetos.carnet}`);
+           });
+
+           $('#datosPersonales1').append(plantilla);
+           $('#datosPersonales2').append(plantilla2);
+
+        })
+
+        }
+
+      // funcion para actualizar los datos de discapacidad de una persona 
+       var registrosDiscapacitado = $('#registrosDiscapacitado');
+
+       registrosDiscapacitado.submit(function(e) {
+        
+        datePerson = {
+          id : $('#numerodiscapacidad').val(),
+          tipo :  $('#tipoDiscapacidad').val(),
+          grado: $('#gradoDiscapacidad').val(),
+          carnet: $('#CONAPDIS').val()
+        }
+
+        $.post('Controladores/actualizarDiscapacitado.php', datePerson, function(response) {
+          $('#cambiosHechos').html(response);
+        });
+
+        seccionDatos.hide();
+         mensajeActualizado.show();
+         e.preventDefault();
+       })
         
         //funcion de que muesta la lista de personas de la tercera edad
         function listaTerceraEdad() {
