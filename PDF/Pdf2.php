@@ -25,29 +25,32 @@ class Pdf extends FPDF
 $pdf = new Pdf();
 $pdf->AddPage();
 $pdf->SetFillColor(191,188,188);
-$pdf->setFont('Arial', '', 8);
+$pdf->setFont('Arial', '', 5);
 $pdf->SetTextColor(0);
-$pdf->Cell(32,5, 'Cedula', 1,0,'C',1);
-$pdf->Cell(32,5, 'Nombres y Apellidos', 1,0,'C',1);
-$pdf->Cell(32,5, 'Fecha', 1,0,'C',1);
-$pdf->Cell(32,5, 'Edad', 1,0,'C',1);
-$pdf->Cell(32,5, 'Tipo de discapacidad', 1,1,'C',1);
+$pdf->Cell(30,5, 'ID', 1,0,'C',2);
+$pdf->Cell(30,5, 'Cedula', 1,0,'C',1);
+$pdf->Cell(30,5, 'Nombres y Apellidos', 1,0,'C',1);
+$pdf->Cell(30,5, 'Tipo de discapacidad', 1,0,'C',1);
+$pdf->Cell(30,5, 'Grado de discapacidad', 1,0,'C',1);
+$pdf->Cell(30,5, 'Carnet de discapacidad', 1,1,'C',1);
 
-$pdf->setFont('Arial', '', 6);
 
-$cadcon = mysqli_connect("localhost", "root", "cv23952018", "sanagustin");
+$pdf->setFont('Arial', '', 5);
+
+$cadcon = mysqli_connect("localhost", "root", "", "sanagustin");
 if ($cadcon==false) {
-	die('Error No se hya podido conectar a la base de datos');
+	die('Error No se ha podido conectar a la base de datos');
 }else{
 	$consulta= mysqli_query($cadcon, "SELECT * FROM discapacitados");
 	while ($resultado=mysqli_fetch_array($consulta)) {
-		
-        
-          $pdf->Cell(32,5,$resultado['cedula'],1,0,'C');
-          $pdf->Cell(32,5,$resultado['nombreApellido'],1,0,'C');
-          $pdf->Cell(32,5,$resultado['fechaNacimiento'],1,0,'C');
-          $pdf->Cell(32,5,$resultado['edad'],1,0,'C');
-          $pdf->Cell(32,5,$resultado['tipoDiscapacidad'],1,1,'C');
+		      
+		$pdf->Cell(30,5,$resultado['NroPersonal'],1,0,'C');
+		$pdf->Cell(30,5,$resultado['cedula'],1,0,'C');
+		$pdf->Cell(30,5,$resultado['nombreApellido'],1,0,'C');
+		$pdf->Cell(30,5,$resultado['tipoDiscapacidad'],1,0,'C');
+		$pdf->Cell(30,5,$resultado['gradoDiscapacidad'],1,0,'C');
+		$pdf->Cell(30,5,$resultado['carnetCONAPDIS'],1,1,'C');
+	  
  	}
 
  	$pdf->Output();

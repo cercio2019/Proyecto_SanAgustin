@@ -5,7 +5,7 @@ public function enlacesPaginasModel($enlacesModel){
 
 if($enlacesModel=="inicio" || $enlacesModel=="registros" || $enlacesModel=="discapacitados"
 || $enlacesModel=="TerceraEdad" || $enlacesModel=="Documentos" || $enlacesModel=="registroUsuario"
-|| $enlacesModel=="modificarContraseña"){
+|| $enlacesModel=="modificarContrasena"){
 
 	  $module = "Vistas/Modulos/".$enlacesModel.".php";
 	}

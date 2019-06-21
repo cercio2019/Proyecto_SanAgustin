@@ -36,8 +36,13 @@ class  Discapacitado
         $nombre = $datos['nombres'];
         $fecha = $datos['fecha'];
         $edad = $datos['edad'];
+        $familia = $datos['familia'];
+        $manzana = $datos['manzana'];
+        $tipo = $datos['tipo'];
+        $grado = $datos['grado'];
+        $carnet = $datos['carnet'];
 
-        $query= "INSERT INTO discapacitados ( cedula, nombreApellido, fechaNacimiento, edad) VALUE ('$cedula', '$nombre', '$fecha', '$edad')";
+        $query= "INSERT INTO discapacitados ( cedula, nombreApellido, fechaNacimiento, edad, grupoFamiliar, Manzana, tipoDiscapacidad, gradoDiscapacidad, carnetCONAPDIS) VALUE ('$cedula', '$nombre', '$fecha', '$edad', '$familia', '$manzana','$tipo', '$grado', '$carnet')";
         $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
             die('error en la sentencia'. mysqli_error($this->db->conection()));
@@ -61,8 +66,8 @@ class  Discapacitado
 
     public function Eliminar($cedula)
     {
-        $cedula = $cedula;
-        $query = "DELETE FROM discapacitados WHERE cedula = $cedula ";
+        $cedulaPerson = $cedula;
+        $query = "DELETE FROM discapacitados WHERE cedula = '$cedulaPerson' ";
         $resultado= mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
             die('error en la setencia'. mysqli_error($this->db->conection()));
@@ -70,4 +75,6 @@ class  Discapacitado
             return 'El registro ha sido eliminado del sistema';
         }
     }
+
+   
 }

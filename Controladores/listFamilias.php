@@ -1,7 +1,7 @@
 <?php
 include_once '../Modelos/Familias.php';
 
-$idManzana= $_POST['idManzana'];
+$idManzana= $_POST['nrocuadra'];
 
 $familia = new Familias();
 

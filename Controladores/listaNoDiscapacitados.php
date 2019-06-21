@@ -1,21 +1,19 @@
 <?php
 include_once '../Modelos/Persona.php';
 
-$idFamilia= $_POST['idFamiliar'];
-
 $personas = new Persona();
 
-$lista = $personas->Registros($idFamilia);
+$lista = $personas->NoDiscapacitados();
 
 $json = array();
 while ($row = mysqli_fetch_array($lista)) {
 
     $json[] = array(
-        'id' => $row['idPersona'],
         'cedula' => $row['cedula'],
-        'nombreApellido' => $row['NombresApellidos'],
+        'nombre' => $row['NombresApellidos'],
         'edad' => $row['Edad'],
-        'famid' => $row['NroManzana']
+        'familia' => $row['grupoFamiliarNro'],
+        'manzana' => $row['NroManzana']
     );       
 }
 

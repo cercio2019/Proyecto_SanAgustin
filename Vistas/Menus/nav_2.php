@@ -13,7 +13,7 @@
   <div class="btn-group">  
    <button type="button" class="btn bg-reds  dropdown-toggle p-3 text-white" data-toggle="dropdown">usuarios</button>
    <div class="dropdown-menu bg-reds">
-   	<a href="index.php?action=modificarContraseña" class="dropdown-item text-white bg">Modificar Contraseña</a>
+   	<a href="index.php?action=modificarContrasena" class="dropdown-item text-white bg">Modificar Contraseña</a>
    	<a href="<?php echo RUTA_URL; ?>LoginUsuario/cerrarSesion.php" class="dropdown-item text-white bg">Cerrar sesion</a>
    </div>
   </div>

@@ -22,11 +22,12 @@ class User
    {
        $cedula= $datos['cedula'];
        $nombre= $datos['nombre'];
-       $apellido= $datos['apellido'];
+       $familia = $datos['familia'];
+       $manzana = $datos['manzana'];
        $clave= $datos['contraseña'];
        $tipo= $datos['tipo'];
 
-       $query = "INSERT INTO usuario (cedula_usuario, Nombre, Apellido, clave, tipo) VALUE ('$cedula', '$nombre', '$apellido', '$clave', '$tipo')";
+       $query = "INSERT INTO usuario (cedula_usuario, NombreApellido, grupoFamiliar, Manzana, clave, tipo) VALUE ('$cedula', '$nombre', '$familia', '$manzana',  '$clave', '$tipo')";
         $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
             die('error de sentencia'. mysqli_error($this->db->conection()));

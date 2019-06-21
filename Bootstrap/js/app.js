@@ -4,27 +4,33 @@ $(document).ready(function(){
     listaDiscapacitados();
     listaTerceraEdad();
     var formulario = $('#formulario');
+    var formularioPersonas =$('#formularioPersonas');
     var tabla= $('#tabla');
     var tablaPersona = $('#tablaPersonas');
     var planilla = $('#planillaPersona');
     var planillaRegistrar = $('#form-registrar');
-    var planillaEditar = $('#form-edtitar');  
+    var planillaEditar = $('#form-edtitar'); 
+    var seccionEditar = $('#seccionEditar'); 
     var mensajeLogro = $('#perRegistrada');
     var mensajeEliminado= $('#mensajeliminado'); 
     var mensajeEditado= $('#mensajedicion'); 
     var seccionDiscapacitados = $('#seccionDiscapacitados');
     var seccionDatos = $('#seccionDatos');
     var mensajeActualizado = $('#mensajActualizacion');
+    var informPersonal= $('#InformPersonal');
+    var seccionNodis = $('#seccionNoDis');
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
     planillaRegistrar.hide();
-    planillaEditar.hide();
+    seccionEditar.hide();
     mensajeLogro.hide();
     mensajeEliminado.hide();
     mensajeEditado.hide();
     seccionDatos.hide();
     mensajeActualizado.hide();
+    informPersonal.hide();
+    seccionNodis.hide();
     
     // muestra la lista de manzanas disponibles 
 function listaManzanas() {        
@@ -41,35 +47,174 @@ function listaManzanas() {
               $('#manzanas').append(plantilla);
         }
         });
+   }
+ //**  funcion para contar los integrantes de una familia 
+    function contarIntegrantes(idfamiliar) {
+      let nrofamiliar = idfamiliar;
+      
+      $.post('Controladores/contarIntegrantes.php', {nrofamiliar}, function (response) {        
+       
+         let conteo = JSON.parse(response);
+         let contar = '';
+        conteo.forEach(objetos=>{
+          contar = `${objetos.cantidad}`;         
+        });
+     });
+     
     }
 
+  // funcion para buscar una persona a traves de la cedula de forma mas rapida
+    formularioPersonas.submit(function (e) {
+      
+      const pasaporte = $('#pasaporte').val(),
+       documenPersonal = $('#documPersonal').val();
 
+       if (pasaporte == '') {
+         alert('Introducir el tipo de documento para realizar la busqueda');
+         e.preventDefault()
+       }else if(documenPersonal== ''){
+          alert('Introducir el numero de documento para realizar la busqueda');
+          e.preventDefault();
+       }else{
+        
+        let buscarCedula= `${pasaporte}-${documenPersonal}`;
+
+        $.post('Controladores/buscarPorCedula.php', {buscarCedula}, function (response) {
+          
+          let registroDatos = JSON.parse(response);
+          let plantilla ='';
+          registroDatos.forEach(objetos=>{
+
+            plantilla += `
+            <tr nroID="${objetos.id} " >
+              <td>
+
+              <ul>
+              <li> <strong>ID:</strong> ${objetos.id}  </li>
+              <li> <strong>cedula:</strong> ${objetos.cedula} </li>
+              <li> <strong>Nombre Y apellido:</strong> ${objetos.nombreApellido} </li>
+              <li> <strong>Nro Familiar:</strong> ${objetos.nrofam}  </li>
+              <li> <strong>Fecha de nacimiento:</strong> ${objetos.fecha} </li>
+              <li> <strong>Edad:</strong> ${objetos.edad} </li>
+              <li> <strong>Sexo:</strong> ${objetos.sexo} </li>
+              <li> <strong>Telefono:</strong> ${objetos.telefono} </li>
+              <li> <strong>Correo Electronico:</strong> ${objetos.correo}  </li>
+              
+              </ul>
+
+              </td>
+              <td>
+
+              <ul>
+              <li> <strong>Tipo de persona:</strong> ${objetos.tipoPersona} </li>
+              <li> <strong>Carnet de la patria:</strong> ${objetos.carnet} </li>
+              <li> <strong>Hogares de la Patria:</strong> ${objetos.hogar} </li>
+              <li> <strong>¿Vivienda Propia:? </strong> ${objetos.vivienda} </li>
+              <li> <strong>Nro Casa: </strong> ${objetos.nroCasa} </li>
+              <li> <strong>¿Manzanero?:</strong> ${objetos.manzanero} </li>
+              <li> <strong>Nro Manzana:</strong> ${objetos.nroManzana} </li>
+              <li> <strong>¿Discapacidad?:</strong> ${objetos.discapacidad} </li>
+              
+              </ul>
+
+              </td>
+
+              <td class="bg-dark text-center">
+              <button  class="btn btn-danger editarInformacion">
+                            Actualizar
+              </button>
+              </td>
+
+            </tr>
+            `;
+          })
+
+          $('#cuadroinfo').html(plantilla);
+        });
+        formularioPersonas.trigger('reset');
+        formulario.trigger('reset');
+         informPersonal.show();
+         tabla.hide();
+        e.preventDefault();
+       }
+
+    });
+
+
+    // metodo para llamar los datos de una persona y luego ser editados 
+    $(document).on('click', '.editarInformacion', function (e) {
+      
+      let elemento = $(this)[0].parentElement.parentElement;
+        let nroPersona = $(elemento).attr('nroID');
+
+      $.post('Controladores/PlanillaPersona.php', {nroPersona}, function(response) {
+        
+        let persona = JSON.parse(response);                
+          persona.forEach(objetos => {
+            $('#editID').val(objetos.id),
+            $('#editCedula').val(objetos.cedula); 
+            $('#editNombres').val(objetos.nombreApellido);
+            $('#editFecha').val(objetos.fecha);
+            $('#editSexo').val(objetos.sexo);
+            $('#editTipoPersona').val(objetos.tipoPersona);
+            $('#editTelefono').val(objetos.telefono); 
+            $('#editCorreo').val(objetos.correo); 
+            $('#editCarnet').val(objetos.carnet);
+            $('#editHogar').val(objetos.hogar);
+            $('#editVivienda').val(objetos.vivienda);
+            $('#editCasa').val(objetos.nroCasa);
+            $('#editManzanero').val(objetos.manzanero);
+            $('#editDiscapacidad').val(objetos.discapacidad);
+            $('#PERSONAnro').val(objetos.id);
+
+          });            
+    });
+    informPersonal.hide();
+    $('#buscador').hide();
+    seccionEditar.show();
+    e.preventDefault();
+   });
+    
+
+  function listaFamilias(id) {
+    
+      let nrocuadra = id;
+
+    $.post('Controladores/listFamilias.php' , {nrocuadra}, function (response) {
+      let familias = JSON.parse(response);
+      let plantilla = '';
+     
+      familias.forEach(objetos => {
+        
+            plantilla += `<tr Idfamilia="${objetos.id}">
+               <td>${objetos.id}</td>
+               <td>
+                ${objetos.familias}
+               </td>
+               <td>${objetos.nroManzana}</td>
+               
+               <td>
+               <button  class="btn btn-danger verPersonas">
+                      Ver
+               </button>
+               </td>
+            </tr>`
+        });          
+        $('#fila').html(plantilla);  
+        
+  });
+  }
+  
+   
      //Mostar la tabla de familias que estan en una manazana 
     formulario.submit(function (e) {
         const idManzana = $('#manzanas').val();
               tabla.show();  
-        $.post('Controladores/listFamilias.php' , {idManzana}, function (response) {
-            let familias = JSON.parse(response);
-            let plantilla = '';
-          
-              familias.forEach(objetos => {
-                  plantilla += `<tr Idfamilia="${objetos.id}">
-                     <td>${objetos.id}</td>
-                     <td>
-                      <a href="#" class="item-tarea">${objetos.familias}</a>
-                     </td>
-                     <td>${objetos.nroManzana}</td>
-                     <td>
-                     <button  class="btn btn-danger verPersonas">
-                            Ver
-                     </button>
-                     </td>
-                  </tr>`
-              });          
-              $('#fila').html(plantilla);  
-              
-        });
+              informPersonal.hide();
+        listaFamilias(idManzana);
+
         $('#idCuadra').val(idManzana); 
+        formularioPersonas.trigger('reset');
          e.preventDefault();     
      });
 
@@ -86,7 +231,7 @@ function listaManzanas() {
                  <td>${objetos.id}</td>
                  <td>${objetos.cedula}</td>
                  <td>
-                  <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
+                 ${objetos.nombreApellido}
                  </td>
                  <td>${objetos.edad}</td>
                  <td>
@@ -100,9 +245,12 @@ function listaManzanas() {
                  </button>
                  </td>
               </tr>`
+              
+              $('#idCuadrafamiliar').val(objetos.famid);
           });
       
           $('#personas').html(plantilla); 
+          
     });
      }
 
@@ -119,6 +267,7 @@ function listaManzanas() {
         $('#titulo-familiar').html(`<h4>Familia nro ${idFamilia}</h4>`);
         $('#idFamiliar').val(idFamilia);
         $('#idCuadrafamiliar').val(idCuadra);
+        $('#buscador').hide();
         e.preventDefault(); 
     });
 
@@ -154,7 +303,10 @@ function listaManzanas() {
     })
     
     $(document).on('click', '#volver', function (e) {
+     let idManfam = $('#idCuadrafamiliar').val();
+     listaFamilias(idManfam);
      tablaPersona.hide();
+     $('#buscador').show();
      formulario.show();
      tabla.show();   
     });
@@ -200,7 +352,7 @@ function listaManzanas() {
         }
 
   // funcion que envia los datos de una persona por ajax para registrarlo en la base de datos
-   function registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogar , vivienda, casa, manzanero, discapacitado, manzana, idfamiliar) {
+   function registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogar , vivienda, casa, manzanero,  manzana, idfamiliar3) {
           const datosPersonales ={
             cedula: `${documento}-${cedula}`, 
             nombreApellido: `${nombre} ${apellido} `,
@@ -215,9 +367,8 @@ function listaManzanas() {
             vivienda: vivienda,
             nroCasa: casa,  
             manzanero : manzanero,
-            discapacitado : discapacitado,
             manzana : manzana,
-            familia : idfamiliar
+            familia : idfamiliar3
            };        
            $.post('Controladores/registroPersona.php', datosPersonales, function(response) {
             $('#registroExitoso').html(response);      
@@ -241,7 +392,6 @@ function listaManzanas() {
       vivienda = $('#viviendaPropia').val(),
       nroCasa = $('#NroCasa').val(),
       manzanero = $('#manzanero').val(),
-      discapacitado = $('#discapacitado').val(),
       manzana = $('#manzanaNRO').val(),
       idfamiliar2 = $('#familiaNRO').val();
 
@@ -305,14 +455,8 @@ function listaManzanas() {
         $('#manzanero').focus();
         e.preventDefault();
 
-       }else if (discapacitado==='') {
-        
-        alert('Por favor debes indicar si eres discapacitado o no');
-        $('#discapacitado').focus();
-        e.preventDefault();
-
        }else{       
-        registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogarPatria, vivienda, nroCasa, manzanero, discapacitado, manzana, idfamiliar2);
+        registrarPersona(documento, cedula, nombre, apellido, fecha, sexo, tipo, telefono, correo, carnet, hogarPatria, vivienda, nroCasa, manzanero,  manzana, idfamiliar2);
         planillaRegistrar.trigger('reset');
         planillaRegistrar.hide(); 
         mensajeLogro.show();
@@ -345,40 +489,54 @@ function listaManzanas() {
             
       let persona = JSON.parse(response);
       let plantilla = '';
-      let plantilla2 = '';
-      let plantilla3 = '';
+      
     
   persona.forEach(objetos => {
-            plantilla += `<li class="m-4">ID : ${objetos.id} </li>
-            <li class="m-4">Cedula : ${objetos.cedula} </li>
-            <li class="m-4">Nombres y apellidos : ${objetos.nombreApellido} </li>
-            <li class="m-4">Nro familiar : ${objetos.nrofam} </li>
-            <li class="m-4">Fecha de nacimiento : ${objetos.fecha} </li>
-            <li class="m-4">Edad : ${objetos.edad} </li>
-           
-            `;
-            plantilla2 = ` <li class="m-4">Sexo : ${objetos.sexo} </li>
-            <li class="m-4">Telefono : ${objetos.telefono} </li>
-            <li class="m-4">Correo electronico : ${objetos.correo} </li>
-            <li class="m-4">Tipo de persona : ${objetos.tipoPersona} </li>
-            <li class="m-4">Carnet de la patria : ${objetos.carnet} </li>
-            
-            `;
+    plantilla += `
+    <tr nroID="${objetos.id} " >
+      <td>
 
-            plantilla3= `<li class="m-4">hogares de la patria : ${objetos.hogar} </li>
-            <li class="m-4">vivienda Propia : ${objetos.vivienda}</li>
-            <li class="m-4">Nro de la casa : ${objetos.nroCasa}</li>
-            <li class="m-4">Manzanero : ${objetos.manzanero}</li>
-            <li class="m-4">Nro familiar : ${objetos.nrofam}</li>
-            <li class="m-4">Nro Manzana : ${objetos.nroManzana} </li>
-            <li class="m-4">¿Discapacidad? : ${objetos.discapacidad}</li>
-            `;
+      <ul>
+      <li> <strong>ID:</strong> ${objetos.id}  </li>
+      <li> <strong>cedula:</strong> ${objetos.cedula} </li>
+      <li> <strong>Nombre Y apellido:</strong> ${objetos.nombreApellido} </li>
+      <li> <strong>Nro Familiar:</strong> ${objetos.nrofam}  </li>
+      <li> <strong>Fecha de nacimiento:</strong> ${objetos.fecha} </li>
+      <li> <strong>Edad:</strong> ${objetos.edad} </li>
+      <li> <strong>Sexo:</strong> ${objetos.sexo} </li>
+      <li> <strong>Telefono:</strong> ${objetos.telefono} </li>
+      <li> <strong>Correo Electronico:</strong> ${objetos.correo}  </li>
+      
+      </ul>
+
+      </td>
+      <td>
+
+      <ul>
+      <li> <strong>Tipo de persona:</strong> ${objetos.tipoPersona} </li>
+      <li> <strong>Carnet de la patria:</strong> ${objetos.carnet} </li>
+      <li> <strong>Hogares de la Patria:</strong> ${objetos.hogar} </li>
+      <li> <strong>¿Vivienda Propia:? </strong> ${objetos.vivienda} </li>
+      <li> <strong>Nro Casa: </strong> ${objetos.nroCasa} </li>
+      <li> <strong>¿Manzanero?:</strong> ${objetos.manzanero} </li>
+      <li> <strong>Nro Manzana:</strong> ${objetos.nroManzana} </li>
+      <li> <strong>¿Discapacidad?:</strong> ${objetos.discapacidad} </li>
+      
+      </ul>
+
+      </td>
+
+      <td class="bg-dark text-center">
+      <button class="btn btn-danger" id="editDatos">Editar</button>
+      </td>
+
+    </tr>
+    `;
+
+            $('#regisfam').val(objetos.nrofam)
         });
        
         $('#datos1').html(plantilla); 
-        $('#datos2').html(plantilla2); 
-        $('#datos3').html(plantilla3); 
-
   });
    }
 
@@ -395,6 +553,9 @@ function listaManzanas() {
     });
 
     $(document).on('click', '#volver2', function (e) {
+       let regisfam = $('#regisfam').val();
+        $('#idFamiliar').val(regisfam);
+        listaPersonas(regisfam);
         planilla.hide();
         tablaPersona.show();          
        });
@@ -422,16 +583,20 @@ function listaManzanas() {
                 $('#editCasa').val(objetos.nroCasa);
                 $('#editManzanero').val(objetos.manzanero);
                 $('#editDiscapacidad').val(objetos.discapacidad);
+                $('#PERSONAnro').val(objetos.id);
               });            
         });
         planilla.hide();
-        planillaEditar.show()
+       seccionEditar.show()
         e.preventDefault();
        });
 
        $(document).on('click', '#regresarPlanilla', function (e) {
-         planillaEditar.trigger('reset');  
-        planillaEditar.hide();
+       planillaEditar.trigger('reset');
+       let NROIDIV = $('#PERSONAnro').val();
+       $('#nroPersonal').val(NROIDIV);
+       mostrarDatosPersonales(NROIDIV);  
+       seccionEditar.hide();
        planilla.show();
        e.preventDefault();          
        });
@@ -475,11 +640,9 @@ function listaManzanas() {
         Hogaredit = $('#editHogar').val(),
         Viviendaedit = $('#editVivienda').val(),
         Casaedit = $('#editCasa').val(),
-        Manazaneroedit = $('#editManzanero').val(),
-        Discapacidadedit = $('#editDiscapacidad').val();
-       
-
-        if (Cedulaedit==='') {
+        Manazaneroedit = $('#editManzanero').val();
+     
+        if(Cedulaedit==='') {
         
           alert('Por favor debes ingresar el documento de identidad');
           $('#editCedula').focus();
@@ -511,15 +674,15 @@ function listaManzanas() {
   
          }else if (Casaedit==='') {
           
-          alert('Por favor debes ingresar la fecha de nacimiento');
+          alert('Por favor debes ingresar el numero de referencia de la casa');
           $('#editCasa').focus();
           e.preventDefault();
   
          }else{
 
-          editarPersona(idindividual, Cedulaedit, Nombresedit, fechaedit, Sexoedit, Tipoedit, Telefonoedit, Correoedit, Carnetedit, Hogaredit, Viviendaedit, Casaedit, Manazaneroedit, Discapacidadedit);
+          editarPersona(idindividual, Cedulaedit, Nombresedit, fechaedit, Sexoedit, Tipoedit, Telefonoedit, Correoedit, Carnetedit, Hogaredit, Viviendaedit, Casaedit, Manazaneroedit);
           planillaEditar.trigger('reset'); 
-          planillaEditar.hide();
+          seccionEditar.hide();
           mensajeEditado.show();
           $('#idEditado').val(idindividual);
           e.preventDefault();
@@ -531,6 +694,7 @@ function listaManzanas() {
       $(document).on('click', '#PlanillaEditada', function (e) {
         let idEditado =  $('#idEditado').val();
         mostrarDatosPersonales(idEditado);
+        $('#nroPersonal').val(idEditado);
         mensajeEditado.hide();
         planilla.show();
         e.preventDefault();
@@ -547,17 +711,22 @@ function listaManzanas() {
               let plantilla = '';
     
               discapacitados.forEach(objetos => {
-                plantilla += `<tr IdDiscapacitado="${objetos.NroPersonal}">
+                plantilla += `<tr IdDiscapacitado="${objetos.NroPersonal}"  cedulaDiscapacitado="${objetos.cedula}"  >
                    <td>${objetos.NroPersonal}</td>
                    <td>${objetos.cedula}</td>
                    <td>
-                    <a href="#" class="item-tarea">${objetos.nombreApellido}</a>
+                    ${objetos.nombreApellido}
                    </td>
                    <td>${objetos.edad}</td>
                    <td>${objetos.tipoDiscapacidad}</td>
                    <td>
                    <button  class="btn btn-danger planillaDiscapacidad">
                           Ver Planilla
+                   </button>
+                   </td>
+                   <td>
+                   <button  class="btn btn-warning deleteDiscapacitado">
+                          Eliminar 
                    </button>
                    </td>
                 </tr>`
@@ -580,6 +749,25 @@ function listaManzanas() {
 
         })
 
+        
+        var eliminarDiscapacitado = $('#eliminarMensaje');
+        eliminarDiscapacitado.hide();
+
+        $(document).on('click', '.deleteDiscapacitado', function (e) {
+          
+          if (confirm('¿Deseas eliminar este registro del sistema?')) {
+           let elemento = $(this)[0].parentElement.parentElement;
+           let cedulaDiscapacitado = $(elemento).attr('cedulaDiscapacitado');
+           $.post('Controladores/borrarDiscapacitado.php', {cedulaDiscapacitado}, function (response) {
+             
+             $('#eliminadoDiscapacitado').html(response);
+            
+           });
+            seccionDiscapacitados.hide();
+            eliminarDiscapacitado.show();
+          }  
+           e.preventDefault();
+        })
 
         function datosDiscapacitados(id) {
           let NROdiscapacitado = id;
@@ -630,6 +818,151 @@ function listaManzanas() {
          mensajeActualizado.show();
          e.preventDefault();
        })
+
+      $(document).on('click', '#newDiscapacitado', function (e) {
+        
+       listaNoDiscapacitados();
+       seccionDiscapacitados.hide();
+       seccionNodis.show();
+       e.preventDefault();
+      })
+
+
+       function listaNoDiscapacitados() {        
+        $.ajax({
+          url: 'Controladores/listaNoDiscapacitados.php',
+          type: 'GET',
+          success: function (response) {
+            let noDiscpacitados = JSON.parse(response);
+            let plantilla = '';
+            
+        noDiscpacitados.forEach(objetos => {
+            plantilla += `<tr identCed="${objetos.cedula}">                   
+               <td>${objetos.cedula}</td>
+               <td>
+               ${objetos.nombre} 
+               </td>
+               <td>${objetos.edad}</td>
+               <td>${objetos.manzana}</td>
+               <td>${objetos.familia}</td>
+               <td><button class="btn btn-danger" id="regisDisca">
+               Registrar
+               </button></td>                                   
+            </tr>`
+        });
+
+        $('#individual2').append(plantilla);
+          }
+      });
+
+       }
+
+       var seccionREGIS = $('#regisDISCPACIDAD');
+       seccionREGIS.hide();
+       var completarDiscapacidad = $('#completarDiscapacidad');
+       $('#mensajeExito').hide();
+
+
+       $(document).on('click', '#returnDisca', function (e) {
+        seccionDiscapacitados.show();
+        seccionNodis.hide();
+        e.preventDefault();
+       })
+
+       $(document).on('click', '#regisDisca', function (e) {
+        let elemento = $(this)[0].parentElement.parentElement;
+        let buscarCedula = $(elemento).attr('identCed');
+
+        $.post('Controladores/buscarPorCedula.php', {buscarCedula}, function (response) {
+          
+          let registroDatos = JSON.parse(response);
+          let plantilla ='';
+          registroDatos.forEach(objetos=>{
+
+            plantilla += `
+            <tr nroID="${objetos.id} " >
+              <td>
+
+              <ul>
+              <li> <strong>ID:</strong> ${objetos.id}  </li>
+              <li> <strong>cedula:</strong> ${objetos.cedula} </li>
+              <li> <strong>Nombre Y apellido:</strong> ${objetos.nombreApellido} </li>
+              <li> <strong>Nro Familiar:</strong> ${objetos.nrofam}  </li>
+              <li> <strong>Fecha de nacimiento:</strong> ${objetos.fecha} </li>
+              <li> <strong>Edad:</strong> ${objetos.edad} </li>
+              <li> <strong>Sexo:</strong> ${objetos.sexo} </li>
+              <li> <strong>Telefono:</strong> ${objetos.telefono} </li>
+              <li> <strong>Correo Electronico:</strong> ${objetos.correo}  </li>
+              
+              </ul>
+
+              </td>
+              <td>
+
+              <ul>
+              <li> <strong>Tipo de persona:</strong> ${objetos.tipoPersona} </li>
+              <li> <strong>Carnet de la patria:</strong> ${objetos.carnet} </li>
+              <li> <strong>Hogares de la Patria:</strong> ${objetos.hogar} </li>
+              <li> <strong>¿Vivienda Propia:? </strong> ${objetos.vivienda} </li>
+              <li> <strong>Nro Casa: </strong> ${objetos.nroCasa} </li>
+              <li> <strong>¿Manzanero?:</strong> ${objetos.manzanero} </li>
+              <li> <strong>Nro Manzana:</strong> ${objetos.nroManzana} </li>
+              <li> <strong>¿Discapacidad?:</strong> ${objetos.discapacidad} </li>
+              
+              </ul>
+
+              </td>
+
+            </tr>
+            `;
+            $('#ciDisca').val(objetos.cedula);
+            $('#nombreDisca').val(objetos.nombreApellido);
+            $('#fechaDisca').val(objetos.fecha);
+            $('#edadDisca').val(objetos.edad);
+            $('#grupoDisca').val(objetos.nrofam);
+            $('#manzanaDisca').val(objetos.nroManzana)
+          })
+          $('#inforPersonal').html(plantilla);
+        });
+        seccionNodis.hide();
+        seccionREGIS.show();
+        e.preventDefault();
+
+       });
+
+       completarDiscapacidad.submit(function (e) {
+         
+       const ciDisca = $('#ciDisca').val(),
+          nombreDisca = $('#nombreDisca').val(),
+          edadDisca = $('#edadDisca').val(),
+          fechaDisca = $('#fechaDisca').val(), 
+          grupoDisca = $('#grupoDisca').val(),
+          manzanaDisca = $('#manzanaDisca').val();
+         
+          const datosDiscapacidad = {
+           cedula: ciDisca,
+           nombre: nombreDisca,
+           fecha: fechaDisca,
+           edad: edadDisca,
+           familia: grupoDisca,
+           manzana: manzanaDisca
+          };
+
+          $.post('Controladores/registrarDiscapacitado.php', datosDiscapacidad, function (response) {
+            $('#registroCompletado').html(response);
+          });
+          seccionREGIS.hide();
+          $('#mensajeExito').show();
+          e.preventDefault();
+       });
+
+       $(document).on('click', '#TABLA', function (e) {
+         
+         seccionREGIS.hide();
+         seccionNodis.show();
+         e.preventDefault();
+       });
+
         
         //funcion de que muesta la lista de personas de la tercera edad
         function listaTerceraEdad() {

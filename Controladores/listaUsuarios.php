@@ -10,8 +10,7 @@ while ($row = mysqli_fetch_array($lista)) {
 
     $json[] = array(
         'cedula' => $row['cedula_usuario'],
-        'nombre' => $row['Nombre'],
-        'apellido' => $row['Apellido'],
+        'nombre' => $row['NombreApellido'],
         'tipo' => $row['tipo']
     );       
 }

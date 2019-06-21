@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UFT-8">
+<meta charset="UTF-8">
 	<meta name="viewport" content="width=divice-width, initial-scale=1, shrink-to-fit=no">
 	<meta http-equiv="x-ua-compatible" content="ie-edge">
 	<link rel="stylesheet" type="text/css" href= "Bootstrap/css/bootstrap.css">
@@ -31,7 +31,7 @@
 
 <div class="row bg-dark text-white">
 		<div class="col-6 col-sm-5 col-md-4 text-center mt-2">
-			<p>Usuario: <strong> <?php echo $dato->Nombre." ".$dato->Apellido; ?></strong></p>
+			<p>Usuario: <strong> <?php echo $dato->NombreApellido ?></strong></p>
 		</div>
 		<div class="col-6 col-sm-5 col-md-4 text-center mt-2">
 			<p>Tipo de usuario: <strong id="usuario"><?php echo $dato->tipo; ?></strong></p>

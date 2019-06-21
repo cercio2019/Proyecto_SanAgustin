@@ -19,7 +19,7 @@
         <div class="col-12 col-md-3">
 
         </div>
-        <div class="col-12 col-md-6  text-center bg-danger " >
+        <div class="col-12 col-md-6  text-center bg-danger mb-5 " >
 
             <div class="container-fluid">
                     <h3 class="mt-3 text-white">Comunidad San Agustin</h3>
@@ -52,7 +52,7 @@
             </div>
             
         </div>
-        <div class="col-12  col-md-3">
+        <div class="col-12  col-md-3 mb-5">
             
         </div>
        </div>

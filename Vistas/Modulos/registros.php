@@ -5,32 +5,57 @@
             <h3>Registro de la Comunidad</h3>
         </div>
     </div>
-    <form action="" class="mt-5" id="formulario">
-      <div class="row">
-            <div class="col-5">
+    
+      <div class="row mt-5" id="buscador">
+            <div class="col-4">
+            <p><strong>Buscar por Manzana</strong> </p>
+            <form action=""  id="formulario">
                     <Select class="form-control" id="manzanas">
-                    <option value="">Seleccionar</option>   
+                    <option value="">Seleccionar Manzana</option>   
                    
                     </Select>
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary mt-2 w-100">
                         Buscar
                     </button>
+                    </form>
+                </div>
+
+                <div class="col-4"></div>
+
+                <div class="col-4">
+                <p><strong>Buscar por Cedula</strong></p>
+            <form action=""  id="formularioPersonas">
+                    <div class="row">
+                    <div class="col-4"><select  id="pasaporte" class="form-control">
+                    <option value="">--</option>
+                    <option value="V">V</option>
+                    <option value="E">E</option>
+                    <option value="J">J</option>
+                    </select> </div>
+                    <div class="col-8">
+                    <input type="text" class="form-control" id="documPersonal">
+                    </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-2 w-100">
+                        Buscar
+                    </button>
+                    </form>
                 </div>
       </div>
-    </form>
+    
 
-    <div class="row mt-3" id="tabla">
+    <div class="row mt-5" id="tabla">
         <div class="col-12">
         <input type="hidden" id="idCuadra">
             <table class="table">
-               <thead>
+               <thead class="bg-danger text-white">
                    <th>Id</th>
                    <th>Familias nro:</th>
                    <th>Nro manzana</th>
+                  
+                   <th></th>
                </thead>
-               <tbody id="fila">
+               <tbody id="fila" class="bg-dark text-white">
 
                </tbody>
             </table>
@@ -38,6 +63,32 @@
     </div>
       </div>
  </div>
+
+
+<!-- zona donde se muestra todos los datos de la persona seleccionada -->
+
+<div class="container" id="InformPersonal">
+<div class="row" >
+  
+<div class="col-12">
+
+<table class="table" >
+
+<thead class="bg-danger text-white">
+<th>Datos Personales</th>
+<th></th>
+<th></th>
+</thead>
+<tbody id="cuadroinfo">
+
+</tbody>
+</table>
+
+</div>
+
+ </div>
+</div>
+
 
  <div class="row" id="tablaPersonas">
  <div class="col-12">
@@ -58,14 +109,15 @@
    </div>
           <div class="col-12 mt-5">
           <table class="table">
-      <thead>
+      <thead class="bg-danger text-white">
       <th>ID</th>
       <th>Cedula</th>
       <th>Nombre y apellido</th>
       <th>Edad</th>
       <th></th>
+      <th></th>
       </thead>
-      <tbody id="personas">
+      <tbody id="personas" class="bg-dark text-white">
       
       </tbody>
       </table>
@@ -77,7 +129,7 @@
 
 <!---Menssaje para notificar que el registro se cumplio-->
 <div class="container mt-5" id="mensajeliminado">
-<input type="text" id="Refamiliar">
+<input type="hidden" id="Refamiliar">
 <div class="row">
 <div class="col-12 text-center">
 <h1 id="eliminado"></h1>
@@ -199,16 +251,7 @@
    </select> 
  </div>
  </div>
- <div class="row mt-2">
- <div class="col-6">
- <label for="">¿Discapacitado? *</label>
- <select name="" id="discapacitado" class="form-control">
- <option value="">Seleccionar</option>
- <option value="NO">NO</option>
- <option value="SI">SI</option>
- </select>
- </div>
- </div>
+ 
  <div class="row">
  <div class="col-6">
     <input type="hidden"  id="manzanaNRO">  
@@ -227,7 +270,7 @@
 
 <!---Menssaje para notificar que el registro se cumplio-->
 <div class="container mt-5" id="perRegistrada">
-<input type="text" id="FAMILIAID">
+<input type="hidden" id="FAMILIAID">
 <div class="row">
 <div class="col-12 text-center">
 <h1 id="registroExitoso"></h1>
@@ -241,38 +284,32 @@
 </div>
 
 
-
-
 <!-- zona donde se muestra todos los datos de la persona seleccionada -->
  <div class="row" id="planillaPersona">
   <div class="col-12">
    <div class="container">
    <div class="row">
-   <div class="col-6">
+   <div class="col-6 ml-4">
    <button class="btn btn-primary" id="volver2">Volver</button>
    </div>
    <div class="col-5">
    <input type="hidden" id="nroPersonal">
+   <input type="hidden" id="regisfam">
    </div>
    </div>     
-     <div class="row mt-3">     
-      <div class="col-4 ">
-          <ul id="datos1">
-          
-          </ul>      
-      </div>
-      <div class="col-4" >
-          <ul id="datos2">
-          
-          </ul>
-      </div>
-      <div class="col-4" >
-          <ul id="datos3">
-          
-          </ul>
-      </div>
-      <div class="col-12 m-4">
-      <button class="btn btn-danger" id="editDatos">Editar</button>
+     <div class="row m-4">     
+      <div class="col-12 ">
+      <table class="table" >
+
+<thead class="bg-danger text-white">
+<th>Datos Personales</th>
+<th></th>
+<th></th>
+</thead>
+<tbody id="datos1">
+
+</tbody>
+</table>
       </div>
      </div>
    </div>
@@ -280,12 +317,16 @@
  </div>
 
   <!--zona para editar los datos de un Integrante en la familia -->
-<form action="" id="form-edtitar" class="m-5">
-<div class="row">
-<div class="col-12">
+ <div class="container" id="seccionEditar">
+ <div class="row m-5">
+<div class="col-6">
 <button class="btn btn-primary" id="regresarPlanilla">Volver</button>
 </div>
+<div class="col-6">
+<input type="hidden" id="PERSONAnro">
 </div>
+</div>
+<form action="" id="form-edtitar" class="m-5">
 <div class="row mt-3">
  <div class="col-6">
     <label for="">Cedula *</label>
@@ -368,13 +409,6 @@
    <option value="SI">SI</option>
    </select> 
  </div>
- <div class="col-6">
-    <label for="">¿Discapacidad? *</label>
-   <select name="" id="editDiscapacidad" class="form-control">
-   <option value="NO">NO</option>
-   <option value="SI">SI</option>
-   </select> 
- </div>
  </div>
  <div class="row">
  <div class="col-6">
@@ -391,13 +425,14 @@
  </div>
  <p>Campos obligatorios (*)</p>
 </form>
+</div>
 
 
 <!---Menssaje para notificar que la edicion de un registro se cumplio-->
-<div class="container mt-5" id="mensajedicion">
-<input type="text" id="idEditado">
-<div class="row">
-<div class="col-12 text-center">
+<div class="container mt-5 bg-dark" id="mensajedicion">
+<input type="hidden" id="idEditado">
+<div class="row p-5">
+<div class="col-12 text-center text-white">
 <h1 id="Editado"></h1>
 </div>
 </div>

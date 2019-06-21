@@ -18,30 +18,11 @@ $datos = [
 'hogar' => $_POST['hogarPatria'],
 'vivienda' => $_POST['vivienda'],
 'nroCasa' => $_POST['nroCasa'],
-'manzanero' => $_POST['manzanero'],
-'discapacitado' => $_POST['discapacidad']
+'manzanero' => $_POST['manzanero']
 ];
 
 $personas = new Persona();
-$discapacitado = new Discapacitado();
-
-if ($personas->EditarPersona($datos)) {
-    
-    $mensaje =$personas->EditarPersona($datos);
-    echo $mensaje;
-}else {
-    echo 'No se ha podido completar la actualizacion de datos';
-}
-
-
-if ($_POST['discapacidad']== 'NO') {
-    
-    $cedula = $_POST['cedula'];
-    $discapacitado->Eliminar($cedula);
-
-}else {
-
-    $discapacitado->RegistroIndividual($datos);
-}
+$mensaje =$personas->EditarPersona($datos);
+echo $mensaje;
 
 }

@@ -1,7 +1,5 @@
 <?php
 include_once '../Modelos/Persona.php';
-include_once '../Modelos/Discapacitado.php';
-
 
 if (isset($_POST['cedula'])) {
     
@@ -18,7 +16,7 @@ $hogarPatria = $_POST['hogarPatria'];
 $vivienda = $_POST['vivienda'];
 $nroCasa = $_POST['nroCasa'];
 $manzanero = $_POST['manzanero'];
-$discapacidad = $_POST['discapacitado'];
+$discapacidad = 'NO';
 $manzana = $_POST['manzana'];
 $familia = $_POST['familia'];
 
@@ -39,21 +37,13 @@ $datos = [
     'manzanero' => $manzanero,
     'discapacidad' => $discapacidad,
     'manzana' => $manzana,
-    'familia' => $familia
+    'familia' => $familia,
+    'usuario' => 'NO'
     ];
 
-    $persona = new Persona();
-    $discapacitado = new Discapacitado();
+    $persona = new Persona();   
+    $mensaje =  $persona->Registrar($datos);
 
-    if ($discapacidad == 'SI') {
-        
-      $mensaje =  $persona->Registrar($datos);
-
-        $discapacitado->RegistroIndividual($datos);
-
-    }else {
-        $mensaje =  $persona->Registrar($datos);
-    }
 
     echo $mensaje;
 

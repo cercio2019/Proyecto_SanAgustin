@@ -22,7 +22,7 @@
 <th></th>
 <th></th>
 </thead>
-<tbody id="listaUser">
+<tbody id="listaUser" class="bg-dark text-white">
 
 </tbody>
 </table>
@@ -44,54 +44,101 @@
 
 <!-- formulario para registrar un nuevo usuario -->
 <div class="col-12" id="formu-User">
-<div class="container">
+
+<div class="container mt-4" >
+<div class="row">
 <div class="col-6">
-<button class="btn btn-primary" id="volverUser">
-    volver
+<button class="btn btn-primary" id="regresarAlista">
+Volver
 </button>
+</div>
+<div class="col-6">
+<input type="text" class="form-control" id="buscaPersona" placeholder="Buscar persona">
+</div>
+</div>
+<div class="row mt-4">
+<div class="col-12">
+<table class="table">
+    <thead class="bg-danger text-white">
+    <th>Cedula</th>
+    <th>Nombre y Apellido</th>
+    <th>Edad</th>
+    <th>Manzana</th>
+    <th>Familia</th>
+    <th></th>
+    </thead>
+    <tbody id="individual" class="bg-dark text-white">
+    
+    
+    </tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 
-<div class="container mt-4" >
-<form action="" id="registrarUser">
-<div class="row m-3">
-<div class="col-6">
-<label for="">Cedula</label>
-<input type="text" class="form-control" id="CedulaUser">
-</div>
-<div class="col-6">
-<label for="">Nombre</label>
-<input type="text" class="form-control" id="nombreUser">
-</div>
-</div>
-<div class="row m-3">
-<div class="col-6">
-<label for="">Apellido</label>
-<input type="text" class="form-control" id="apellidoUser">
-</div>
-<div class="col-6">
-<label for="">Contraseña</label>
-<input type="password" class="form-control" id="contraseñaUser">
+
+<!-----Seccion para registrar o no a un usuario ---->
+
+<div class="col-12" id="seccRegis">
+
+<div class="container">
+<div class="row">
+<div class="col-12">
+<h3>¿Deseas registrar a esta persona como usuario del sistema?</h3>
 </div>
 </div>
-<div class="row m-3">
-<div class="col-6">
-<label for="">Tipo de usuario</label>
-<select name="" class="form-control" id="tipoUser">
+
+<form action="" id="completarRegistro">
+ 
+<input type="hidden" id="ciUser">
+<input type="hidden" id="nombreUser">
+<input type="hidden" id="edadUser">
+<input type="hidden" id="grupoUser">
+<input type="hidden" id="manzanaUSer">
+
+<div class="row">
+<div class="col-12">
+<table class="table" >
+
+<thead class="bg-danger text-white">
+<th>Datos Personales</th>
+<th></th>
+</thead>
+<tbody id="listaInformacion">
+     
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="row">
+<div class="col-12">
+<label for="">Seleccionar el tipo de usuario</label>
+<select name="" id="tipouser" class="form-control">
 <option value="">Seleccionar</option>
 <option value="Administrador">Administrador</option>
 <option value="Invitado">Invitado</option>
 </select>
 </div>
 </div>
-<div class="row m-5">
-<div class="col-12 text-center">
-<input type="submit" value="Registrar" class="btn btn-danger w-50">
+<div class="row mt-4">
+<div class="col-6 text-center">
+<button class="btn btn-primary w-50" id="TABLA">
+cancelar
+</button>
+</div>
+<div class="col-6 text-center">
+<input type="submit" class="btn btn-danger w-50" value="Registrar">
 </div>
 </div>
 </form>
 </div>
+
 </div>
+
+
+
 
 <!---Menssaje para notificar que el registro se cumplio-->
 <div class="container mt-5" id="mensajeRegistro">
@@ -109,7 +156,7 @@
 
 <!--FORMULARIO PARA CAMBIAR LA CONTRASEÑA DE UN USUARIO-->
 
-<div class="col-12" id="cambiarContraseña">
+<div class="col-12" id="cambiarContrasena">
 <div class="container">
 <div class="col-6">
 <button class="btn btn-primary" id="returnUser">
@@ -118,9 +165,9 @@
 </div>
 </div>
 
-<div class="container">
-<form action="" id="form-contraseña">
-<input type="text" id="ci">
+<div class="container mt-4">
+<form action="" id="form-contrasena">
+<input type="hidden" id="ci">
 <div class="row">
 <div class="col-6">
 <label for="">Contraseña Nueva</label>

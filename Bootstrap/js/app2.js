@@ -3,14 +3,16 @@ $(document).ready(function() {
     console.log('jquery 2 funciona exitosamente');
     listaUsuarios();
     var formUsuario = $('#formu-User');
-    var seccionContraseña = $('#cambiarContraseña');
-    var formContraseña = $('#form-contraseña');
+    var seccionContrasena = $('#cambiarContrasena');
+    var formContrasena = $('#form-contrasena');
     var mensajeRegistro = $('#mensajeRegistro');
     var mensajeEliminar = $('#mensajeEliminar');
+    var seccionRegis = $('#seccRegis');
     formUsuario.hide();
-    seccionContraseña.hide();
+    seccionContrasena.hide();
     mensajeRegistro.hide();
     mensajeEliminar.hide();
+    seccionRegis.hide();
   
     //funcion de que muesta la lista de usuarios 
     function listaUsuarios() {
@@ -25,7 +27,7 @@ $(document).ready(function() {
               plantilla += `<tr UserCedula="${objetos.cedula}">                   
                  <td>${objetos.cedula}</td>
                  <td>
-                 ${objetos.nombre} ${objetos.apellido} 
+                 ${objetos.nombre} 
                  </td>
                  <td>${objetos.tipo}</td>
                  <td><button class="btn btn-primary" id="Contraseña">
@@ -42,33 +44,149 @@ $(document).ready(function() {
         });
       }
 
+      function listaNoUsuarios() {
+        
+        $.ajax({
+          url: 'Controladores/listaNoUsuarios.php',
+          type: 'GET',
+          success: function (response) {
+            let noUser = JSON.parse(response);
+            let plantilla = '';
+            
+        noUser.forEach(objetos => {
+            plantilla += `<tr identificacion="${objetos.cedula}">                   
+               <td>${objetos.cedula}</td>
+               <td>
+               ${objetos.nombre} 
+               </td>
+               <td>${objetos.edad}</td>
+               <td>${objetos.manzana}</td>
+               <td>${objetos.familia}</td>
+               <td><button class="btn btn-danger" id="regisUser">
+               Registrar
+               </button></td>                                   
+            </tr>`
+        });
+
+        $('#individual').append(plantilla);
+          }
+      });
+      }
+
       // boton para llamar el formulario para registrar un nuevo usuario
       $(document).on('click', '#nuevoUser', function (e) {
         $('#listUsuarios').hide();
+        listaNoUsuarios();
         formUsuario.show();
+        e.preventDefault();
+      });
+
+
+      $(document).on('click', '#regisUser', function (e) {
+        
+        let elemento = $(this)[0].parentElement.parentElement;
+        let cedulPersona = $(elemento).attr('identificacion');
+        informacionDatos(cedulPersona);
+        formUsuario.hide();
+        seccionRegis.show();
         e.preventDefault();
       })
 
+
+      function informacionDatos(cedula) {
+        
+        let buscarCedula = cedula; 
+        $.post('Controladores/buscarPorCedula.php', {buscarCedula}, function (response) {
+          
+          let registroDatos = JSON.parse(response);
+          let plantilla ='';
+          registroDatos.forEach(objetos=>{
+
+            plantilla += `
+            <tr nroID="${objetos.id} " >
+              <td>
+
+              <ul>
+              <li> <strong>ID:</strong> ${objetos.id}  </li>
+              <li> <strong>cedula:</strong> ${objetos.cedula} </li>
+              <li> <strong>Nombre Y apellido:</strong> ${objetos.nombreApellido} </li>
+              <li> <strong>Nro Familiar:</strong> ${objetos.nrofam}  </li>
+              <li> <strong>Fecha de nacimiento:</strong> ${objetos.fecha} </li>
+              <li> <strong>Edad:</strong> ${objetos.edad} </li>
+              <li> <strong>Sexo:</strong> ${objetos.sexo} </li>
+              <li> <strong>Telefono:</strong> ${objetos.telefono} </li>
+              <li> <strong>Correo Electronico:</strong> ${objetos.correo}  </li>
+              
+              </ul>
+
+              </td>
+              <td>
+
+              <ul>
+              <li> <strong>Tipo de persona:</strong> ${objetos.tipoPersona} </li>
+              <li> <strong>Carnet de la patria:</strong> ${objetos.carnet} </li>
+              <li> <strong>Hogares de la Patria:</strong> ${objetos.hogar} </li>
+              <li> <strong>¿Vivienda Propia:? </strong> ${objetos.vivienda} </li>
+              <li> <strong>Nro Casa: </strong> ${objetos.nroCasa} </li>
+              <li> <strong>¿Manzanero?:</strong> ${objetos.manzanero} </li>
+              <li> <strong>Nro Manzana:</strong> ${objetos.nroManzana} </li>
+              <li> <strong>¿Discapacidad?:</strong> ${objetos.discapacidad} </li>
+              
+              </ul>
+
+              </td>
+
+            </tr>
+            `;
+
+            $('#ciUser').val(objetos.cedula);
+            $('#nombreUser').val(objetos.nombreApellido);
+            $('#edadUser').val(objetos.edad);
+            $('#grupoUser').val(objetos.nrofam);
+            $('#manzanaUSer').val(objetos.nroManzana);            
+
+          })
+
+          $('#listaInformacion').html(plantilla);
+        });
+
+      }
+
       // funcion para registar un nuevo usuario en el sistema
-      var registrarUsuario = $('#registrarUser');
+      var registrarUsuario = $('#completarRegistro');
       registrarUsuario.submit(function(e) {
         
-        const datosUsuarios= {
-          cedula: $('#CedulaUser').val(),
-          nombre: $('#nombreUser').val(),
-          apellido: $('#apellidoUser').val(),
-          contraseña: $('#contraseñaUser').val(),
-          tipo: $('#tipoUser').val()
-        };
+         const celIndentidad = $('#ciUser').val(),
+         nombreUser = $('#nombreUser').val(),
+         edadUser = $('#edadUser').val(),
+         grupoUser = $('#grupoUser').val(),
+         manzanaUser = $('#manzanaUSer').val(),
+         tipoUser = $('#tipouser').val();
 
-        $.post('Controladores/registrarUsuario.php', datosUsuarios, function(response) {
-         
-        registrarUsuario.trigger('reset'); 
-        formUsuario.hide();
-        mensajeRegistro.show();
-        $('#SeRegistro').html(response);
-         });   
-         e.preventDefault();
+         if (tipoUser == '') {
+          alert('Por seleccionar el tipo de usuario que desea registrar'); 
+          e.preventDefault();
+         }else{
+
+          datosUser = {
+           cedula: celIndentidad,
+           nombre : nombreUser,
+           edad: edadUser,
+           familia : grupoUser,
+           manzana : manzanaUser,
+           clave : celIndentidad,
+           tipo : tipoUser
+          };
+
+          $.post('Controladores/registrarUsuario.php', datosUser, function (response) {
+            
+            $('#SeRegistro').html(response);
+
+          });
+           seccionRegis.hide();
+           mensajeRegistro.show()
+          e.preventDefault();
+         }        
       })
 
 
@@ -100,30 +218,43 @@ $(document).ready(function() {
         let ciUsuario = $(elemento2).attr('UserCedula');
 
         $('#listUsuarios').hide();
-        seccionContraseña.show();
+        seccionContrasena.show();
         $('#ci').val(ciUsuario);
        })
 
 
      //funcion para el cambio de contraseña a todo los usuario 
-     formContraseña.submit(function(e) {
+     formContrasena.submit(function(e) {
         
-        let contraseñaNueva = $('#pwrdNueva').val();
-        let contraseñaConfirmada= $('#pwrdConfirmada').val();
+        const contrasenaNueva = $('#pwrdNueva').val();
+        const contrasenaConfirmada= $('#pwrdConfirmada').val();
    
-           if (contraseñaNueva == contraseñaConfirmada) {
+        if (contrasenaNueva== '') {
+          
+          alert('Por favor Introducir la nueva contraseña');
+          e.preventDefault();
+
+        }else if (contrasenaConfirmada== '') {
+          
+          alert('Por favor confirmar la contraseña nueva');
+          e.preventDefault();
+
+        }else{
+
+
+          if (contrasenaNueva == contrasenaConfirmada) {
                
-            const datosContraseña={
+            const datosContrasena={
                 cedula: $('#ci').val(),
-                Nuevapassword: contraseñaNueva,
-                ConfirmPassword: contraseñaConfirmada
+                Nuevapassword: contrasenaNueva,
+                ConfirmPassword: contrasenaConfirmada
             };
     
-            $.post('Controladores/cambioContraseña.php', datosContraseña, function(response) {
+            $.post('Controladores/cambioContrasena.php', datosContrasena, function(response) {
                 
                 alert(response);
-                seccionContraseña.hide();
-                formContraseña.trigger('reset');
+                seccionContrasena.hide();
+                formContrasena.trigger('reset');
                 $('#listUsuarios').show();    
             });      
    
@@ -133,6 +264,8 @@ $(document).ready(function() {
 
            }        
            e.preventDefault();
+
+        }
      });
 
      // funcion que permite realizar cambio de contraseña de un usuario invitado
@@ -140,23 +273,36 @@ $(document).ready(function() {
      $('#ciInvitado').val(cedulaUser);
      formuPassword = $('#formu-password');
      $('#mensaje').hide();
+
      formuPassword.submit(function (e) {
        
-      let cedulaInvitado = $('#ciInvitado').val();      
-      let Nueva = $('#claveNueva').val();
-      let Confirmada= $('#claveConfirmada').val();
- 
-         if (Nueva == Confirmada) {
+      const cedulaInvitado = $('#ciInvitado').val(),      
+       Nueva = $('#claveNueva').val(),
+       Confirmada= $('#claveConfirmada').val();
+
+       if (Nueva == '') {
+        
+        alert('Por favor introducir una nueva contraseña');
+        e.preventDefault();
+
+       } else if (Confirmada == ''){
+        
+        alert('Por favor confirme su nueva contraseña');
+        e.preventDefault();
+
+       }else{
+
+        if (Nueva == Confirmada) {
              
-          const datosContraseña2={
+          const datosContrasena2={
               cedula: cedulaInvitado,
               Nuevapassword: Nueva,
               ConfirmPassword: Confirmada
           };
   
-          $.post('Controladores/cambioContraseña.php', datosContraseña2, function(response) {
+          $.post('Controladores/cambioContrasena.php', datosContrasena2, function(response) {
               
-              alert(response)
+              $('#mensajeCambio').html(response);
               formuPassword.hide();
               $('#mensaje').show();
               formuPassword.trigger('reset'); 
@@ -168,7 +314,7 @@ $(document).ready(function() {
            
          }        
          e.preventDefault();
-     })
-
+       }         
+     });
 
 })
