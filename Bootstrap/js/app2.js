@@ -13,6 +13,7 @@ $(document).ready(function() {
     mensajeRegistro.hide();
     mensajeEliminar.hide();
     seccionRegis.hide();
+    
   
     //funcion de que muesta la lista de usuarios 
     function listaUsuarios() {
@@ -31,15 +32,16 @@ $(document).ready(function() {
                  </td>
                  <td>${objetos.tipo}</td>
                  <td><button class="btn btn-primary" id="Contraseña">
-                 Contraseña
+                 <i class="fas fa-key"></i>
                  </button></td>
                  <td><button class="btn btn-danger" id="eliminarUser">
-                 Eliminar
+                 <i class="fas fa-trash"></i>
                  </button></td>                                   
               </tr>`
           });
 
           $('#listaUser').append(plantilla);
+          $('#TABLAUSER').DataTable();
             }
         });
       }
@@ -69,43 +71,10 @@ $(document).ready(function() {
         });
 
         $('#individual').html(plantilla);
+        $('#tablaFuturoUsuario').DataTable();
           }
       });
       }
-
-      $('#buscaPersona').keyup(function (e) {
-         
-        if ($('#buscaPersona').val()) {
-          
-         let buscarPersona = $('#buscaPersona').val();
- 
-         $.post('Controladores/buscarPersonas.php', {buscarPersona}, function (response) {
-          
-           let resultados = JSON.parse(response);
-           let plantilla = '';
- 
-           resultados.forEach(objetos => {
-             
-             plantilla += `<tr identificacion="${objetos.cedula}">                   
-             <td>${objetos.cedula}</td>
-             <td>
-             ${objetos.nombre} 
-             </td>
-             <td>${objetos.edad}</td>
-             <td>${objetos.manzana}</td>
-             <td>${objetos.familia}</td>
-             <td><button class="btn btn-danger" id="regisUser">
-             Registrar
-             </button></td>                                   
-          </tr>`;
- 
-           });
-           $('#individual').html(plantilla);
-         })
-        }
-       e.preventDefault();
-        });
-
 
 
       // boton para llamar el formulario para registrar un nuevo usuario
@@ -366,6 +335,13 @@ $(document).ready(function() {
          }        
          e.preventDefault();
        }         
+     });
+
+     $(document).on('click', '#returnUser', function (e) {
+      formContrasena.trigger('reset');
+      seccionContrasena.hide();
+      $('#listUsuarios').show();
+      e.preventDefault();
      });
 
 })

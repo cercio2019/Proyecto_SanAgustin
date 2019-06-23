@@ -6,6 +6,7 @@
 	<meta http-equiv="x-ua-compatible" content="ie-edge">
 	<link rel="stylesheet" type="text/css" href= "Bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href= "Bootstrap/css/personalizacion.css">
+	<link rel="stylesheet" type="text/css" href= "Bootstrap/dataTable/dataTables.bootstrap4.min.css">
 	<title><?php echo NOMBRESITIO; ?></title>
 </head>
 <body>
@@ -48,9 +49,11 @@ $mvc -> enlacesPaginasController();
 ?>
 </div>
 
-<script src="Bootstrap/js/jquery-3.4.0.min.js"></script>
+<script src="Bootstrap/js/jquery-3.4.1.min.js"></script>
 <script src="Bootstrap/js/app.js"></script>
 <script src="Bootstrap/js/app2.js"></script>
+<script src="Bootstrap/dataTable/jquery.dataTables.min.js"></script>
+<script src="Bootstrap/dataTable/dataTables.bootstrap4.min.js"></script>
 <script src="Bootstrap/js/popper.min.js"></script>
 <script src="Bootstrap/js/bootstrap.min.js"></script>
 <script src="Bootstrap/js/all.js"></script>
@@ -105,6 +108,7 @@ function soloNumeros(e) {
           return false;
          }
        }
+
 </script>
 </body>
 </html>

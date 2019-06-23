@@ -10,7 +10,7 @@
 <div class="row">
 <div class="col-6">
 <button class="btn btn-dark" id="newDiscapacitado">
-Nuevo registro
+Nuevo registro <i class="fas fa-file-alt"></i>
 </button>
 </div>
 </div>
@@ -63,23 +63,22 @@ Nuevo registro
 <div class="row">
 <div class="col-6">
 <button class="btn btn-primary" id="returnDisca">
-Volver
+<i class="fas fa-arrow-circle-left"></i>  Volver
 </button>
 </div>
-<div class="col-6">
-<input type="text" class="form-control" id="buscaPers2" placeholder="Buscar persona">
 </div>
-</div>
-<div class="row mt-4">
+<div class="row mt-4 mb-5">
 <div class="col-12">
-<table class="table">
+<table class="table" id="tablafuturoDisc">
     <thead class="bg-danger text-white text-center">
-    <th>Cedula</th>
+    <tr>
+   <th>Cedula</th>
     <th>Nombre y Apellido</th>
     <th>Edad</th>
     <th>Manzana</th>
     <th>Familia</th>
     <th></th>
+   </tr>
     </thead>
     <tbody id="individual2" class="bg-dark text-white text-center">
     
@@ -165,7 +164,7 @@ cancelar
 
 <div class="row m-4">
 <div class="col-6">
-<a href="" class="btn btn-primary" id="volverDiscapacidad">volver</a>
+<a href="" class="btn btn-primary" id="volverDiscapacidad"> <i class="fas fa-arrow-circle-left"></i>  Volver</a>
 </div>
 </div>
 

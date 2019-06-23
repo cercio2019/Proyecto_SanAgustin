@@ -7,14 +7,16 @@
 <div class="col-12 mt-5" id="listUsuarios">
 
 <div class="container">
+<div class="row">
 <div class="col-6">
 <button class="btn btn-dark" id="nuevoUser">
- Nuevo Usuario
+ Nuevo Usuario <i class="fas fa-file-alt"></i>
 </button>
 </div>
 </div>
-
-<table class="table mt-5">
+<div class="row mt-4">
+<div class="col-12">
+<table class="table mt-5" id="TABLAUSER">
 <thead class="bg-danger text-white">
 <th>Cedula</th>
 <th>Nombre y Apellido </th>
@@ -26,6 +28,9 @@
 
 </tbody>
 </table>
+</div>
+</div>
+</div>
 </div>
 
 <!---Menssaje para notificar que  registro fue eliminado-->
@@ -49,23 +54,22 @@
 <div class="row">
 <div class="col-6">
 <button class="btn btn-primary" id="regresarAlista">
-Volver
+<i class="fas fa-arrow-circle-left"></i>  Volver
 </button>
-</div>
-<div class="col-6">
-<input type="text" class="form-control" id="buscaPersona" placeholder="Buscar persona">
 </div>
 </div>
 <div class="row mt-4">
 <div class="col-12">
-<table class="table">
+<table class="table" id="tablaFuturoUsuario">
     <thead class="bg-danger text-white">
-    <th>Cedula</th>
+   <tr>
+   <th>Cedula</th>
     <th>Nombre y Apellido</th>
     <th>Edad</th>
     <th>Manzana</th>
     <th>Familia</th>
     <th></th>
+   </tr>
     </thead>
     <tbody id="individual" class="bg-dark text-white">
     
@@ -84,7 +88,7 @@ Volver
 
 <div class="container">
 <div class="row">
-<div class="col-12">
+<div class="col-12 text-center">
 <h3>¿Deseas registrar a esta persona como usuario del sistema?</h3>
 </div>
 </div>
@@ -160,7 +164,7 @@ cancelar
 <div class="container">
 <div class="col-6">
 <button class="btn btn-primary" id="returnUser">
-    volver
+<i class="fas fa-arrow-circle-left"></i>  Volver
 </button>
 </div>
 </div>

@@ -44,18 +44,18 @@
       </div>
     
 
-    <div class="row mt-5" id="tabla">
+    <div class="row mt-5 mb-5" id="tabla">
         <div class="col-12">
         <input type="hidden" id="idCuadra">
-            <table class="table">
-               <thead class="bg-danger text-white">
+            <table class="table" id="TABLAfamilias">
+               <thead class="bg-danger text-white text-center">
                    <th>Id</th>
                    <th>Familias nro:</th>
                    <th>Nro manzana</th>
                   
                    <th></th>
                </thead>
-               <tbody id="fila" class="bg-dark text-white">
+               <tbody id="fila" class="bg-dark text-white text-center">
 
                </tbody>
             </table>
@@ -70,7 +70,7 @@
 <div class="container" id="InformPersonal">
 <div class="row" >
   
-<div class="col-12">
+<div class="col-12 mb-4">
 
 <table class="table" >
 
@@ -90,26 +90,28 @@
 </div>
 
 
- <div class="row" id="tablaPersonas">
+ <div class="row mb-5" id="tablaPersonas">
  <div class="col-12">
      <div class="container-fluid">
         <div class="row">
           <div class="col-4">
-           <button class="btn btn-primary" id="volver">Volver</button>
+           <button class="btn btn-primary" id="volver">
+           <i class="fas fa-arrow-circle-left"></i>  Volver
+           </button>
           </div>
           <div class="col-4" id="titulo-familiar">
          
           </div>
           <div class="col-4">
    <button class="btn btn-warning" id="nuevo">
-    Nuevo Integrante
+    Nuevo Integrante <i class="fas fa-file-alt"></i>
    </button>
    <input type="hidden" id="idFamiliar">
    <input type="hidden" id="idCuadrafamiliar">
    </div>
           <div class="col-12 mt-5">
-          <table class="table">
-      <thead class="bg-danger text-white">
+          <table class="table" id="TABLApersonas">
+      <thead class="bg-danger text-white text-center">
       <th>ID</th>
       <th>Cedula</th>
       <th>Nombre y apellido</th>
@@ -117,7 +119,7 @@
       <th></th>
       <th></th>
       </thead>
-      <tbody id="personas" class="bg-dark text-white">
+      <tbody id="personas" class="bg-dark text-white text-center">
       
       </tbody>
       </table>
@@ -149,7 +151,9 @@
 <form action="" id="form-registrar" class="m-5">
 <div class="row">
 <div class="col-12">
-<button class="btn btn-primary" id="regresar">Volver</button>
+<button class="btn btn-primary" id="regresar">
+<i class="fas fa-arrow-circle-left"></i>  Volver
+</button>
 </div>
 </div>
 <div class="row mt-3">
@@ -290,7 +294,9 @@
    <div class="container">
    <div class="row">
    <div class="col-6 ml-4">
-   <button class="btn btn-primary" id="volver2">Volver</button>
+   <button class="btn btn-primary" id="volver2">
+   <i class="fas fa-arrow-circle-left"></i>  Volver
+   </button>
    </div>
    <div class="col-5">
    <input type="hidden" id="nroPersonal">
@@ -320,7 +326,9 @@
  <div class="container" id="seccionEditar">
  <div class="row m-5">
 <div class="col-6">
-<button class="btn btn-primary" id="regresarPlanilla">Volver</button>
+<button class="btn btn-primary" id="regresarPlanilla">
+<i class="fas fa-arrow-circle-left"></i>  Volver
+</button>
 </div>
 <div class="col-6">
 <input type="hidden" id="PERSONAnro">

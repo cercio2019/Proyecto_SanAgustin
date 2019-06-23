@@ -19,6 +19,7 @@ $(document).ready(function(){
     var mensajeActualizado = $('#mensajActualizacion');
     var informPersonal= $('#InformPersonal');
     var seccionNodis = $('#seccionNoDis');
+   
     tabla.hide();
     tablaPersona.hide();
     planilla.hide();
@@ -48,20 +49,6 @@ function listaManzanas() {
         }
         });
    }
- //**  funcion para contar los integrantes de una familia 
-    function contarIntegrantes(idfamiliar) {
-      let nrofamiliar = idfamiliar;
-      
-      $.post('Controladores/contarIntegrantes.php', {nrofamiliar}, function (response) {        
-       
-         let conteo = JSON.parse(response);
-         let contar = '';
-        conteo.forEach(objetos=>{
-          contar = `${objetos.cantidad}`;         
-        });
-     });
-     
-    }
 
   // funcion para buscar una persona a traves de la cedula de forma mas rapida
     formularioPersonas.submit(function (e) {
@@ -195,14 +182,17 @@ function listaManzanas() {
                
                <td>
                <button  class="btn btn-danger verPersonas">
-                      Ver
+               <i class="fas fa-id-card"></i>
                </button>
                </td>
             </tr>`
+
+            $('#TABLAfamilias').DataTable(); 
         });          
-        $('#fila').html(plantilla);  
-        
+        $('#fila').html(plantilla); 
+       
   });
+ 
   }
   
    
@@ -212,7 +202,7 @@ function listaManzanas() {
               tabla.show();  
               informPersonal.hide();
         listaFamilias(idManzana);
-
+       
         $('#idCuadra').val(idManzana); 
         formularioPersonas.trigger('reset');
          e.preventDefault();     
@@ -236,12 +226,12 @@ function listaManzanas() {
                  <td>${objetos.edad}</td>
                  <td>
                  <button  class="btn btn-danger planilla">
-                        Ver Planilla
+                 <i class="fas fa-id-card"></i>
                  </button>
                  </td>
                  <td>
                  <button  class="btn btn-warning delete">
-                      Eliminar
+                 <i class="fas fa-trash"></i>
                  </button>
                  </td>
               </tr>`
@@ -250,6 +240,7 @@ function listaManzanas() {
           });
       
           $('#personas').html(plantilla); 
+          $('#TABLApersonas').DataTable();
           
     });
      }
@@ -305,6 +296,7 @@ function listaManzanas() {
     $(document).on('click', '#volver', function (e) {
      let idManfam = $('#idCuadrafamiliar').val();
      listaFamilias(idManfam);
+     $('#TABLAfamilias').DataTable();
      tablaPersona.hide();
      $('#buscador').show();
      formulario.show();
@@ -395,7 +387,19 @@ function listaManzanas() {
       manzana = $('#manzanaNRO').val(),
       idfamiliar2 = $('#familiaNRO').val();
 
-       if (nombre==='') {
+      if (documento==='') {
+        
+        alert('Por favor debes ingresar el tipo de documento');
+        $('#documento').focus();
+        e.preventDefault();
+
+       }else if (cedula==='') {
+        
+        alert('Por favor debes ingresar el numero de documento');
+        $('#cedula').focus();
+        e.preventDefault();
+
+       }else if (nombre==='') {
         
         alert('Por favor debes ingresar el nombre');
         $('#nombres').focus();
@@ -721,17 +725,18 @@ function listaManzanas() {
                    <td>${objetos.tipoDiscapacidad}</td>
                    <td>
                    <button  class="btn btn-danger planillaDiscapacidad">
-                          Ver Planilla
+                   <i class="fas fa-id-card"></i>
                    </button>
                    </td>
                    <td>
                    <button  class="btn btn-warning deleteDiscapacitado">
-                          Eliminar 
+                   <i class="fas fa-trash"></i>
                    </button>
                    </td>
                 </tr>`
             });
                   $('#listaDiscapacitado').append(plantilla);
+                  $('#tablaDiscapacitado').DataTable();
             }
             });
         } 
@@ -852,44 +857,11 @@ function listaManzanas() {
         });
 
         $('#individual2').html(plantilla);
+        $('#tablafuturoDisc').DataTable();
           }
       });
 
        }
-
-
-       $('#buscaPers2').keyup(function (e) {
-         
-       if ($('#buscaPers2').val()) {
-         
-        let buscarPers2 = $('#buscaPers2').val();
-
-        $.post('Controladores/buscarPersonas.php', {buscarPers2}, function (response) {
-         
-          let resultados = JSON.parse(response);
-          let plantilla = '';
-
-          resultados.forEach(objetos => {
-            
-            plantilla += `<tr identCed="${objetos.cedula}">                   
-            <td>${objetos.cedula}</td>
-            <td>
-            ${objetos.nombre} 
-            </td>
-            <td>${objetos.edad}</td>
-            <td>${objetos.manzana}</td>
-            <td>${objetos.familia}</td>
-            <td><button class="btn btn-danger" id="regisDisca">
-            Registrar
-            </button></td>                                   
-         </tr>`;
-
-          });
-          $('#individual2').html(plantilla);
-        })
-       }
-      e.preventDefault();
-       });
 
        var seccionREGIS = $('#regisDISCPACIDAD');
        seccionREGIS.hide();
@@ -1022,6 +994,7 @@ function listaManzanas() {
             });
 
             $('#listaMayores').append(plantilla);
+            $('#TABLAtercera').DataTable();
               }
           });
         }
