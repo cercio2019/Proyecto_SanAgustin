@@ -4,7 +4,7 @@ class Base
 {
 	private $host = 'localhost';
     private $usuario = 'root';
-    private $password = '';
+    private $password = 'cv23952018';
     private $nombre_base = 'sanagustin';
     private $dbh;
     private $stmt;

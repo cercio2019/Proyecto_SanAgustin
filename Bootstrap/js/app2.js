@@ -68,10 +68,45 @@ $(document).ready(function() {
             </tr>`
         });
 
-        $('#individual').append(plantilla);
+        $('#individual').html(plantilla);
           }
       });
       }
+
+      $('#buscaPersona').keyup(function (e) {
+         
+        if ($('#buscaPersona').val()) {
+          
+         let buscarPersona = $('#buscaPersona').val();
+ 
+         $.post('Controladores/buscarPersonas.php', {buscarPersona}, function (response) {
+          
+           let resultados = JSON.parse(response);
+           let plantilla = '';
+ 
+           resultados.forEach(objetos => {
+             
+             plantilla += `<tr identificacion="${objetos.cedula}">                   
+             <td>${objetos.cedula}</td>
+             <td>
+             ${objetos.nombre} 
+             </td>
+             <td>${objetos.edad}</td>
+             <td>${objetos.manzana}</td>
+             <td>${objetos.familia}</td>
+             <td><button class="btn btn-danger" id="regisUser">
+             Registrar
+             </button></td>                                   
+          </tr>`;
+ 
+           });
+           $('#individual').html(plantilla);
+         })
+        }
+       e.preventDefault();
+        });
+
+
 
       // boton para llamar el formulario para registrar un nuevo usuario
       $(document).on('click', '#nuevoUser', function (e) {
@@ -80,6 +115,14 @@ $(document).ready(function() {
         formUsuario.show();
         e.preventDefault();
       });
+
+      $(document).on('click', '#regresarAlista', function (e) {
+      
+        formUsuario.hide();
+        $('#listUsuarios').show();  
+        e.preventDefault();
+
+      })
 
 
       $(document).on('click', '#regisUser', function (e) {
@@ -90,6 +133,14 @@ $(document).ready(function() {
         formUsuario.hide();
         seccionRegis.show();
         e.preventDefault();
+      })
+
+      $(document).on('click', '#TABLA', function (e) {
+      
+        seccionRegis.hide();
+        formUsuario.show();
+        e.preventDefault();
+
       })
 
 

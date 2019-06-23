@@ -139,9 +139,31 @@ class Persona
         return $resultado;
     }
 
+    public function BuscarNoUsuarios($parametro2)
+    {
+        $buscar2 = $parametro2;
+        $query = "SELECT * FROM individual WHERE usuario = 'NO' AND NombresApellidos LIKE '$buscar2%' ";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'. mysqli_error($this->db->conection()));
+        }
+        return $resultado;
+    }
+
     public function NoDiscapacitados()
     {
         $query = "SELECT * FROM individual WHERE Discapacidad = 'NO' ";
+        $resultado = mysqli_query($this->db->conection(), $query);
+        if (!$resultado) {
+            die('error en la busqueda'. mysqli_error($this->db->conection()));
+        }
+        return $resultado;
+    }
+
+    public function BuscarNoDiscapacitados($parametros)
+    {
+        $buscar = $parametros;
+        $query = "SELECT * FROM individual WHERE Discapacidad = 'NO' AND NombresApellidos LIKE '$buscar%' ";
         $resultado = mysqli_query($this->db->conection(), $query);
         if (!$resultado) {
             die('error en la busqueda'. mysqli_error($this->db->conection()));

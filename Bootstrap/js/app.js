@@ -851,11 +851,45 @@ function listaManzanas() {
             </tr>`
         });
 
-        $('#individual2').append(plantilla);
+        $('#individual2').html(plantilla);
           }
       });
 
        }
+
+
+       $('#buscaPers2').keyup(function (e) {
+         
+       if ($('#buscaPers2').val()) {
+         
+        let buscarPers2 = $('#buscaPers2').val();
+
+        $.post('Controladores/buscarPersonas.php', {buscarPers2}, function (response) {
+         
+          let resultados = JSON.parse(response);
+          let plantilla = '';
+
+          resultados.forEach(objetos => {
+            
+            plantilla += `<tr identCed="${objetos.cedula}">                   
+            <td>${objetos.cedula}</td>
+            <td>
+            ${objetos.nombre} 
+            </td>
+            <td>${objetos.edad}</td>
+            <td>${objetos.manzana}</td>
+            <td>${objetos.familia}</td>
+            <td><button class="btn btn-danger" id="regisDisca">
+            Registrar
+            </button></td>                                   
+         </tr>`;
+
+          });
+          $('#individual2').html(plantilla);
+        })
+       }
+      e.preventDefault();
+       });
 
        var seccionREGIS = $('#regisDISCPACIDAD');
        seccionREGIS.hide();
