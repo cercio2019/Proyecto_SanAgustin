@@ -1,6 +1,6 @@
 .bg-blus{background: #79C8E2;}
 .bg-reds{background: #F7210E;}
-.bg-bluDark{background: #2084DE;}
+.bg-bluDark {background: #2084DE;}
 .bg-verde{background: #A6F530;}
 .bg-Agua{background: #BFF8F2;}
 .bg-morado{background: #9D6DD8;}
@@ -14,3 +14,5 @@
 .hg{height: 720px;}
 
 .center{margin-top: 300px;}
+
+.bg-reds a:hover{color: black;}

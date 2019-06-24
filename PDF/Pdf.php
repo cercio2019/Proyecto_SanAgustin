@@ -36,7 +36,7 @@ $pdf->Cell(32,5, 'Manzana', 1,1,'C',1);
 
 $pdf->setFont('Arial', '', 6);
 
-$cadcon = mysqli_connect("localhost", "root", "", "sanagustin");
+$cadcon = mysqli_connect("localhost", "root", "cv23952018", "sanagustin");
 if ($cadcon==false) {
 	die('Error No se hya podido conectar a la base de datos');
 }else{

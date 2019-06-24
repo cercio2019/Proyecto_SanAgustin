@@ -34,9 +34,9 @@
 </div>
 
 <!---Menssaje para notificar que  registro fue eliminado-->
-<div class="container mt-5" id="mensajeEliminar">
-<div class="row">
-<div class="col-12 text-center">
+<div class="container mt-5 bg-dark" id="mensajeEliminar">
+<div class="row m-5">
+<div class="col-12 text-center text-white">
 <h1 id="SeElimino"></h1>
 </div>
 </div>
@@ -145,9 +145,9 @@ cancelar
 
 
 <!---Menssaje para notificar que el registro se cumplio-->
-<div class="container mt-5" id="mensajeRegistro">
-<div class="row">
-<div class="col-12 text-center">
+<div class="container mt-5 bg-dark" id="mensajeRegistro">
+<div class="row m-5">
+<div class="col-12 text-center text-white">
 <h1 id="SeRegistro"></h1>
 </div>
 </div>

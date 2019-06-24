@@ -37,7 +37,7 @@ $pdf->Cell(30,5, 'Carnet de discapacidad', 1,1,'C',1);
 
 $pdf->setFont('Arial', '', 5);
 
-$cadcon = mysqli_connect("localhost", "root", "", "sanagustin");
+$cadcon = mysqli_connect("localhost", "root", "cv23952018", "sanagustin");
 if ($cadcon==false) {
 	die('Error No se ha podido conectar a la base de datos');
 }else{
